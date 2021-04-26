@@ -22,7 +22,7 @@
 
 					<?php
               $no = 1;
-			  $sql = $koneksi->query("SELECT * from tb_pegawai");
+			  $sql = $koneksi->query("SELECT * from tb_hasilproyek");
               while ($data= $sql->fetch_assoc()) {
             ?>
 
@@ -31,16 +31,16 @@
 							<?php echo $no++; ?>
 						</td>
 						<td align="center">
-							<img src="foto/<?php echo $data['foto']; ?>" width="70px" />
+							<img src="foto/<?php echo $data['foto_hasil']; ?>" width="70px" />
 						</td>
 						<td>
-							<?php echo $data['nip']; ?>
+							<?php echo $data['kode_hasilproyek']; ?>
 						</td>
 						<td>
-							<?php echo $data['nama']; ?>
+							<?php echo $data['nama_pelanggan']; ?>
 						</td>
 						<td>
-							<?php echo $data['jabatan']; ?>
+							<?php echo $data['ulasan']; ?>
 						</td>
 
 						<td>
@@ -88,7 +88,7 @@
 
 					<?php
               $no = 1;
-			  $sql = $koneksi->query("SELECT * from tb_pegawai");
+			  $sql = $koneksi->query("SELECT * from tb_hasilproyek");
               while ($data= $sql->fetch_assoc()) {
             ?>
 

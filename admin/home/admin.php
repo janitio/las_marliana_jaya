@@ -51,18 +51,18 @@
 ?>
 
 <?php
-	$sql = $koneksi->query("SELECT count(kode_hasilproyek) as hasil from tb_hasilproyek");
-	while ($data= $sql->fetch_assoc()) {
+	//$sql = $koneksi->query("SELECT count(kode_hasilproyek) as hasil from tb_hasilproyek");
+	//while ($data= $sql->fetch_assoc()) {
 	
-		$hasil=$data['hasil'];
-	}
+		//$hasil=$data['hasil'];
+	//}
 ?>
 
 <?php
-	$sql = $koneksi->query("SELECT count(id_pengguna) as boyong from tb_pengguna");
+	$sql = $koneksi->query("SELECT count(id_pengguna) as pengguna from tb_pengguna");
 	while ($data= $sql->fetch_assoc()) {
 	
-		$boyong=$data['boyong'];
+		$pengguna=$data['pengguna'];
 	}
 ?>
 
@@ -110,7 +110,7 @@
 		<div class="small-box bg-danger">
 			<div class="inner">
 				<h3>
-					<?php echo $hasil; ?>
+					<?php //echo $hasil; ?>
 				</h3>
 
 				<p>Jumlah Hasil Proyek</p>
@@ -128,7 +128,7 @@
 		<div class="small-box bg-warning">
 			<div class="inner">
 				<h3>
-					<?php echo $boyong;  ?>
+					<?php echo $pengguna;  ?>
 				</h3>
 
 				<p>Pengguna Sistem</p>

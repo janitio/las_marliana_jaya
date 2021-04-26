@@ -149,26 +149,10 @@ while ($data= $sql->fetch_assoc()) {
 								</a>
 							</li>
 							<li class="nav-item">
-								<a href="?page=data-ulasan" class="nav-link">
-									<i class="nav-icon far fa fa-users"></i>
-									<p>
-										Data Ulasan
-									</p>
-								</a>
-							</li>
-							<li class="nav-item">
 								<a href="?page=data-proyek" class="nav-link">
 									<i class="nav-icon far fa fa-users"></i>
 									<p>
 										Data Hasil Proyek
-									</p>
-								</a>
-							</li>
-							<li class="nav-item">
-								<a href="?page=data-laporan" class="nav-link">
-									<i class="nav-icon far fa fa-users"></i>
-									<p>
-										Data Laporan
 									</p>
 								</a>
 							</li>
@@ -321,22 +305,6 @@ while ($data= $sql->fetch_assoc()) {
 								break;
 								case 'view-proyek':
 								include "admin/proyek/view_proyek.php";
-								break;
-
-					//ulasan
-								case 'data-ulasan':
-								include "admin/ulasan/data_ulasan.php";
-								break;
-								case 'view-ulasan':
-								include "admin/ulasan/view_ulasan.php";
-								break;
-
-					//ulasan
-								case 'data-laporan':
-								include "admin/laporan/data_laporan.php";
-								break;
-								case 'view-laporan':
-								include "admin/laporan/view_laporan.php";
 								break;
 
 				//Profil
