@@ -9,22 +9,6 @@ if (isset($_SESSION["ses_username"])){
   $data_user = $_SESSION["ses_username"];
 }
 
-if(isset($data_id)){
-
-  $sql = $koneksi->query("SELECT tb_pesanan.kode_pesanan, tb_desain.foto_desain , tb_desain.nama_desain, tb_pesanan.alamat, tb_pesanan.proses, tb_pesanan.timestamp from tb_pesanan JOIN tb_desain ON tb_pesanan.kode_desain=tb_desain.kode_desain 
-    WHERE id_pengguna='".$data_id."'");
-
-  while ($data= $sql->fetch_assoc()) {
-
-    $kode_pesanan=$data['kode_pesanan'];
-    $nama_desain=$data['nama_desain'];
-    $foto_desain=$data['foto_desain'];
-    $alamat=$data['alamat'];
-    $proses=$data['proses'];
-    $timestamp=$data['timestamp'];
-  }
-}
-
 $sql2 = $koneksi->query("SELECT * from tb_profil");
 
 ?>
@@ -97,7 +81,7 @@ $sql2 = $koneksi->query("SELECT * from tb_profil");
           <?php if(!isset($data_user)){?>
            <li><a class="nav-link scrollto" href="login.php">Login</a></li>
          <?php }else{?>
-           <li class="dropdown"><a href="#"><span><?php if(isset($data_user)){
+           <li class="dropdown"><a href="ubah_profil.php?id_pelanggan=<?=$data_id?>"><span><?php if(isset($data_user)){
                 //tampil data nama dari sesi yang ada
              echo $_SESSION['ses_nama'];}?>
              
@@ -160,6 +144,10 @@ $sql2 = $koneksi->query("SELECT * from tb_profil");
 
             <?php
             $no = 1;
+            $sql = $koneksi->query("SELECT tb_pesanan.kode_pesanan, tb_desain.foto_desain , tb_desain.nama_desain, tb_pesanan.alamat, tb_pesanan.proses, tb_pesanan.timestamp from tb_pesanan JOIN tb_desain ON tb_pesanan.kode_desain=tb_desain.kode_desain 
+              WHERE id_pengguna='".$data_id."'");
+
+            while ($data= $sql->fetch_assoc()) {
               ?>
 
               <tr>
@@ -167,36 +155,36 @@ $sql2 = $koneksi->query("SELECT * from tb_profil");
                   <?php echo $no++; ?>
                 </td>
                 <td>
-                  <?= $kode_pesanan ?>
+                  <?= $data['kode_pesanan']; ?>
                 </td>
-                 <td align="center">
-                  <img src="admin/foto/desain/<?=$foto_desain ?>" width="100px" />
-                </td>
-                <td>
-                   <?= $nama_desain ?>
+                <td align="center">
+                  <img src="admin/foto/desain/<?=$data['foto_desain'];?>" width="100px" />
                 </td>
                 <td>
-                  <?= $alamat ?>
-                </td>
-                <td>
-                   <?= $proses ?>
-                </td>
-                <td>
-                   <?= $timestamp ?>
-                </td>
-                <td>
-                  <a href="?page=view-pesanan&kode_pesanan=<?php echo $data['kode_pesanan']; ?>" title="Lihat Surat Penawaran"
-                    class="btn btn-info btn-sm">
-                    <i class="fa fa-eye"></i>
-                  </a>
-                </a>
+                 <?= $data['nama_desain'];?>
+               </td>
+               <td>
+                <?=$data['alamat'];?>
               </td>
-            </tr>
+              <td>
+               <?=$data['proses'];?>
+             </td>
+             <td>
+               <?=$data['timestamp'];?>
+             </td>
+             <td>
+                  <a href="track_pesanan.php?kode_pesanan=<?php echo $data['kode_pesanan']; ?>" title="lihat pesanan" class="btn btn-primary"><i class="bx bx-show"></i></a>
 
-        </tbody>
-      </tfoot>
-    </table>
-  </div>
+
+                  <a href="penawaran_pelanggan.php?kode_pesanan=<?php echo $data['kode_pesanan']; ?>" title="lihat penawaran" class="btn btn-secondary"><i class="bx bx-file"></i></a>
+                  
+            </td>
+          <?php } ?>
+        </tr>
+      </tbody>
+    </tfoot>
+  </table>
+</div>
 </div>
 </div>
 </section>

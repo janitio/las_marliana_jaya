@@ -51,14 +51,11 @@
 								</td>
 
 								<td>
-									<a href="./report/cetak_penawaran.php?kode_penawaran=<?php echo $data['kode_penawaran']; ?>" target=" _blank" title="Detail"
+									<a href="?page=view-penawaran&kode_penawaran=<?php echo $data['kode_penawaran']; ?>" target=" _blank" title="Detail"
 										class="btn btn-info btn-sm">
 										<i class="fa fa-eye"></i>
 									</a>
-									<a href="?page=edit-penawaran&kode_penawaran=<?php echo $data['kode_penawaran']; ?>" title="Detail"
-										class="btn btn-success btn-sm">
-										<i class="fa fa-edit"></i>
-									</a>
+									
 									<a href="?page=del-penawaran&kode_penawaran=<?php echo $data['kode_penawaran']; ?>" onclick="return confirm('Apakah anda yakin hapus data ini ?')"
 										title="Hapus" class="btn btn-danger btn-sm">
 										<i class="fa fa-trash"></i>

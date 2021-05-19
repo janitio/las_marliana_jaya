@@ -66,7 +66,7 @@ if(isset($_GET['kode_desain'])){
 			</div>
 
 			<div class="card-footer">
-				<input type="submit" name="Ubah" value="Simpan" class="btn btn-success">
+				<input type="submit" name="Ubah" value="Ubah" class="btn btn-success">
 				<a href="?page=data-desain" title="Kembali" class="btn btn-secondary">Batal</a>
 			</div>
 		</form>

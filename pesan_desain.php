@@ -1,24 +1,33 @@
 <?php
+ //KONEKSI DB
+include "admin/inc/koneksi.php";
+
 session_start();
 if (isset($_SESSION["ses_username"])){
 
-	$data_id = $_SESSION["ses_id"];
-	$data_nama = $_SESSION["ses_nama"];
 	$data_user = $_SESSION["ses_username"];
-	$data_hp = $_SESSION["ses_no_hp"];
-	$data_email = $_SESSION["ses_email"];
+	$sql1 = $koneksi->query("SELECT * from tb_pengguna WHERE username='$data_user'");
+
+	while ($data1= $sql1->fetch_assoc()) {
+
+		$id_pengguna=$data1['id_pengguna'];
+		$nama_pengguna=$data1['nama_pengguna'];
+		$no_hp=$data1['no_hp'];
+		$email=$data1['email'];
+		$alamat_pengguna=$data1['alamat_pengguna'];
+	}
 }
 
 include "admin/inc/koneksi.php";
 
 if(isset($_GET['kode_desain'])){
-	$sql = $koneksi->query("SELECT * from tb_desain WHERE kode_desain='".$_GET['kode_desain']."'");
+	$sql2 = $koneksi->query("SELECT * from tb_desain WHERE kode_desain='".$_GET['kode_desain']."'");
 
-	while ($data= $sql->fetch_assoc()) {
+	while ($data2= $sql2->fetch_assoc()) {
 
-		$nama_desain=$data['nama_desain'];
-		$foto_desain=$data['foto_desain'];
-		$kode_desain=$data['kode_desain'];
+		$nama_desain=$data2['nama_desain'];
+		$foto_desain=$data2['foto_desain'];
+		$kode_desain=$data2['kode_desain'];
 	}
 }
 ?>
@@ -94,21 +103,15 @@ if(isset($_GET['kode_desain'])){
       		<form method="post" enctype="multipart/form-data">
       			<h3>Informasi Pesanan</h3>
       			<ul>
-      				<li><strong>Nama Lengkap</strong>: <?=$data_nama; ?></li>
-      				<li><strong>Nomor Handphone</strong>: <?=$data_hp; ?></li>
-      				<li><strong>Email</strong>: <?=$data_email; ?></li>
+      				<li><strong>Nama Lengkap</strong>: <?=$nama_pengguna; ?></li>
+      				<li><strong>Nomor Handphone</strong>: <?=$no_hp; ?></li>
+      				<li><strong>Email</strong>: <?=$email; ?></li>
       				<li><strong>Nama Desain</strong>: <?=$nama_desain; ?></li>
-      				<li><strong>Alamat</strong>: <br>
-      					<div class="form-group row">
-      						<div class="col-sm-10">
-      							<textarea type="text" class="form-control" id="alamat" name="alamat" placeholder="masukkan alamatmu dengan lengkap"
-      							></textarea>
-      						</div>
-      					</div>
+      				<li><strong>Alamat</strong>: <?=$alamat_pengguna; ?><br>
       				</li>
       				<li>
       					<div class="">
-      						<input type="submit" name="pesan" value="pesan" class="btn btn-success">
+      						<input type="submit" name="pesan" value="Pesan Sekarang" class="btn btn-success">
       						<a href="index.php" title="batal" class="btn btn-secondary">Batal</a>
       					</div>
       				</li>
@@ -160,9 +163,9 @@ if (isset ($_POST['pesan'])){
 
 	$sql_simpan = "INSERT INTO tb_pesanan (kode_desain, id_pengguna, nama_pengguna, alamat, proses, foto_desain, timestamp) VALUES (
 	$kode_desain,
-	$data_id,
-	'$data_nama',
-	'".$_POST['alamat']."',
+	$id_pengguna,
+	'$nama_pengguna',
+	'$alamat_pengguna',
 	'diproses',
 	'$foto_desain',
 	NOW())";

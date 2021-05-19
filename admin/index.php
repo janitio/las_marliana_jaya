@@ -278,9 +278,6 @@ while ($data= $sql->fetch_assoc()) {
 								case 'edit-penawaran':
 								include "admin/penawaran/edit_penawaran.php";
 								break;
-								case 'del-penawaran':
-								include "admin/penawaran/del_penawaran.php";
-								break;
 								case 'view-penawaran':
 								include "admin/penawaran/view_penawaran.php";
 								break;

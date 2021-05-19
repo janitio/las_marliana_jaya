@@ -92,23 +92,14 @@ $sql2 = $koneksi->query("SELECT * from tb_desain");
           <?php if(!isset($data_user)){?>
            <li><a class="nav-link scrollto" href="login.php">Login</a></li>
          <?php }else{?>
-           <li class="dropdown"><a href="#"><span><?php if(isset($data_user)){
+           <li class="dropdown"><a href="ubah_profil.php?id_pelanggan=<?=$data_id?>"><span><?php if(isset($data_user)){
                 //tampil data nama dari sesi yang ada
              echo $_SESSION['ses_nama'];}?>
              
            </span> <i class="bi bi-chevron-down"></i></a>
            <ul>
-            <li><a href="pesanan_pelanggan.php?id_pelanggan=<?= $data_id?>">Pesanan</a></li>
-           <!--  <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
-              <ul>
-                <li><a href="#">Deep Drop Down 1</a></li>
-                <li><a href="#">Deep Drop Down 2</a></li>
-                <li><a href="#">Deep Drop Down 3</a></li>
-                <li><a href="#">Deep Drop Down 4</a></li>
-                <li><a href="#">Deep Drop Down 5</a></li>
-              </ul>
-            </li> -->
-            <li><a href="hasil_proyek.php">Hasil Proyek</a></li>
+            <li><a href="pesanan_pelanggan.php?id_pelanggan=<?=$data_id?>">Pesanan</a></li>
+            <li><a href="hasil_proyek.php?id_pelanggan=<?=$data_id?>">Hasil Proyek</a></li>
           </ul>
         </li>
         <li><a href="admin/logout.php">Keluar</a></li>

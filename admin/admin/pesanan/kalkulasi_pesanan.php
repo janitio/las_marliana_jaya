@@ -37,9 +37,9 @@ if(isset($_GET['kode_pesanan'])){
 
 				<div class="form-group row">
 					<label class="col-sm-2 col-form-label">Alamat</label>
-					<div class="col-sm-10">
+					<div class="col-sm-5">
 						<input type="text" class="form-control" id="alamat" name="alamat" value="<?php echo $data_cek['alamat']; ?>"
-						/>
+						 />
 					</div>
 				</div>
 
@@ -54,7 +54,7 @@ if(isset($_GET['kode_pesanan'])){
 				<div class="form-group row">
 					<label class="col-sm-2 col-form-label">Harga Normal</label>
 					<div class="col-sm-5">
-						<input type="text" class="form-control" id="nama_desain" name="nama_desain" value="<?= number_format($data_user['harga_normal']); ?>"
+						<input type="text" class="form-control" id="harga_normal" name="harga_normal" value="<?= number_format($data_user['harga_normal']); ?>"
 						readonly/>
 					</div>
 				</div>
@@ -83,7 +83,7 @@ if(isset($_GET['kode_pesanan'])){
 		$biaya_dp=(0.2*$total_bayar);
 		$sisa_bayar=$total_bayar-$biaya_dp;
 
-	$sql_simpan = "INSERT INTO tb_penawaran (kode_pesanan, id_pengguna, nama_pengguna, nama_desain, biaya_dp, sisa_bayar, total_bayar, proses_tawar, timestamp) VALUES (
+	$sql_simpan = "INSERT INTO tb_penawaran (kode_pesanan, id_pengguna, nama_pengguna, nama_desain, biaya_dp, sisa_bayar, total_bayar, proses_tawar, ttd_admin,ttd_pelanggan, timestamp) VALUES (
 	'".$_POST['kode_pesanan']."',
 	'".$data_cek['id_pengguna']."',
 	'".$_POST['nama_pengguna']."',
@@ -92,6 +92,8 @@ if(isset($_GET['kode_pesanan'])){
 	$sisa_bayar,
 	$total_bayar,
 	'diproses',
+	'ttd vitra.jpg',
+	'',
 	NOW())";
 	$query_simpan = mysqli_query($koneksi, $sql_simpan);
 	mysqli_close($koneksi);
