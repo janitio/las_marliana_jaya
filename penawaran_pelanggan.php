@@ -4,23 +4,9 @@ include "admin/inc/koneksi.php";
 
 $kode_pesanan = $_GET['kode_pesanan'];
 
-if (isset($kode_pesanan)){
-  $sql_penawaran="SELECT kode_penawaran from tb_penawaran WHERE kode_pesanan=$kode_pesanan";
-  $cek_penawaran = mysqli_query($koneksi, $sql_penawaran);
+$cek_penawaran = mysqli_query($koneksi, "SELECT kode_penawaran FROM tb_penawaran WHERE kode_pesanan=$kode_pesanan");
 
-  if (empty($cek_penawaran)) {
-    echo "<script>
-    Swal.fire({title: 'Penawaran Belum Ada, Masih Diproses',text: 'Harap Tunggu dan cek berkala pada kolom proses pesanan',icon: 'error',confirmButtonText: 'OK'
-    }).then((result) => {
-      if (result.value) {
-        window.location = 'pesanan_pelanggan.php?id_pelanggan=<?=$data_id?>';
-      }
-    })</script>";
-  }
-}
-
-
-
+    //echo $cek_penawaran or die("sintaks salah");
 session_start();
 
 if (isset($_SESSION["ses_username"])){
@@ -65,6 +51,9 @@ $data_cek = mysqli_fetch_array($query_cek,MYSQLI_BOTH);
     <!-- Template Main CSS File -->
     <link href="assets/css/style.css" rel="stylesheet">
 
+    <!-- Alert -->
+    <script src="admin/plugins/alert.js"></script>
+
     <style>
       #canvasDiv{
         position: relative;
@@ -89,42 +78,53 @@ $data_cek = mysqli_fetch_array($query_cek,MYSQLI_BOTH);
 
     </style>
   </head>
+  <?php 
+    if (empty($cek_penawaran)) {
+     echo "<script>
+     Swal.fire({title: 'Penawaran Belum Ada, Masih Diproses',text: 'Harap Tunggu dan cek berkala pada kolom proses pesanan',icon: 'error',confirmButtonText: 'OK'
+     }).then((result) => {
+      if (result.value) {
+        window.location = 'pesanan_pelanggan.php?id_pelanggan=<?=$data_id?>';
+      }
+    })</script>";
+  }
 
-  <body>
+?>  
+<body>
 
-    <!-- ======= Header ======= -->
-    <header id="header" class="d-flex align-items-center">
-      <div class="container d-flex align-items-center justify-content-between">
+  <!-- ======= Header ======= -->
+  <header id="header" class="d-flex align-items-center">
+    <div class="container d-flex align-items-center justify-content-between">
 
-        <div class="logo">
-          <h1><a href="index.php"></a></h1>
-          <!-- Uncomment below if you prefer to use an image logo -->
-          <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
-        </div>
+      <div class="logo">
+        <h1><a href="index.php"></a></h1>
+        <!-- Uncomment below if you prefer to use an image logo -->
+        <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+      </div>
 
-        <nav id="navbar" class="navbar">
-          <ul>
-            <li><a class="nav-link scrollto active" href="index.php">Beranda</a></li>
-            <?php if(!isset($data_user)){?>
-             <li><a class="nav-link scrollto" href="login.php">Login</a></li>
-           <?php }else{?>
-             <li class="dropdown"><a href="#"><span><?php if(isset($data_user)){
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a class="nav-link scrollto active" href="index.php">Beranda</a></li>
+          <?php if(!isset($data_user)){?>
+           <li><a class="nav-link scrollto" href="login.php">Login</a></li>
+         <?php }else{?>
+           <li class="dropdown"><a href="#"><span><?php if(isset($data_user)){
                 //tampil data nama dari sesi yang ada
-               echo $_SESSION['ses_nama'];}?>
+             echo $_SESSION['ses_nama'];}?>
 
-             </span> <i class="bi bi-chevron-down"></i></a>
-             <ul>
-              <li><a href="pesanan_pelanggan.php?id_pelanggan=<?= $data_id?>">Pesanan</a></li>
-              <li><a href="hasil_proyek.php">Hasil Proyek</a></li>
-            </ul>
-          </li>
-          <li><a href="admin/logout.php">Keluar</a></li>
-        <?php } ?>
-      </ul>
-      <i class="bi bi-list mobile-nav-toggle"></i>
-    </nav><!-- .navbar -->
+           </span> <i class="bi bi-chevron-down"></i></a>
+           <ul>
+            <li><a href="pesanan_pelanggan.php?id_pelanggan=<?= $data_id?>">Pesanan</a></li>
+            <li><a href="hasil_proyek.php">Hasil Proyek</a></li>
+          </ul>
+        </li>
+        <li><a href="admin/logout.php">Keluar</a></li>
+      <?php } ?>
+    </ul>
+    <i class="bi bi-list mobile-nav-toggle"></i>
+  </nav><!-- .navbar -->
 
-  </div>
+</div>
 </header><!-- End Header -->
 
 <main id="main">
@@ -413,6 +413,9 @@ $data_cek = mysqli_fetch_array($query_cek,MYSQLI_BOTH);
     </footer><!-- End Footer -->
 
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+<!-- jQuery -->
+    <script src="admin/plugins/jquery/jquery.min.js"></script>
 
     <!-- Vendor JS Files -->
     <script src="assets/vendor/aos/aos.js"></script>

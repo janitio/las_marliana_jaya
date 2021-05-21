@@ -41,29 +41,12 @@ $sql2 = $koneksi->query("SELECT * from tb_profil");
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
 
-  <!-- =======================================================
-  * Template Name: Flexor - v4.0.1
-  * Template URL: https://bootstrapmade.com/flexor-free-multipurpose-bootstrap-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
+  <!-- Alert -->
+  <script src="plugins/alert.js"></script>
+
 </head>
 
 <body>
-
-  <!-- ======= Top Bar ======= -->
-  <!-- <section id="topbar" class="d-flex align-items-center">
-    <div class="container d-flex justify-content-center justify-content-md-between">
-      <div class="contact-info d-flex align-items-center">
-        <i class="bi bi-envelope d-flex align-items-center"><a href="mailto:contact@example.com">contact@example.com</a></i>
-        <i class="bi bi-phone d-flex align-items-center ms-4"><span>+1 5589 55488 55</spanS></i>
-      </div>
-
-      <div class="cta d-none d-md-flex align-items-center">
-        <a href="#about" class="scrollto">Get Started</a>
-      </div>
-    </div>
-  </section> -->
 
   <!-- ======= Header ======= -->
   <header id="header" class="d-flex align-items-center">
@@ -173,11 +156,12 @@ $sql2 = $koneksi->query("SELECT * from tb_profil");
                <?=$data['timestamp'];?>
              </td>
              <td>
-                  <a href="track_pesanan.php?kode_pesanan=<?php echo $data['kode_pesanan']; ?>" title="lihat pesanan" class="btn btn-primary"><i class="bx bx-show"></i></a>
+              <a href="track_pesanan.php?kode_pesanan=<?php echo $data['kode_pesanan']; ?>" title="lihat pesanan" class="btn btn-primary"><i class="bx bx-show"></i></a>
 
+              <a href="penawaran_pelanggan.php?kode_pesanan=<?php echo $data['kode_pesanan']; ?>" title="lihat penawaran" class="btn btn-info"><i class="bx bx-file"></i></a>
 
-                  <a href="penawaran_pelanggan.php?kode_pesanan=<?php echo $data['kode_pesanan']; ?>" title="lihat penawaran" class="btn btn-secondary"><i class="bx bx-file"></i></a>
-                  
+              <a href="kirimpesan_pelanggan.php?kode_pesanan=<?php echo $data['kode_pesanan']; ?>" title="lihat pesan" class="btn btn-secondary"><i class="bx bx-chat"></i></a>
+
             </td>
           <?php } ?>
         </tr>
