@@ -12,11 +12,10 @@
 						<tr>
 							<th width="5px">No</th>
 							<th width="30px">Foto</th>
-							<th width="10px">Kode Pesanan</th>
-							<th width="5px">Kode Desain</th>
+							<th width="5px">Kode Pesanan</th>
 							<th width="5px">ID Pelanggan</th>
 							<th width="20px">Nama Pelanggan</th>
-							<th width="30px">Alamat</th>
+							<th width="50px">Alamat</th>
 							<th width="30px">Waktu</th>
 							<th width="20px">Proses</th>
 							<th width="90px">Aksi</th>
@@ -39,9 +38,6 @@
 								</td>
 								<td>
 									<?php echo $data['kode_pesanan']; ?>
-								</td>
-								<td>
-									<?php echo $data['kode_desain']; ?>
 								</td>
 								<td>
 									<?php echo $data['id_pengguna']; ?>

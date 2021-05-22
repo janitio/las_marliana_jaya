@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 18, 2021 at 09:09 PM
+-- Generation Time: May 22, 2021 at 08:43 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.2
 
@@ -86,7 +86,8 @@ CREATE TABLE `tb_penawaran` (
 --
 
 INSERT INTO `tb_penawaran` (`kode_penawaran`, `kode_pesanan`, `id_pengguna`, `nama_pengguna`, `nama_desain`, `biaya_dp`, `sisa_bayar`, `total_bayar`, `proses_tawar`, `ttd_admin`, `ttd_pelanggan`, `timestamp`) VALUES
-(6, 8, 4, 'Tio Achdama Ahay', 'Ralling Balkon', 400000, 1600000, 2000000, 'diproses', 'ttd vitra.jpg', '', '2021-05-18 18:35:56');
+(6, 8, 4, 'Tio Achdama Ahay', 'Pagar Besi', 400000, 1600000, 2000000, 'diproses', 'ttd vitra.jpg', '60a94c6daff80.png', '2021-05-22 18:24:45'),
+(7, 7, 4, 'Tio Achdama', 'kanopi rumah', 400000, 960000, 2000000, 'diterima', 'ttd vitra.jpg', '7Tio Achdama60a9508670bb8.png', '2021-05-22 18:42:14');
 
 -- --------------------------------------------------------
 
@@ -111,7 +112,7 @@ CREATE TABLE `tb_pengguna` (
 
 INSERT INTO `tb_pengguna` (`id_pengguna`, `nama_pengguna`, `username`, `password`, `no_hp`, `email`, `alamat_pengguna`, `level`) VALUES
 (1, 'Vitra Janitio', 'admin', '1', '085215637999', 'pitra_ahoy@gmail.com', '', 'Administrator'),
-(4, 'Tio Achdama Ahay', 'tio', '1', '081222888999', 'tio@gmail.com', 'Jalan Beo 3 No. 15 D6 Pondok Sejahtera', 'Pelanggan'),
+(4, 'Tio Achdama', 'tio', '1', '081222888999', 'tio@gmail.com', 'Jalan Beo 3 No. 15 D6 Pondok Sejahtera, Kutabumi', 'Pelanggan'),
 (5, 'Almer Risma', 'almer', '1', '081888333000', 'almer@gmail.com', '', 'Pelanggan');
 
 -- --------------------------------------------------------
@@ -257,7 +258,7 @@ ALTER TABLE `tb_hasilproyek`
 -- AUTO_INCREMENT for table `tb_penawaran`
 --
 ALTER TABLE `tb_penawaran`
-  MODIFY `kode_penawaran` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `kode_penawaran` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `tb_pengguna`
