@@ -2,6 +2,8 @@
  //KONEKSI DB
 include "admin/inc/koneksi.php";
 
+$kode_pesanan=$_GET['kode_pesanan'];
+
 session_start();
 if (isset($_SESSION["ses_username"])){
 
@@ -15,65 +17,56 @@ while ($data= $sql->fetch_assoc()) {
   $nama=$data['nama_profil'];
   $alamat=$data['alamat'];
 }
-?>
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+if (isset($kode_pesanan)) {
+  $sql_tampil = "SELECT tb_pesanan.kode_pesanan, tb_desain.nama_desain FROM tb_pesanan 
+  JOIN tb_desain ON tb_pesanan.kode_desain=tb_desain.kode_desain 
+  WHERE tb_pesanan.kode_pesanan=$kode_pesanan";
+  $query_tampil = mysqli_query($koneksi, $sql_tampil);
+  while ($tampil= $query_tampil->fetch_assoc()) {
+    $kode_pesanan=$tampil['kode_pesanan'];
+    $nama_desain=$tampil['nama_desain'];
+  }}
 
-  <title>Marliana Jaya 2</title>
-  <meta content="" name="description">
-  <meta content="" name="keywords">
+  ?>
+  <!DOCTYPE html>
+  <html lang="en">
 
-  <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <title>Marliana Jaya 2</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
 
-  <!-- Vendor CSS Files -->
-  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <!-- Favicons -->
+    <link href="assets/img/favicon.png" rel="icon">
+    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
-  <!-- Template Main CSS File -->
-  <link href="assets/css/style.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
-  <!-- =======================================================
-  * Template Name: Flexor - v4.0.1
-  * Template URL: https://bootstrapmade.com/flexor-free-multipurpose-bootstrap-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
-</head>
+    <!-- Vendor CSS Files -->
+    <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
-<body>
+    <!-- Template Main CSS File -->
+    <link href="assets/css/style.css" rel="stylesheet">
 
-  <!-- ======= Top Bar ======= -->
-  <!-- <section id="topbar" class="d-flex align-items-center">
-    <div class="container d-flex justify-content-center justify-content-md-between">
-      <div class="contact-info d-flex align-items-center">
-        <i class="bi bi-envelope d-flex align-items-center"><a href="mailto:contact@example.com">contact@example.com</a></i>
-        <i class="bi bi-phone d-flex align-items-center ms-4"><span>+1 5589 55488 55</spanS></i>
-      </div>
+  </head>
 
-      <div class="cta d-none d-md-flex align-items-center">
-        <a href="#about" class="scrollto">Get Started</a>
-      </div>
-    </div>
-  </section> -->
+  <body>
 
-  <!-- ======= Header ======= -->
-  <header id="header" class="d-flex align-items-center">
-    <div class="container d-flex align-items-center justify-content-between">
+    <!-- ======= Header ======= -->
+    <header id="header" class="d-flex align-items-center">
+      <div class="container d-flex align-items-center justify-content-between">
 
-     <div class="logo">
+       <div class="logo">
         <h1><a href="index.php"><?=$nama; ?></a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
@@ -88,19 +81,10 @@ while ($data= $sql->fetch_assoc()) {
            <li class="dropdown"><a href="#"><span><?php if(isset($data_user)){
                 //tampil data nama dari sesi yang ada
              echo $_SESSION['ses_nama'];}?>
-             
+
            </span> <i class="bi bi-chevron-down"></i></a>
            <ul>
             <li><a href="pesanan_pelanggan.php?id_pelanggan=<?= $data_id?>">Pesanan</a></li>
-           <!--  <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
-              <ul>
-                <li><a href="#">Deep Drop Down 1</a></li>
-                <li><a href="#">Deep Drop Down 2</a></li>
-                <li><a href="#">Deep Drop Down 3</a></li>
-                <li><a href="#">Deep Drop Down 4</a></li>
-                <li><a href="#">Deep Drop Down 5</a></li>
-              </ul>
-            </li> -->
             <li><a href="hasil_proyek.php">Hasil Proyek</a></li>
           </ul>
         </li>
@@ -120,9 +104,9 @@ while ($data= $sql->fetch_assoc()) {
     <div class="container">
       <ol>
         <li><a href="index.php">Beranda</a></li>
-        <li>Hasil Proyek</li>
+        <li>Pembayaran</li>
       </ol>
-      <h2>Hasil Proyek</h2>
+      <h2>Pembayaran</h2>
     </div>
   </section><!-- End Breadcrumbs -->
 
@@ -132,30 +116,56 @@ while ($data= $sql->fetch_assoc()) {
         <div class="card-body">
 
           <div class="form-group row">
-            <label class="col-sm-2 col-form-label">Foto Hasil Proyek</label>
-            <div class="col-sm-6">
-              <input type="file" id="foto_hasil" name="foto_hasil">
-              <p class="help-block">
-                <font color="red">"Format file Jpg/Png"</font>
-              </p>
-            </div>
+            <label class="col-sm-3 col-form-label">Kode Pesanan</label>
+            <div class="col-sm-3">
+             <input type="text" class="form-control" id="kode_pesanan" name="kode_pesanan" value="<?=$kode_pesanan; ?>"
+             readonly/> 
+           </div>
+         </div>
+         <br>
+         <div class="form-group row">
+          <label class="col-sm-3 col-form-label">Nama Desain</label>
+          <div class="col-sm-3">
+            <input type="text" class="form-control" id="nama_desain" name="nama_desain" value="<?=$nama_desain; ?>"
+            readonly/> 
           </div>
+        </div>
+        <br>
+        <div class="form-group row">
+          <label class="col-sm-3 col-form-label">Jenis Pembayaran</label>
+          <div class="col-sm-3">
+            <select name="proses" id="proses" class="form-control">
+              <option value="">-- Pilih --</option>
+              <?php
+                //cek data yg dipilih sebelumnya
+              if ($data_cek['jenis_bayar'] == "Bayar Dimuka") echo "<option value='Bayar Dimuka' selected>Bayar Dimuka</option>";
+              else echo "<option value='Bayar Dimuka'>Bayar Dimuka</option>";
 
-          <div class="form-group row">
-            <label class="col-sm-2 col-form-label">Ulasan</label>
-            <div class="col-sm-7">
-              <textarea type="text" class="form-control" id="ulasan" name="ulasan" placeholder="ulasan" required></textarea> 
-            </div>
+              if ($data_cek['jenis_bayar'] == "Sisa Pembayaran") echo "<option value='Sisa Pembayaran' selected>Sisa Pembayaran</option>";
+              else echo "<option value='Sisa Pembayaran'>Sisa Pembayaran</option>";
+              ?>
+            </select>
           </div>
-
         </div>
-        <div class="card-body">
-          <input type="submit" name="Simpan" value="Simpan" class="btn btn-info">
-          <a href="index.php" title="Kembali" class="btn btn-secondary">Batal</a>
+        <br>
+        <div class="form-group row">
+          <label class="col-sm-3 col-form-label">Unggah Foto Pembayaran</label>
+          <div class="col-sm-6">
+            <input type="file" id="foto_pembayaran" name="foto_pembayaran">
+            <p class="help-block">
+              <font color="red">"Format file Jpg/Png"</font>
+            </p>
+          </div>
         </div>
-      </form>  
-    </div>
-  </section>
+        <br>
+      </div>
+      <div class="card-body">
+        <input type="submit" name="kirim" value="Kirim" class="btn btn-primary">
+        <a href="index.php" title="Kembali" class="btn btn-secondary">Kembali</a>
+      </div>
+    </form>  
+  </div>
+</section>
 
 </main><!-- End #main -->
 
@@ -253,19 +263,18 @@ while ($data= $sql->fetch_assoc()) {
 </html>
 
 <?php
-$sumber = @$_FILES['foto_hasil']['tmp_name'];
-$target = 'admin/foto/proyek/';
-$nama_file = @$_FILES['foto_hasil']['name'];
+$sumber = @$_FILES['foto_pembayaran']['tmp_name'];
+$target = 'admin/foto/bayar/';
+$nama_file = @$_FILES['foto_pembayaran']['name'];
 $pindah = move_uploaded_file($sumber, $target.$nama_file);
 
-if (isset ($_POST['Simpan'])){
+if (isset ($_POST['kirim'])){
 
   if(!empty($sumber)){
-    $sql_simpan = "INSERT INTO tb_hasilproyek (id_pengguna,nama_pengguna,foto_hasil,ulasan,tgl_hasil) VALUES (
-    '".$_POST['nama_desain']."',
-    '".$_POST['deskripsi']."',
-    '".$_POST['harga_normal']."',
-    '".$nama_file."')";
+    $sql_simpan = "INSERT INTO tb_pembayaran (id_pengguna,jenis_bayar,foto_pembayaran,timestamp) VALUES (
+    '".$_POST['jenis_bayar']."',
+    '".$nama_file."',
+    NOW())";
     $query_simpan = mysqli_query($koneksi, $sql_simpan);
     mysqli_close($koneksi);
 

@@ -23,7 +23,9 @@
 
 						<?php
 						$no = 1;
-						$sql = $koneksi->query("SELECT * from tb_penawaran");
+						$sql = $koneksi->query("SELECT tb_penawaran.kode_penawaran, tb_penawaran.kode_pesanan, tb_penawaran.biaya_dp, tb_penawaran.sisa_bayar, tb_penawaran.total_bayar, tb_penawaran.proses_tawar, tb_pengguna.nama_pengguna from tb_penawaran
+							JOIN tb_pesanan ON tb_penawaran.kode_pesanan=tb_pesanan.kode_pesanan
+							JOIN tb_pengguna ON tb_pesanan.id_pengguna=tb_pengguna.id_pengguna");
 						while ($data= $sql->fetch_assoc()) {
 							?>
 

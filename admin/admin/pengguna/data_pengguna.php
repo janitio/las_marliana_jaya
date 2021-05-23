@@ -40,7 +40,7 @@
 						</td>
 						<td>
 							<a href="?page=edit-pengguna&kode=<?php echo $data['id_pengguna']; ?>" title="Ubah"
-							 class="btn btn-success btn-sm">
+							 class="btn btn-warning btn-sm">
 								<i class="fa fa-edit"></i>
 							</a>
 							<a href="?page=del-pengguna&kode=<?php echo $data['id_pengguna']; ?>" onclick="return confirm('Apakah anda yakin hapus data ini ?')"

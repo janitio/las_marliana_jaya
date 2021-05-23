@@ -57,7 +57,7 @@
 											<i class="fa fa-eye"></i>
 										</a>
 									</a>
-									<a href="?page=edit-desain&kode_desain=<?php echo $data['kode_desain']; ?>" title="Ubah" class="btn btn-success btn-sm">
+									<a href="?page=edit-desain&kode_desain=<?php echo $data['kode_desain']; ?>" title="Ubah" class="btn btn-warning btn-sm">
 										<i class="fa fa-edit"></i>
 									</a>
 									<a href="?page=del-desain&kode_desain=<?php echo $data['kode_desain']; ?>" onclick="return confirm('Apakah anda yakin hapus data ini ?')"

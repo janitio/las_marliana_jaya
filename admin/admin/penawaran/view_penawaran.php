@@ -58,10 +58,12 @@ $data_cek = mysqli_fetch_array($query_cek,MYSQLI_BOTH);
 							<?php
 						}
 
-						$sql_tampil = "SELECT tb_penawaran.kode_penawaran,tb_pesanan.kode_pesanan, tb_pesanan.nama_pengguna, tb_pesanan.alamat, tb_desain.nama_desain, tb_desain.foto_desain, tb_pengguna.no_hp, tb_penawaran.biaya_dp, tb_penawaran.total_bayar, tb_penawaran.ttd_admin, tb_penawaran.ttd_pelanggan FROM tb_desain 
-						JOIN tb_pesanan ON tb_desain.kode_desain=tb_pesanan.kode_desain 
-						JOIN tb_pengguna ON tb_pesanan.id_pengguna=tb_pengguna.id_pengguna 
-						JOIN tb_penawaran ON tb_pesanan.kode_pesanan=tb_penawaran.kode_pesanan";
+						$sql_tampil = "SELECT tb_penawaran.kode_penawaran,tb_pesanan.kode_pesanan, tb_pengguna.nama_pengguna, tb_pengguna.alamat_pengguna, tb_desain.nama_desain, tb_desain.foto_desain, tb_pengguna.no_hp, tb_penawaran.biaya_dp, tb_penawaran.total_bayar, tb_penawaran.ttd_admin, tb_penawaran.ttd_pelanggan, tb_penawaran.timestamp FROM tb_penawaran 
+						JOIN tb_pesanan ON tb_penawaran.kode_pesanan=tb_pesanan.kode_pesanan 
+						JOIN tb_pengguna ON tb_pesanan.id_pengguna=tb_pengguna.id_pengguna
+						JOIN tb_desain ON tb_pesanan.kode_desain=tb_desain.kode_desain
+						WHERE tb_penawaran.kode_penawaran=$kode_penawaran
+						";
 						$query_tampil = mysqli_query($koneksi, $sql_tampil);
 						$no=1;
 						while ($data = mysqli_fetch_array($query_tampil,MYSQLI_BOTH)) {
@@ -83,7 +85,7 @@ $data_cek = mysqli_fetch_array($query_cek,MYSQLI_BOTH);
 								</td>     
 								<td valign="top">
 									<div align="right">
-										<span >Sumedang, 03 mei 2011</span></div>
+										<span ><?php echo $data['timestamp']; ?></span></div>
 									</td>   
 								</tr>
 								<tr>     
@@ -109,7 +111,7 @@ $data_cek = mysqli_fetch_array($query_cek,MYSQLI_BOTH);
 												<tr>
 													<td style="width: 30%; vertical-align: top;">Alamat</td>
 													<td style="width: 5%; vertical-align: top;">:</td>
-													<td style="width: 65%;"><?php echo $data['alamat']; ?></td>
+													<td style="width: 65%;"><?php echo $data['alamat_pengguna']; ?></td>
 												</tr>
 												<tr>
 													<td style="width: 30%;">Kode Pesanan</td>
@@ -141,7 +143,7 @@ $data_cek = mysqli_fetch_array($query_cek,MYSQLI_BOTH);
 											<tr>     <td><div align="center">
 												<span >Pelanggan,</span></div>
 												<div align="center">
-													<img src="foto/ttd_pelanggan/<?=$data['ttd_pelanggan']; ?>" width="100px"/>
+													<img src="foto/ttd_pelanggan/<?=$data['ttd_pelanggan']; ?>" width="210px"/>
 												</div>
 												<div align="center">
 													<span ><?php echo $data['nama_pengguna']; ?></span></div>

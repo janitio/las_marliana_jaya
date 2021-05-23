@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 22, 2021 at 08:43 PM
+-- Generation Time: May 23, 2021 at 08:45 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.2
 
@@ -29,6 +29,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `tb_desain` (
   `kode_desain` int(3) NOT NULL,
+  `jenis_desain` enum('TJ','KR','RT','RB','PB','PP','PAB','PG','TBP') NOT NULL,
   `nama_desain` varchar(20) NOT NULL,
   `deskripsi` varchar(120) NOT NULL,
   `harga_normal` int(10) NOT NULL,
@@ -39,11 +40,11 @@ CREATE TABLE `tb_desain` (
 -- Dumping data for table `tb_desain`
 --
 
-INSERT INTO `tb_desain` (`kode_desain`, `nama_desain`, `deskripsi`, `harga_normal`, `foto_desain`) VALUES
-(2, 'Ralling Balkon', 'berbunga', 1000000, 'otw.jpg'),
-(3, 'Teralis Jendela', 'Bergaris', 300000, 'aa.jpg'),
-(4, 'kanopi rumah', 'coklat', 500000, 'ae.jpg'),
-(5, 'Pagar Besi', 'bergaris', 900000, 'earth.jpg');
+INSERT INTO `tb_desain` (`kode_desain`, `jenis_desain`, `nama_desain`, `deskripsi`, `harga_normal`, `foto_desain`) VALUES
+(2, 'RB', 'Ralling Balkon', 'berbunga', 1000000, 'otw.jpg'),
+(3, 'TJ', 'Teralis Jendela', 'Bergaris', 300000, 'aa.jpg'),
+(4, 'KR', 'kanopi rumah', 'coklat', 500000, 'ae.jpg'),
+(5, 'PB', 'Pagar Besi', 'bergaris', 900000, 'earth.jpg');
 
 -- --------------------------------------------------------
 
@@ -54,10 +55,23 @@ INSERT INTO `tb_desain` (`kode_desain`, `nama_desain`, `deskripsi`, `harga_norma
 CREATE TABLE `tb_hasilproyek` (
   `id_hasilproyek` int(3) NOT NULL,
   `id_pengguna` int(3) NOT NULL,
-  `nama_pengguna` varchar(40) NOT NULL,
   `foto_hasil` varchar(50) NOT NULL,
   `ulasan` text NOT NULL,
   `tgl_hasil` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_pembayaran`
+--
+
+CREATE TABLE `tb_pembayaran` (
+  `id_pembayaran` int(6) NOT NULL,
+  `id_pengguna` int(3) NOT NULL,
+  `jenis_bayar` enum('Bayar Dimuka','Sisa Pembayaran') NOT NULL,
+  `foto_pembayaran` varchar(50) NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -69,9 +83,6 @@ CREATE TABLE `tb_hasilproyek` (
 CREATE TABLE `tb_penawaran` (
   `kode_penawaran` int(9) NOT NULL,
   `kode_pesanan` int(6) NOT NULL,
-  `id_pengguna` int(3) NOT NULL,
-  `nama_pengguna` varchar(40) NOT NULL,
-  `nama_desain` varchar(20) NOT NULL,
   `biaya_dp` int(10) NOT NULL,
   `sisa_bayar` int(10) NOT NULL,
   `total_bayar` int(10) NOT NULL,
@@ -85,9 +96,9 @@ CREATE TABLE `tb_penawaran` (
 -- Dumping data for table `tb_penawaran`
 --
 
-INSERT INTO `tb_penawaran` (`kode_penawaran`, `kode_pesanan`, `id_pengguna`, `nama_pengguna`, `nama_desain`, `biaya_dp`, `sisa_bayar`, `total_bayar`, `proses_tawar`, `ttd_admin`, `ttd_pelanggan`, `timestamp`) VALUES
-(6, 8, 4, 'Tio Achdama Ahay', 'Pagar Besi', 400000, 1600000, 2000000, 'diproses', 'ttd vitra.jpg', '60a94c6daff80.png', '2021-05-22 18:24:45'),
-(7, 7, 4, 'Tio Achdama', 'kanopi rumah', 400000, 960000, 2000000, 'diterima', 'ttd vitra.jpg', '7Tio Achdama60a9508670bb8.png', '2021-05-22 18:42:14');
+INSERT INTO `tb_penawaran` (`kode_penawaran`, `kode_pesanan`, `biaya_dp`, `sisa_bayar`, `total_bayar`, `proses_tawar`, `ttd_admin`, `ttd_pelanggan`, `timestamp`) VALUES
+(6, 8, 400000, 1600000, 2000000, 'diproses', 'ttd vitra.jpg', '60a94c6daff80.png', '2021-05-22 18:24:45'),
+(7, 7, 400000, 960000, 2000000, 'dibatalkan', 'ttd vitra.jpg', '7Tio Achdama60aa8286aca7d.png', '2021-05-23 17:03:49');
 
 -- --------------------------------------------------------
 
@@ -125,10 +136,7 @@ CREATE TABLE `tb_pesanan` (
   `kode_pesanan` int(6) NOT NULL,
   `kode_desain` int(3) NOT NULL,
   `id_pengguna` int(3) NOT NULL,
-  `nama_pengguna` varchar(40) NOT NULL,
-  `alamat` text NOT NULL,
   `proses` enum('diproses','survei','kalkulasi','pengerjaan','dikirim','diterima','dibatalkan') NOT NULL,
-  `foto_desain` varchar(30) NOT NULL,
   `timestamp` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -136,12 +144,12 @@ CREATE TABLE `tb_pesanan` (
 -- Dumping data for table `tb_pesanan`
 --
 
-INSERT INTO `tb_pesanan` (`kode_pesanan`, `kode_desain`, `id_pengguna`, `nama_pengguna`, `alamat`, `proses`, `foto_desain`, `timestamp`) VALUES
-(4, 2, 3, 'ilham ahmad', 'jalan pegangsaan timu cengkareng', 'dibatalkan', 'otw.jpg', '2021-05-18 18:18:18'),
-(5, 4, 5, 'Almer Risma', 'jalan komodo 2, no. 2, perum', 'diproses', 'ae.jpg', '2021-04-23 06:57:31'),
-(6, 5, 4, 'Tio Achdama', 'jalan beo 3 no 15 D6, kotabumi', 'diproses', 'earth.jpg', '2021-04-23 07:32:39'),
-(7, 4, 4, 'Tio Achdama', 'jalan beo 3', 'kalkulasi', 'ae.jpg', '2021-05-18 18:18:55'),
-(8, 5, 4, 'Tio Achdama Ahay', 'Jalan Beo 3 No. 15 D6 Pondok Sejahtera', 'kalkulasi', 'earth.jpg', '2021-05-18 18:19:37');
+INSERT INTO `tb_pesanan` (`kode_pesanan`, `kode_desain`, `id_pengguna`, `proses`, `timestamp`) VALUES
+(4, 2, 3, 'dibatalkan', '2021-05-18 18:18:18'),
+(5, 4, 5, 'diproses', '2021-04-23 06:57:31'),
+(6, 5, 4, 'diproses', '2021-04-23 07:32:39'),
+(7, 4, 4, 'kalkulasi', '2021-05-18 18:18:55'),
+(8, 5, 4, 'diterima', '2021-05-23 18:26:47');
 
 -- --------------------------------------------------------
 
@@ -171,12 +179,6 @@ INSERT INTO `tb_profil` (`id_profil`, `nama_profil`, `alamat`) VALUES
 CREATE TABLE `tb_track_pesanan` (
   `kode_track_pesanan` int(4) NOT NULL,
   `kode_pesanan` int(6) NOT NULL,
-  `kode_desain` int(3) NOT NULL,
-  `id_pengguna` int(3) NOT NULL,
-  `nama_pengguna` varchar(40) NOT NULL,
-  `alamat` text NOT NULL,
-  `no_hp` varchar(13) NOT NULL,
-  `foto_desain` varchar(50) NOT NULL,
   `proses` enum('diproses','survei','kalkulasi','pengerjaan','dikirim','diterima','dibatalkan') NOT NULL,
   `timestamp` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -185,12 +187,30 @@ CREATE TABLE `tb_track_pesanan` (
 -- Dumping data for table `tb_track_pesanan`
 --
 
-INSERT INTO `tb_track_pesanan` (`kode_track_pesanan`, `kode_pesanan`, `kode_desain`, `id_pengguna`, `nama_pengguna`, `alamat`, `no_hp`, `foto_desain`, `proses`, `timestamp`) VALUES
-(1, 4, 2, 3, 'ilham ahmad', 'jalan pegangsaan timu cengkareng', '081222333111', 'otw.jpg', 'kalkulasi', '2021-04-17 15:23:48'),
-(2, 4, 2, 3, 'ilham ahmad', 'jalan pegangsaan timu cengkareng', '081222333111', 'otw.jpg', 'pengerjaan', '2021-04-17 15:24:11'),
-(3, 4, 2, 3, 'ilham ahmad', 'jalan pegangsaan timu cengkareng', '081888333000', 'otw.jpg', 'dibatalkan', '2021-05-18 18:18:18'),
-(4, 7, 4, 4, 'Tio Achdama', 'jalan beo 3', '081888333000', 'ae.jpg', 'kalkulasi', '2021-05-18 18:18:55'),
-(5, 8, 5, 4, 'Tio Achdama Ahay', 'Jalan Beo 3 No. 15 D6 Pondok Sejahtera', '081888333000', 'earth.jpg', 'kalkulasi', '2021-05-18 18:19:37');
+INSERT INTO `tb_track_pesanan` (`kode_track_pesanan`, `kode_pesanan`, `proses`, `timestamp`) VALUES
+(1, 4, 'kalkulasi', '2021-04-17 15:23:48'),
+(2, 4, 'pengerjaan', '2021-04-17 15:24:11'),
+(3, 4, 'dibatalkan', '2021-05-18 18:18:18'),
+(4, 7, 'kalkulasi', '2021-05-18 18:18:55'),
+(5, 8, 'kalkulasi', '2021-05-18 18:19:37'),
+(6, 8, 'survei', '2021-05-23 18:26:10'),
+(7, 8, 'pengerjaan', '2021-05-23 18:26:24'),
+(8, 8, 'dikirim', '2021-05-23 18:26:34'),
+(9, 8, 'diterima', '2021-05-23 18:26:47');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_verify_proyek`
+--
+
+CREATE TABLE `tb_verify_proyek` (
+  `id_verifyproyek` int(3) NOT NULL,
+  `id_pengguna` int(3) NOT NULL,
+  `foto_verifyhasil` varchar(50) NOT NULL,
+  `ulasan_verify` text NOT NULL,
+  `tgl_verifyhasil` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Indexes for dumped tables
@@ -207,6 +227,12 @@ ALTER TABLE `tb_desain`
 --
 ALTER TABLE `tb_hasilproyek`
   ADD PRIMARY KEY (`id_hasilproyek`);
+
+--
+-- Indexes for table `tb_pembayaran`
+--
+ALTER TABLE `tb_pembayaran`
+  ADD PRIMARY KEY (`id_pembayaran`);
 
 --
 -- Indexes for table `tb_penawaran`
@@ -239,6 +265,12 @@ ALTER TABLE `tb_track_pesanan`
   ADD PRIMARY KEY (`kode_track_pesanan`);
 
 --
+-- Indexes for table `tb_verify_proyek`
+--
+ALTER TABLE `tb_verify_proyek`
+  ADD PRIMARY KEY (`id_verifyproyek`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -253,6 +285,12 @@ ALTER TABLE `tb_desain`
 --
 ALTER TABLE `tb_hasilproyek`
   MODIFY `id_hasilproyek` int(3) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tb_pembayaran`
+--
+ALTER TABLE `tb_pembayaran`
+  MODIFY `id_pembayaran` int(6) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tb_penawaran`
@@ -282,7 +320,13 @@ ALTER TABLE `tb_profil`
 -- AUTO_INCREMENT for table `tb_track_pesanan`
 --
 ALTER TABLE `tb_track_pesanan`
-  MODIFY `kode_track_pesanan` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `kode_track_pesanan` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `tb_verify_proyek`
+--
+ALTER TABLE `tb_verify_proyek`
+  MODIFY `id_verifyproyek` int(3) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

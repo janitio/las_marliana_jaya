@@ -2,6 +2,8 @@
  //KONEKSI DB
 include "admin/inc/koneksi.php";
 
+$kode_pesanan=$_GET['kode_pesanan'];
+
 session_start();
 if (isset($_SESSION["ses_username"])){
 
@@ -111,23 +113,20 @@ while ($data= $sql->fetch_assoc()) {
 						<thead>
 							<tr>
 								<th width="5px" class="text-center">No</th>
-								<th width="10px" class="text-center">Kode Pesanan</th>
-								<th width="30px" class="text-center">Foto</th>
 								<th width="30px" class="text-center">Nama Desain</th>
-								<th width="60px" class="text-center">Alamat</th>
 								<th width="20px" class="text-center">Proses</th>
 								<th width="30px" class="text-center">Waktu</th>
-								<th width="50px" class="text-center">Aksi</th>
 							</tr>
 						</thead>
 						<tbody>
 
 							<?php
 							$no = 1;
-							$sql = $koneksi->query("SELECT tb_pesanan.kode_pesanan, tb_desain.foto_desain , tb_desain.nama_desain, tb_pengguna.alamat_pengguna, tb_pesanan.proses, tb_pesanan.timestamp FROM tb_pesanan 
-								JOIN tb_desain ON tb_pesanan.kode_desain=tb_desain.kode_desain 
-								JOIN tb_pengguna ON tb_pesanan.id_pengguna=tb_pengguna.id_pengguna
-								WHERE tb_pesanan.id_pengguna='".$data_id."'");
+							$sql = $koneksi->query("SELECT tb_desain.nama_desain, tb_track_pesanan.proses, tb_track_pesanan.timestamp FROM tb_track_pesanan 
+								JOIN tb_pesanan ON tb_track_pesanan.kode_pesanan=tb_pesanan.kode_pesanan 
+								JOIN tb_desain ON tb_pesanan.kode_desain=tb_desain.kode_desain
+
+								WHERE tb_track_pesanan.kode_pesanan=$kode_pesanan");
 
 							while($data=mysqli_fetch_assoc($sql)):
 								?>
@@ -137,32 +136,13 @@ while ($data= $sql->fetch_assoc()) {
 										<?= $no;?>
 									</td>
 									<td class="text-center">
-										<?= $data['kode_pesanan']; ?>
-									</td>
-									<td align="center">
-										<img src="admin/foto/desain/<?=$data['foto_desain'];?>" width="100px" />
-									</td>
-									<td>
 										<?= $data['nama_desain'];?>
-									</td>
-									<td>
-										<?=$data['alamat_pengguna'];?>
 									</td>
 									<td class="text-center">
 										<?=$data['proses'];?>
 									</td>
-									<td>
+									<td class="text-center">
 										<?=$data['timestamp'];?>
-									</td>
-									<td class="row h-60 justify-content-center align-items-center">
-										<a href="riwayat_pesanan.php?kode_pesanan=<?=$data['kode_pesanan']; ?>" class="btn btn-info">riwayat pesanan</a>
-
-										<a href="penawaran_pelanggan.php?kode_pesanan=<?=$data['kode_pesanan']; ?>" class="btn btn-secondary">surat penawaran</a>
-
-										<a href="pembayaran_pelanggan.php?kode_pesanan=<?=$data['kode_pesanan']; ?>" class="btn btn-success">Pembayaran</a>
-										<br>
-										<a href="kirimpesan_pelanggan.php?kode_pesanan=<?=$data['kode_pesanan']; ?>" class="btn btn-primary">Lihat Pesan</a>
-
 									</td>
 									<?php $no++;
 								endwhile;?>
@@ -172,6 +152,7 @@ while ($data= $sql->fetch_assoc()) {
 				</table>
 			</div>
 		</div>
+		<a href="pesanan_pelanggan.php?id_pelanggan=<?=$data_id?>" title="Batal" class="btn btn-secondary">Kembali</a>
 	</div>
 </section>
 

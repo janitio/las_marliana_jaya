@@ -90,7 +90,7 @@ $sql2 = $koneksi->query("SELECT * from tb_desain");
           <li><a class="nav-link scrollto " href="#portfolio">Desain</a></li>
           <li><a class="nav-link scrollto" href="#contact">Kontak Kami</a></li>
           <?php if(!isset($data_user)){?>
-           <li><a class="nav-link scrollto" href="login.php">Login</a></li>
+           <li><a class="nav-link scrollto" href="login.php">Masuk</a></li>
          <?php }else{?>
            <li class="dropdown"><a href="ubah_profil.php?id_pelanggan=<?=$data_id?>"><span><?php if(isset($data_user)){
                 //tampil data nama dari sesi yang ada
