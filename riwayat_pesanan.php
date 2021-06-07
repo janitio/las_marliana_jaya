@@ -142,7 +142,7 @@ while ($data= $sql->fetch_assoc()) {
 										<?=$data['proses'];?>
 									</td>
 									<td class="text-center">
-										<?=$data['timestamp'];?>
+										<?=date('F j, Y, g:i a',strtotime($data['timestamp']));?>
 									</td>
 									<?php $no++;
 								endwhile;?>

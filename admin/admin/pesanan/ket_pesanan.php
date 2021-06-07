@@ -1,79 +1,73 @@
 <?php
 
-    if(isset($_GET['kode'])){
-        $sql_cek = "SELECT * from tb_pegawai WHERE nip='".$_GET['kode']."'";
-        $query_cek = mysqli_query($koneksi, $sql_cek);
-        $data_cek = mysqli_fetch_array($query_cek,MYSQLI_BOTH);
-    }
+define('DBINFO', 'mysql:host=localhost;dbname=las_marliana');
+define('DBUSER','root');
+define('DBPASS','');
+
+function fetchAll($query){
+	$con = new PDO(DBINFO, DBUSER, DBPASS);
+	$stmt = $con->query($query);
+	return $stmt->fetchAll();
+}
+function performQuery($query){
+	$con = new PDO(DBINFO, DBUSER, DBPASS);
+	$stmt = $con->prepare($query);
+	if($stmt->execute()){
+		return true;
+	}else{
+		return false;
+	}
+}
+
+
+$kode_pesanan=$_GET['kode_pesanan'];
 ?>
 <div class="row">
 
 	<div class="col-md-8">
 		<div class="card card-info">
 			<div class="card-header">
-				<h3 class="card-title">Detail Pegawai</h3>
+				<h3 class="card-title">Beri Keterangan Pesanan</h3>
 
 				<div class="card-tools">
 				</div>
 			</div>
-			<div class="card-body p-0">
-				<table class="table">
-					<tbody>
-						<tr>
-							<td style="width: 150px">
-								<b>NIP</b>
-							</td>
-							<td>:
-								<?php echo $data_cek['nip']; ?>
-							</td>
-						</tr>
-						<tr>
-							<td style="width: 150px">
-								<b>Nama</b>
-							</td>
-							<td>:
-								<?php echo $data_cek['nama']; ?>
-							</td>
-						</tr>
-						<tr>
-							<td style="width: 150px">
-								<b>Alamat</b>
-							</td>
-							<td>:
-								<?php echo $data_cek['alamat']; ?>
-							</td>
-						</tr>
-						<tr>
-							<td style="width: 150px">
-								<b>No HP</b>
-							</td>
-							<td>:
-								<?php echo $data_cek['no_hp']; ?>
-							</td>
-						</tr>
-						<tr>
-							<td style="width: 150px">
-								<b>Status</b>
-							</td>
-							<td>:
-								<?php echo $data_cek['status']; ?>
-							</td>
-						</tr>
-						<tr>
-							<td style="width: 150px">
-								<b>Jabatan</b>
-							</td>
-							<td>:
-								<?php echo $data_cek['jabatan']; ?>
-							</td>
-						</tr>
-					</tbody>
-				</table>
-				<div class="card-footer">
-					<a href="?page=data-pegawai" class="btn btn-warning">Kembali</a>
+			<div class="card-body p-0"><br>
+				<?php 
 
-					<a href="./report/cetak-pegawai.php?nip=<?php echo $data_cek['nip']; ?>" target=" _blank"
-					 title="Cetak Data Pegawai" class="btn btn-primary">Print</a>
+				if(isset($_POST['submit'])){
+					$pesan = $_POST['kirim_pesan'];
+					$query ="INSERT INTO tb_notif (kode_pesanan,pesan,status,tgl_pesan) VALUES ($kode_pesanan,'$pesan', 'unread', CURRENT_TIMESTAMP)";
+					if(performQuery($query)){
+						echo "<script>
+						Swal.fire({title: 'Kirim Pesan Berhasil',text: '',icon: 'success',confirmButtonText: 'OK'
+						}).then((result) => {
+							if (result.value) {
+								window.location = 'index.php?page=data-pesanan';
+							}
+						})</script>";
+					}else{
+						echo "<script>
+						Swal.fire({title: 'Kirim Pesan Gagal',text: '',icon: 'error',confirmButtonText: 'OK'
+						}).then((result) => {
+							if (result.value) {
+								window.location = 'index.php?page=ket-pesanan';
+							}
+						})</script>";
+					}
+				}
+
+				?>
+				<form method="post">
+					<div class="card-body">
+						<textarea name="kirim_pesan" class="form-control mr-sm-10" type="text" placeholder="Beritahu pada pelanggan" required></textarea>
+					</div><br>
+					<div class="card-footer">
+						<button name="submit" class="btn btn-success my-2 my-sm-0" type="submit">Kirim</button>
+
+						<a href="?page=data-pegawai" class="btn btn-warning">Kembali</a>
+					</form>
+
 				</div>
 			</div>
 		</div>
@@ -84,7 +78,7 @@
 			<div class="card-header">
 				<center>
 					<h3 class="card-title">
-						Foto Pegawai
+						Pratinjau Pesan yang dikirim
 					</h3>
 				</center>
 
@@ -92,17 +86,26 @@
 				</div>
 			</div>
 			<div class="card-body">
-				<div class="text-center">
-					<img src="foto/<?php echo $data_cek['foto']; ?>" width="280px" />
+
+				<?php
+				$sql_cek = $koneksi->query("SELECT * FROM tb_notif WHERE kode_pesanan=$kode_pesanan");
+
+				while ($data= $sql_cek->fetch_assoc()) {
+					?>
+					<table id="example1" class="table table-bordered table-striped">
+						<thead>
+							<tr>
+								<?php echo $data['pesan']; ?> (<?php echo $data['tgl_pesan']; ?>)
+							</tr>
+						</thead>
+					</table>
+							<?php
+						}
+						?>
+					</div>
 				</div>
-
-				<h3 class="profile-username text-center">
-					<?php echo $data_cek['nip']; ?>
-					-
-					<?php echo $data_cek['nama']; ?>
-				</h3>
 			</div>
-		</div>
-	</div>
 
-</div>
+		</div>
+		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

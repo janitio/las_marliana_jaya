@@ -160,8 +160,8 @@ if (isset($kode_pesanan)) {
         <br>
       </div>
       <div class="card-body">
-        <input type="submit" name="kirim" value="Kirim" class="btn btn-primary">
-        <a href="index.php" title="Kembali" class="btn btn-secondary">Kembali</a>
+        <input type="submit" name="kirim" value="Kirim" class="btn btn-success">
+        <a href="pesanan_pelanggan.php?id_pelanggan=<?=$data_id?>" title="Kembali" class="btn btn-secondary">Kembali</a>
       </div>
     </form>  
   </div>

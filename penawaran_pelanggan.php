@@ -19,7 +19,7 @@ while ($data= $sql->fetch_assoc()) {
 	$alamat=$data['alamat'];
 }
 
-$sql_tampil = "SELECT tb_penawaran.kode_penawaran,tb_pesanan.kode_pesanan, tb_pengguna.nama_pengguna, tb_pengguna.alamat_pengguna, tb_desain.nama_desain, tb_desain.foto_desain, tb_pengguna.no_hp, tb_penawaran.biaya_dp, tb_penawaran.total_bayar, tb_penawaran.ttd_admin, tb_penawaran.ttd_pelanggan, tb_penawaran.timestamp FROM tb_pesanan 
+$sql_tampil = "SELECT tb_penawaran.kode_penawaran,tb_pesanan.kode_pesanan, tb_pengguna.nama_pengguna, tb_pengguna.alamat_pengguna, tb_desain.nama_desain, tb_desain.foto_desain, tb_pengguna.no_hp, tb_penawaran.biaya_dp, tb_penawaran.total_bayar, tb_penawaran.ttd_admin, tb_penawaran.ttd_pelanggan, tb_penawaran.tgl_tawar FROM tb_pesanan 
 JOIN tb_desain ON tb_pesanan.kode_desain=tb_desain.kode_desain 
 JOIN tb_pengguna ON tb_pesanan.id_pengguna=tb_pengguna.id_pengguna 
 JOIN tb_penawaran ON tb_pesanan.kode_pesanan=tb_penawaran.kode_pesanan 
@@ -37,7 +37,7 @@ while ($tampil= $query_tampil->fetch_assoc()) {
 	$total_bayar=$tampil['total_bayar'];
 	$ttd_admin=$tampil['ttd_admin'];
 	$ttd_pelanggan=$tampil['ttd_pelanggan'];
-	$timestamp=$tampil['timestamp'];
+	$tgl_tawar=$tampil['tgl_tawar'];
 }
 ?>
 <!DOCTYPE html>
@@ -204,7 +204,7 @@ while ($tampil= $query_tampil->fetch_assoc()) {
 										</td>     
 										<td valign="top">
 											<div align="right">
-												<span ><?=$timestamp?></span></div>
+												<span ><?=$tgl_tawar?></span></div>
 											</td>   
 										</tr>
 										<tr>     

@@ -150,8 +150,8 @@ while ($data= $sql->fetch_assoc()) {
 
         </div>
         <div class="card-body">
-          <input type="submit" name="Simpan" value="Simpan" class="btn btn-info">
-          <a href="index.php" title="Kembali" class="btn btn-secondary">Batal</a>
+          <input type="submit" name="Simpan" value="Simpan" class="btn btn-success">
+          <a href="index.php" title="Kembali" class="btn btn-secondary">Kembali</a>
         </div>
       </form>  
     </div>

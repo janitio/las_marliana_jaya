@@ -53,7 +53,7 @@ if(isset($_GET['kode_pesanan'])){
 				<div class="form-group row">
 					<label class="col-sm-2 col-form-label">Alamat</label>
 					<div class="col-sm-5">
-						<input type="text" class="form-control" id="alamat" name="alamat" value="<?php echo $data_cek['alamat_pengguna']; ?>"readonly
+						<input type="text" class="form-control" id="alamat" name="alamat" value="<?php echo $data_cek['alamat_pengguna']; ?>"
 						/>
 					</div>
 				</div>
@@ -61,7 +61,7 @@ if(isset($_GET['kode_pesanan'])){
 				<div class="form-group row">
 					<label class="col-sm-2 col-form-label">No HP</label>
 					<div class="col-sm-5">
-						<input type="text" class="form-control" id="no_hp" name="no_hp" value="<?=$data_cek['no_hp']; ?>"readonly
+						<input type="text" class="form-control" id="no_hp" name="no_hp" value="<?=$data_cek['no_hp']; ?>"
 						/>
 					</div>
 				</div>

@@ -11,6 +11,25 @@ if (isset($_SESSION["ses_username"])){
 
 include "admin/inc/koneksi.php";
 
+define('DBINFO', 'mysql:host=localhost;dbname=las_marliana');
+define('DBUSER','root');
+define('DBPASS','');
+
+function fetchAll($query){
+  $con = new PDO(DBINFO, DBUSER, DBPASS);
+  $stmt = $con->query($query);
+  return $stmt->fetchAll();
+}
+function performQuery($query){
+  $con = new PDO(DBINFO, DBUSER, DBPASS);
+  $stmt = $con->prepare($query);
+  if($stmt->execute()){
+    return true;
+  }else{
+    return false;
+  }
+}
+
 $sql = $koneksi->query("SELECT * from tb_profil");
 while ($data= $sql->fetch_assoc()) {
 
@@ -30,6 +49,8 @@ $sql2 = $koneksi->query("SELECT * from tb_desain");
   <meta content="" name="description">
   <meta content="" name="keywords">
 
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
   <!-- Favicons -->
   <link href="assets/img/favicon.png" rel="icon">
   <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
@@ -47,30 +68,9 @@ $sql2 = $koneksi->query("SELECT * from tb_desain");
 
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
-
-  <!-- =======================================================
-  * Template Name: Flexor - v4.0.1
-  * Template URL: https://bootstrapmade.com/flexor-free-multipurpose-bootstrap-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
 </head>
 
 <body>
-
-  <!-- ======= Top Bar ======= -->
-  <!-- <section id="topbar" class="d-flex align-items-center">
-    <div class="container d-flex justify-content-center justify-content-md-between">
-      <div class="contact-info d-flex align-items-center">
-        <i class="bi bi-envelope d-flex align-items-center"><a href="mailto:contact@example.com">contact@example.com</a></i>
-        <i class="bi bi-phone d-flex align-items-center ms-4"><span>+1 5589 55488 55</span></i>
-      </div>
-
-      <div class="cta d-none d-md-flex align-items-center">
-        <a href="#about" class="scrollto">Get Started</a>
-      </div>
-    </div>
-  </section> -->
 
   <!-- ======= Header ======= -->
   <header id="header" class="d-flex align-items-center">
@@ -78,8 +78,6 @@ $sql2 = $koneksi->query("SELECT * from tb_desain");
 
       <div class="logo">
         <h1><a href="index.html"><?=$nama; ?></a></h1>
-        <!-- Uncomment below if you prefer to use an image logo -->
-        <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
       </div>
 
       <nav id="navbar" class="navbar">
@@ -91,22 +89,60 @@ $sql2 = $koneksi->query("SELECT * from tb_desain");
           <li><a class="nav-link scrollto" href="#contact">Kontak Kami</a></li>
           <?php if(!isset($data_user)){?>
            <li><a class="nav-link scrollto" href="login.php">Masuk</a></li>
-         <?php }else{?>
-           <li class="dropdown"><a href="ubah_profil.php?id_pelanggan=<?=$data_id?>"><span><?php if(isset($data_user)){
+           <?php }else{?>
+            <li class="nav-item dropdown">
+              <a class="nav-link" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Notifikasi 
+                <?php
+                $query = "SELECT * from tb_notif where status = 'unread' order by tgl_pesan DESC";
+                if(count(fetchAll($query))>0){
+                  ?>
+                  <span class="badge badge-dark"><?php echo count(fetchAll($query)); ?></span>
+                  <?php
+                }
+                ?>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="dropdown01">
+                <?php
+                $query = "SELECT * from tb_notif order by tgl_pesan DESC";
+                if(count(fetchAll($query))>0){
+                 foreach(fetchAll($query) as $data){
+                  ?>
+                  <a style ="
+                  <?php
+                  if($i['status']=='unread'){
+                    echo "font-weight:bold;";
+                  }
+                  ?>
+                  " class="dropdown-item" href="kirimpesan_pelanggan.php?kode_pesanan=<?=$data['kode_pesanan']; ?>">
+                  <small><i><?php echo date('F j, Y, g:i a',strtotime($data['tgl_pesan'])) ?></i></small><br/>
+                  <?php 
+                  echo "Ada pesan untuk Anda.";
+                  ?>
+                </a>
+                <div class="dropdown-divider"></div>
+                <?php
+              }
+            }else{
+             echo "tidak ada pesan.";
+           }
+           ?>
+         </div>
+       </li>
+     <li class="dropdown"><a href="ubah_profil.php?id_pelanggan=<?=$data_id?>"><span><?php if(isset($data_user)){
                 //tampil data nama dari sesi yang ada
-             echo $_SESSION['ses_nama'];}?>
-             
-           </span> <i class="bi bi-chevron-down"></i></a>
-           <ul>
-            <li><a href="pesanan_pelanggan.php?id_pelanggan=<?=$data_id?>">Pesanan</a></li>
-            <li><a href="hasil_proyek.php?id_pelanggan=<?=$data_id?>">Hasil Proyek</a></li>
-          </ul>
-        </li>
-        <li><a href="admin/logout.php">Keluar</a></li>
-      <?php } ?>
+       echo $_SESSION['ses_nama'];}?>
+
+     </span> <i class="bi bi-chevron-down"></i></a>
+     <ul>
+      <li><a href="pesanan_pelanggan.php?id_pelanggan=<?=$data_id?>">Pesanan</a></li>
+      <li><a href="hasil_proyek.php?id_pelanggan=<?=$data_id?>">Hasil Proyek</a></li>
     </ul>
-    <i class="bi bi-list mobile-nav-toggle"></i>
-  </nav><!-- .navbar -->
+  </li>
+  <li><a href="admin/logout.php">Keluar</a></li>
+<?php } ?>
+</ul>
+<i class="bi bi-list mobile-nav-toggle"></i>
+</nav><!-- .navbar -->
 
 </div>
 </header><!-- End Header -->
@@ -506,46 +542,7 @@ $sql2 = $koneksi->query("SELECT * from tb_desain");
   <!-- ======= Footer ======= -->
   <footer id="footer">
 
-    <div class="footer-top">
-      <div class="container">
-        <div class="row">
 
-          <div class="col-lg-3 col-md-6 footer-contact">
-            <h3>Flexor</h3>
-            <p>
-              A108 Adam Street <br>
-              New York, NY 535022<br>
-              United States <br><br>
-              <strong>Phone:</strong> +1 5589 55488 55<br>
-              <strong>Email:</strong> info@example.com<br>
-            </p>
-          </div>
-
-          <div class="col-lg-2 col-md-6 footer-links">
-            <h4>Useful Links</h4>
-            <ul>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Services</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
-            </ul>
-          </div>
-
-          <div class="col-lg-3 col-md-6 footer-links">
-            <h4>Our Services</h4>
-            <ul>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Web Design</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Web Development</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Product Management</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Marketing</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Graphic Design</a></li>
-            </ul>
-          </div>
-
-        </div>
-      </div>
-    </div>
 
     <div class="container d-lg-flex py-4">
 
@@ -554,10 +551,6 @@ $sql2 = $koneksi->query("SELECT * from tb_desain");
           &copy; Copyright <strong><span>Marliana Jaya 2</span></strong>. All Rights Reserved
         </div>
         <div class="credits">
-          <!-- All the links in the footer should remain intact. -->
-          <!-- You can delete the links only if you purchased the pro version. -->
-          <!-- Licensing information: https://bootstrapmade.com/license/ -->
-          <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/flexor-free-multipurpose-bootstrap-template/ -->
           Designed by <a href="https://bootstrapmade.com/">Vitra Janitio</a>
         </div>
       </div>
@@ -573,6 +566,10 @@ $sql2 = $koneksi->query("SELECT * from tb_desain");
   <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
   <script src="assets/vendor/php-email-form/validate.js"></script>
   <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
