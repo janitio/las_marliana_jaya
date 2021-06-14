@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 07, 2021 at 08:49 PM
+-- Generation Time: Jun 14, 2021 at 11:55 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.2
 
@@ -97,6 +97,14 @@ CREATE TABLE `tb_pembayaran` (
   `foto_pembayaran` varchar(50) NOT NULL,
   `tgl_bayar` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tb_pembayaran`
+--
+
+INSERT INTO `tb_pembayaran` (`id_pembayaran`, `id_pengguna`, `jenis_bayar`, `foto_pembayaran`, `tgl_bayar`) VALUES
+(2, 4, 'Bayar Dimuka', 'Activity-Diagram.jpg', '2021-06-14 15:35:25'),
+(3, 4, 'Sisa Pembayaran', 'Deployment-Diagram.jpg', '2021-06-14 15:36:14');
 
 -- --------------------------------------------------------
 
@@ -233,8 +241,15 @@ CREATE TABLE `tb_verify_proyek` (
   `id_pengguna` int(3) NOT NULL,
   `foto_verifyhasil` varchar(50) NOT NULL,
   `ulasan_verify` text NOT NULL,
-  `tgl_verifyhasil` date NOT NULL
+  `tgl_verifyhasil` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tb_verify_proyek`
+--
+
+INSERT INTO `tb_verify_proyek` (`id_verifyproyek`, `id_pengguna`, `foto_verifyhasil`, `ulasan_verify`, `tgl_verifyhasil`) VALUES
+(2, 4, 'kucing.jpeg', 'hahahahahahaha', '2021-06-14 15:26:08');
 
 --
 -- Indexes for dumped tables
@@ -326,7 +341,7 @@ ALTER TABLE `tb_notif`
 -- AUTO_INCREMENT for table `tb_pembayaran`
 --
 ALTER TABLE `tb_pembayaran`
-  MODIFY `id_pembayaran` int(6) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_pembayaran` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tb_penawaran`
@@ -362,7 +377,7 @@ ALTER TABLE `tb_track_pesanan`
 -- AUTO_INCREMENT for table `tb_verify_proyek`
 --
 ALTER TABLE `tb_verify_proyek`
-  MODIFY `id_verifyproyek` int(3) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_verifyproyek` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

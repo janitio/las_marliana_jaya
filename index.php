@@ -51,6 +51,7 @@ $sql2 = $koneksi->query("SELECT * from tb_desain");
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet"/>
   <!-- Favicons -->
   <link href="assets/img/favicon.png" rel="icon">
   <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
@@ -89,45 +90,45 @@ $sql2 = $koneksi->query("SELECT * from tb_desain");
           <li><a class="nav-link scrollto" href="#contact">Kontak Kami</a></li>
           <?php if(!isset($data_user)){?>
            <li><a class="nav-link scrollto" href="login.php">Masuk</a></li>
-           <?php }else{?>
-            <li class="nav-item dropdown">
-              <a class="nav-link" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Notifikasi 
-                <?php
-                $query = "SELECT * from tb_notif where status = 'unread' order by tgl_pesan DESC";
-                if(count(fetchAll($query))>0){
-                  ?>
-                  <span class="badge badge-dark"><?php echo count(fetchAll($query)); ?></span>
-                  <?php
-                }
+         <?php }else{?>
+          <li class="nav-item dropdown">
+            <a class="nav-link" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="bi bi-bell-fill" font-size="36px"></i>
+              <?php
+              $query = "SELECT * from tb_notif where status = 'unread' order by tgl_pesan DESC";
+              if(count(fetchAll($query))>0){
                 ?>
-              </a>
-              <div class="dropdown-menu" aria-labelledby="dropdown01">
-                <?php
-                $query = "SELECT * from tb_notif order by tgl_pesan DESC";
-                if(count(fetchAll($query))>0){
-                 foreach(fetchAll($query) as $data){
-                  ?>
-                  <a style ="
-                  <?php
-                  if($i['status']=='unread'){
-                    echo "font-weight:bold;";
-                  }
-                  ?>
-                  " class="dropdown-item" href="kirimpesan_pelanggan.php?kode_pesanan=<?=$data['kode_pesanan']; ?>">
-                  <small><i><?php echo date('F j, Y, g:i a',strtotime($data['tgl_pesan'])) ?></i></small><br/>
-                  <?php 
-                  echo "Ada pesan untuk Anda.";
-                  ?>
-                </a>
-                <div class="dropdown-divider"></div>
+                <span class="badge badge-dark"><?php echo count(fetchAll($query)); ?></span>
                 <?php
               }
-            }else{
-             echo "tidak ada pesan.";
-           }
-           ?>
-         </div>
-       </li>
+              ?>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="dropdown01">
+              <?php
+              $query = "SELECT * from tb_notif order by tgl_pesan DESC";
+              if(count(fetchAll($query))>0){
+               foreach(fetchAll($query) as $data){
+                ?>
+                <a style ="
+                <?php
+                if($i['status']=='unread'){
+                  echo "font-weight:bold;";
+                }
+                ?>
+                " class="dropdown-item" href="kirimpesan_pelanggan.php?kode_pesanan=<?=$data['kode_pesanan']; ?>">
+                <small><i><?php echo date('F j, Y, g:i a',strtotime($data['tgl_pesan'])) ?></i></small><br>
+                <?php 
+                echo "Ada pesan untuk Anda.";
+                ?>
+              </a>
+              <div class="dropdown-divider"></div>
+              <?php
+            }
+          }else{
+           echo "tidak ada pesan.";
+         }
+         ?>
+       </div>
+     </li>
      <li class="dropdown"><a href="ubah_profil.php?id_pelanggan=<?=$data_id?>"><span><?php if(isset($data_user)){
                 //tampil data nama dari sesi yang ada
        echo $_SESSION['ses_nama'];}?>

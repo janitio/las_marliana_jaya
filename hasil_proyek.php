@@ -74,41 +74,30 @@ while ($data= $sql->fetch_assoc()) {
     <div class="container d-flex align-items-center justify-content-between">
 
      <div class="logo">
-        <h1><a href="index.php"><?=$nama; ?></a></h1>
-        <!-- Uncomment below if you prefer to use an image logo -->
-        <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
-      </div>
+      <h1><a href="index.php"><?=$nama; ?></a></h1>
+    </div>
 
-      <nav id="navbar" class="navbar">
-        <ul>
-          <li><a class="nav-link scrollto active" href="index.php">Beranda</a></li>
-          <?php if(!isset($data_user)){?>
-           <li><a class="nav-link scrollto" href="login.php">Login</a></li>
-         <?php }else{?>
-           <li class="dropdown"><a href="#"><span><?php if(isset($data_user)){
+    <nav id="navbar" class="navbar">
+      <ul>
+        <li><a class="nav-link scrollto active" href="index.php">Beranda</a></li>
+        <?php if(!isset($data_user)){?>
+         <li><a class="nav-link scrollto" href="login.php">Login</a></li>
+       <?php }else{?>
+         <li class="dropdown"><a href="#"><span><?php if(isset($data_user)){
                 //tampil data nama dari sesi yang ada
-             echo $_SESSION['ses_nama'];}?>
-             
-           </span> <i class="bi bi-chevron-down"></i></a>
-           <ul>
-            <li><a href="pesanan_pelanggan.php?id_pelanggan=<?= $data_id?>">Pesanan</a></li>
-           <!--  <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
-              <ul>
-                <li><a href="#">Deep Drop Down 1</a></li>
-                <li><a href="#">Deep Drop Down 2</a></li>
-                <li><a href="#">Deep Drop Down 3</a></li>
-                <li><a href="#">Deep Drop Down 4</a></li>
-                <li><a href="#">Deep Drop Down 5</a></li>
-              </ul>
-            </li> -->
-            <li><a href="hasil_proyek.php">Hasil Proyek</a></li>
-          </ul>
-        </li>
-        <li><a href="admin/logout.php">Keluar</a></li>
-      <?php } ?>
-    </ul>
-    <i class="bi bi-list mobile-nav-toggle"></i>
-  </nav><!-- .navbar -->
+           echo $_SESSION['ses_nama'];}?>
+
+         </span> <i class="bi bi-chevron-down"></i></a>
+         <ul>
+          <li><a href="pesanan_pelanggan.php?id_pelanggan=<?= $data_id?>">Pesanan</a></li>
+          <li><a href="hasil_proyek.php">Hasil Proyek</a></li>
+        </ul>
+      </li>
+      <li><a href="admin/logout.php">Keluar</a></li>
+    <?php } ?>
+  </ul>
+  <i class="bi bi-list mobile-nav-toggle"></i>
+</nav><!-- .navbar -->
 
 </div>
 </header><!-- End Header -->
@@ -134,7 +123,7 @@ while ($data= $sql->fetch_assoc()) {
           <div class="form-group row">
             <label class="col-sm-2 col-form-label">Foto Hasil Proyek</label>
             <div class="col-sm-6">
-              <input type="file" id="foto_hasil" name="foto_hasil">
+              <input type="file" id="foto_verifyhasil" name="foto_verifyhasil">
               <p class="help-block">
                 <font color="red">"Format file Jpg/Png"</font>
               </p>
@@ -144,7 +133,7 @@ while ($data= $sql->fetch_assoc()) {
           <div class="form-group row">
             <label class="col-sm-2 col-form-label">Ulasan</label>
             <div class="col-sm-7">
-              <textarea type="text" class="form-control" id="ulasan" name="ulasan" placeholder="ulasan" required></textarea> 
+              <textarea type="text" class="form-control" id="ulasan_verify" name="ulasan_verify" placeholder="Ketik Ulasan Anda Di Sini" required></textarea> 
             </div>
           </div>
 
@@ -248,37 +237,41 @@ while ($data= $sql->fetch_assoc()) {
 <!-- Template Main JS File -->
 <script src="assets/js/main.js"></script>
 
+<!-- jQuery -->
+<script src="admin/plugins/jquery/jquery.min.js"></script>
+<!-- Alert -->
+<script src="admin/plugins/alert.js"></script>
 </body>
 
 </html>
 
 <?php
-$sumber = @$_FILES['foto_hasil']['tmp_name'];
+$sumber = @$_FILES['foto_verifyhasil']['tmp_name'];
 $target = 'admin/foto/proyek/';
-$nama_file = @$_FILES['foto_hasil']['name'];
+$nama_file = @$_FILES['foto_verifyhasil']['name'];
 $pindah = move_uploaded_file($sumber, $target.$nama_file);
 
 if (isset ($_POST['Simpan'])){
 
   if(!empty($sumber)){
-    $sql_simpan = "INSERT INTO tb_hasilproyek (id_pengguna,nama_pengguna,foto_hasil,ulasan,tgl_hasil) VALUES (
-    '".$_POST['nama_desain']."',
-    '".$_POST['deskripsi']."',
-    '".$_POST['harga_normal']."',
-    '".$nama_file."')";
+    $sql_simpan = "INSERT INTO tb_verify_proyek (id_pengguna,foto_verifyhasil,ulasan_verify,tgl_verifyhasil) VALUES (
+    $data_id,
+    '".$nama_file."',
+    '".$_POST['ulasan_verify']."',
+    CURRENT_TIMESTAMP)";
     $query_simpan = mysqli_query($koneksi, $sql_simpan);
     mysqli_close($koneksi);
 
     if ($query_simpan) {
       echo "<script>
-      Swal.fire({title: 'Tambah Data Berhasil',text: '',icon: 'success',confirmButtonText: 'OK'
+      Swal.fire({title: 'Simpan Data Berhasil',text: 'Tunggu Beberapa Saat, Admin Akan Memverifikasi Data Anda',icon: 'success',confirmButtonText: 'OK'
       }).then((result) => {if (result.value){
         window.location = 'index.php?page=data-desain';
       }
     })</script>";
   }else{
     echo "<script>
-    Swal.fire({title: 'Tambah Data Gagal',text: '',icon: 'error',confirmButtonText: 'OK'
+    Swal.fire({title: 'Simpan Data Gagal',text: '',icon: 'error',confirmButtonText: 'OK'
     }).then((result) => {if (result.value){
       window.location = 'index.php?page=add-desain';
     }

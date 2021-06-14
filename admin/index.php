@@ -149,6 +149,14 @@ while ($data= $sql->fetch_assoc()) {
 								</a>
 							</li>
 							<li class="nav-item">
+								<a href="?page=data-pembayaran" class="nav-link">
+									<i class="nav-icon far fa fa-users"></i>
+									<p>
+										Data Pembayaran
+									</p>
+								</a>
+							</li>
+							<li class="nav-item">
 								<a href="?page=data-proyek" class="nav-link">
 									<i class="nav-icon far fa fa-users"></i>
 									<p>
@@ -294,6 +302,14 @@ while ($data= $sql->fetch_assoc()) {
 								break;
 								case 'kalkulasi-pesanan':
 								include "admin/pesanan/kalkulasi_pesanan.php";
+								break;
+
+					//pembayaran 
+								case 'data-pembayaran':
+								include "admin/pembayaran/data_pembayaran.php";
+								break;
+								case 'edit-pembayaran':
+								include "admin/pembayaran/edit_pembayaran.php";
 								break;
 
 					//hasil proyek

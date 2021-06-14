@@ -134,7 +134,7 @@ if (isset($kode_pesanan)) {
         <div class="form-group row">
           <label class="col-sm-3 col-form-label">Jenis Pembayaran</label>
           <div class="col-sm-3">
-            <select name="proses" id="proses" class="form-control">
+            <select name="jenis_bayar" id="jenis_bayar" class="form-control">
               <option value="">-- Pilih --</option>
               <?php
                 //cek data yg dipilih sebelumnya
@@ -258,6 +258,10 @@ if (isset($kode_pesanan)) {
 <!-- Template Main JS File -->
 <script src="assets/js/main.js"></script>
 
+<!-- jQuery -->
+<script src="admin/plugins/jquery/jquery.min.js"></script>
+<!-- Alert -->
+<script src="admin/plugins/alert.js"></script>
 </body>
 
 </html>
@@ -271,23 +275,24 @@ $pindah = move_uploaded_file($sumber, $target.$nama_file);
 if (isset ($_POST['kirim'])){
 
   if(!empty($sumber)){
-    $sql_simpan = "INSERT INTO tb_pembayaran (id_pengguna,jenis_bayar,foto_pembayaran,timestamp) VALUES (
+    $sql_simpan = "INSERT INTO tb_pembayaran (id_pengguna,jenis_bayar,foto_pembayaran,tgl_bayar) VALUES (
+    $data_id,
     '".$_POST['jenis_bayar']."',
     '".$nama_file."',
-    NOW())";
+    CURRENT_TIMESTAMP)";
     $query_simpan = mysqli_query($koneksi, $sql_simpan);
     mysqli_close($koneksi);
 
     if ($query_simpan) {
       echo "<script>
-      Swal.fire({title: 'Tambah Data Berhasil',text: '',icon: 'success',confirmButtonText: 'OK'
+      Swal.fire({title: 'Kirim Bukti Pembayaran Berhasil',text: '',icon: 'success',confirmButtonText: 'OK'
       }).then((result) => {if (result.value){
         window.location = 'index.php?page=data-desain';
       }
     })</script>";
   }else{
     echo "<script>
-    Swal.fire({title: 'Tambah Data Gagal',text: '',icon: 'error',confirmButtonText: 'OK'
+    Swal.fire({title: 'Kirim Bukti Pembayarana Gagal',text: '',icon: 'error',confirmButtonText: 'OK'
     }).then((result) => {if (result.value){
       window.location = 'index.php?page=add-desain';
     }
