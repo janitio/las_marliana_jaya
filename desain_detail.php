@@ -95,9 +95,9 @@ if(isset($_GET['kode_desain'])){
             </ul>
           </div>
           <div class="portfolio-description">
-            <h2>This is an example of portfolio detail</h2>
+            <h2>Cara order</h2>
             <p>
-              Autem ipsum nam porro corporis rerum. Quis eos dolorem eos itaque inventore commodi labore quia quia. Exercitationem repudiandae officiis neque suscipit non officia eaque itaque enim. Voluptatem officia accusantium nesciunt est omnis tempora consectetur dignissimos. Sequi nulla at esse enim cum deserunt eius.
+              Login terlebih dahulu dengan pilih menu "Masuk", lalu pesan desain yang diinginkan, setelah itu kami akan memproses pesanan anda dan mengukur lokasi anda sesuai yang dicantumkan alamat pada akun anda. Kami akan melakukan kalkulasi pesanan anda mulai dari biaya karyawan, bahan yang dibutuhkan, pengiriman, dan pemasangan, lalu melakukan penawaran yang akan dikirimkan ke menu "Penawaran", bila disetujui dan bayar dimuka (cukup kirimkan bukti pembayarannya pada menu "Pembayaran") maka pesanan anda akan diproses, bila sudah dikirim dan pasang maka anda wajib membayar sisa pembayaran (cukup kirimkan bukti pembayarannya pada menu "Pembayaran").
             </p>
           </div>
         </div>

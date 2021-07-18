@@ -8,7 +8,7 @@ include "admin/inc/koneksi.php";
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Login | Marliana Jaya 2</title>
+  <title>Login | Mailiana Jaya 2</title>
   <link href="https://fonts.googleapis.com/css?family=Karla:400,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.materialdesignicons.com/4.8.95/css/materialdesignicons.min.css">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
@@ -19,9 +19,6 @@ include "admin/inc/koneksi.php";
     <div class="container-fluid">
       <div class="row">
         <div class="col-sm-6 login-section-wrapper">
-          <div class="brand-wrapper">
-            <img src="login/assets/images/logo.svg" alt="logo" class="logo">
-          </div>
           <div class="login-wrapper my-auto">
             <h1 class="login-title">Masuk</h1>
             <form action="" method="post">
@@ -40,6 +37,7 @@ include "admin/inc/koneksi.php";
             </form>
             <!-- <a href="#!" class="forgot-password-link">Forgot password?</a> -->
             <p class="login-wrapper-footer-text">Belum memiliki akun? <a href="register.php" class="text-reset">Daftar Di Sini!</a></p>
+            <p class="login-wrapper-footer-text"><a href="index.php" class="text-reset">Ke halaman Beranda</a></p>
           </div>
         </div>
         <div class="col-sm-6 px-0 d-none d-sm-block">

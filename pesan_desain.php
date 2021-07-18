@@ -161,13 +161,10 @@ date_default_timezone_set('Asia/Jakarta');
 
 if (isset ($_POST['pesan'])){
 
-	$sql_simpan = "INSERT INTO tb_pesanan (kode_desain, id_pengguna, nama_pengguna, alamat, proses, foto_desain, timestamp) VALUES (
+	$sql_simpan = "INSERT INTO tb_pesanan (kode_desain, id_pengguna, proses, tgl_pesanan) VALUES (
 	$kode_desain,
 	$id_pengguna,
-	'$nama_pengguna',
-	'$alamat_pengguna',
 	'diproses',
-	'$foto_desain',
 	NOW())";
 	$query_simpan = mysqli_query($koneksi, $sql_simpan);
 	mysqli_close($koneksi);

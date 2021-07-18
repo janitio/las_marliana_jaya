@@ -79,16 +79,15 @@ if(isset($_GET['kode_pesanan'])){
 	if (isset ($_POST['Buat'])){
 
 		$total_bayar=$_POST['total_bayar'];
-		$biaya_dp=(0.2*$total_bayar);
+		$biaya_dp=(0.3*$total_bayar);
 		$sisa_bayar=$total_bayar-$biaya_dp;
 
-		$sql_simpan = "INSERT INTO tb_penawaran (kode_pesanan, biaya_dp, sisa_bayar, total_bayar, proses_tawar, ttd_admin,ttd_pelanggan, tgl_tawar) VALUES (
+		$sql_simpan = "INSERT INTO tb_penawaran (kode_pesanan, biaya_dp, sisa_bayar, total_bayar, proses_tawar, ttd_pelanggan, tgl_tawar) VALUES (
 		'".$_POST['kode_pesanan']."',
 		$biaya_dp,
 		$sisa_bayar,
 		$total_bayar,
 		'diproses',
-		'ttd vitra.jpg',
 		'',
 		NOW())";
 		$query_simpan = mysqli_query($koneksi, $sql_simpan);

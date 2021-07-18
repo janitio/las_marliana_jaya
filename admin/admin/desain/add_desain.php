@@ -7,44 +7,6 @@
 			<div class="card-body">
 
 				<div class="form-group row">
-					<label class="col-sm-2 col-form-label">Jenis Desain</label>
-					<div class="col-sm-4">
-						<select name="proses" id="proses" class="form-control">
-							<option value="">-- Pilih --</option>
-							<?php
-                //cek data yg dipilih sebelumnya
-							if ($data_cek['jenis_desain'] == "TJ") echo "<option value='TJ' selected>TJ</option>";
-							else echo "<option value='TJ'>TJ</option>";
-
-							if ($data_cek['jenis_desain'] == "KR") echo "<option value='KR' selected>KR</option>";
-							else echo "<option value='KR'>KR</option>";
-
-							if ($data_cek['jenis_desain'] == "RT") echo "<option value='RT' selected>RT</option>";
-							else echo "<option value='RT'>RT</option>";
-
-							if ($data_cek['jenis_desain'] == "RB") echo "<option value='RB' selected>RB</option>";
-							else echo "<option value='RB'>RB</option>";
-
-							if ($data_cek['jenis_desain'] == "PB") echo "<option value='PB' selected>PB</option>";
-							else echo "<option value='PB'>PB</option>";
-
-							if ($data_cek['jenis_desain'] == "PP") echo "<option value='PP' selected>PP</option>";
-							else echo "<option value='PP'>PP</option>";
-
-							if ($data_cek['jenis_desain'] == "PAB") echo "<option value='PAB' selected>PAB</option>";
-							else echo "<option value='PAB'>PAB</option>";
-
-							if ($data_cek['jenis_desain'] == "PG") echo "<option value='PG' selected>PG</option>";
-							else echo "<option value='PG'>PG</option>";
-
-							if ($data_cek['jenis_desain'] == "TBP") echo "<option value='TBP' selected>TBP</option>";
-							else echo "<option value='TBP'>TBP</option>";
-							?>
-						</select>
-					</div>
-				</div>
-
-				<div class="form-group row">
 					<label class="col-sm-2 col-form-label">Nama Desain</label>
 					<div class="col-sm-5">
 						<input type="text" class="form-control" id="nama_desain" name="nama_desain" placeholder="Nama Desain" required>

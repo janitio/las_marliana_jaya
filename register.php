@@ -8,7 +8,7 @@ include "admin/inc/koneksi.php";
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Daftar | Marliana Jaya 2</title>
+  <title>Daftar | Mailiana Jaya 2</title>
   <link href="https://fonts.googleapis.com/css?family=Karla:400,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.materialdesignicons.com/4.8.95/css/materialdesignicons.min.css">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
@@ -19,9 +19,6 @@ include "admin/inc/koneksi.php";
     <div class="container-fluid">
       <div class="row">
         <div class="col-sm-6 login-section-wrapper">
-          <div class="brand-wrapper">
-            <img src="login/assets/images/logo.svg" alt="logo" class="logo">
-          </div>
           <div class="login-wrapper my-auto">
             <form action="" method="post">
               <div class="form-group">
@@ -51,8 +48,7 @@ include "admin/inc/koneksi.php";
               </button>
 
             </form>
-            <!-- <a href="#!" class="forgot-password-link">Forgot password?</a> -->
-
+           <p class="login-wrapper-footer-text"><a href="login.php" class="text-reset">Ke halaman Login</a></p>
           </div>
         </div>
         <div class="col-sm-6 px-0 d-none d-sm-block">

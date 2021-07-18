@@ -51,14 +51,6 @@
 ?>
 
 <?php
-	//$sql = $koneksi->query("SELECT count(kode_hasilproyek) as hasil from tb_hasilproyek");
-	//while ($data= $sql->fetch_assoc()) {
-	
-		//$hasil=$data['hasil'];
-	//}
-?>
-
-<?php
 	$sql = $koneksi->query("SELECT count(id_pengguna) as pengguna from tb_pengguna");
 	while ($data= $sql->fetch_assoc()) {
 	
@@ -78,7 +70,7 @@
 				<p>Jumlah Desain</p>
 			</div>
 			<div class="icon">
-				<i class="ion ion-person-add"></i>
+				<i class="ion ion-pie-graph"></i>
 			</div>
 			<a href="index.php?page=data-santri" class="small-box-footer">Selengkapnya
 				<i class="fas fa-arrow-circle-right"></i>
@@ -104,25 +96,7 @@
 			</a>
 		</div>
 	</div>
-	<!-- ./col -->
-	<div class="col-lg-3 col-6">
-		<!-- small box -->
-		<div class="small-box bg-danger">
-			<div class="inner">
-				<h3>
-					<?php //echo $hasil; ?>
-				</h3>
-
-				<p>Jumlah Hasil Proyek</p>
-			</div>
-			<div class="icon">
-				<i class="ion ion-pie-graph"></i>
-			</div>
-			<a href="#" class="small-box-footer">Informasi
-			</a>
-		</div>
-	</div>
-	<!-- ./col -->
+	
 	<div class="col-lg-3 col-6">
 		<!-- small box -->
 		<div class="small-box bg-warning">
@@ -134,7 +108,7 @@
 				<p>Pengguna Sistem</p>
 			</div>
 			<div class="icon">
-				<i class="ion ion-android-happy"></i>
+				<i class="ion ion-person-add"></i>
 			</div>
 			<a href="#" class="small-box-footer">Informasi
 			</a>

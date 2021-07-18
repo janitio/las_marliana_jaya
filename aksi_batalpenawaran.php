@@ -39,27 +39,44 @@ include "admin/inc/koneksi.php";
 <?php
 
 if(isset($_GET['kode_penawaran'])){ 
-							$sql_batal = "UPDATE tb_penawaran SET
-							proses_tawar='dibatalkan',
-							timestamp=NOW()   
-							WHERE kode_penawaran='".$_GET['kode_penawaran']."'";
-							$query_batal = mysqli_query($koneksi, $sql_batal);
+	$sql_batal = "UPDATE tb_penawaran SET
+	proses_tawar='dibatalkan',
+	tgl_tawar=NOW()   
+	WHERE kode_penawaran='".$_GET['kode_penawaran']."'";
+	$query_batal = mysqli_query($koneksi, $sql_batal);
 
-							if ($query_batal) {
-								echo "<script>
-								Swal.fire({title: 'Penawaran Dibatalkan',text: '',icon: 'info',confirmButtonText: 'OK'
-								}).then((result) => {if (result.value){
-									window.location = 'index.php';
-								}
-							})</script>";
-						}else{
-							echo "<script>
-							Swal.fire({title: 'Penawaran Gagal',text: 'Ada Kesalahan',icon: 'error',confirmButtonText: 'OK'
-							}).then((result) => {if (result.value){
-								'index.php';
-							}
-						})</script>";
-					}
+	if ($query_batal) {
+		echo "<script>
+		Swal.fire({title: 'Penawaran Dibatalkan',text: '',icon: 'info',confirmButtonText: 'OK'
+		}).then((result) => {if (result.value){
+			window.location = 'index.php';
+		}
+	})</script>";
+}else{
+	echo "<script>
+	Swal.fire({title: 'Penawaran Gagal',text: 'Ada Kesalahan',icon: 'error',confirmButtonText: 'OK'
+	}).then((result) => {if (result.value){
+		'index.php';
+	}
+})</script>";
+}
 
-				}
+}
 ?>
+<!-- jQuery -->
+<script src="admin/plugins/jquery/jquery.min.js"></script>
+
+<!-- Vendor JS Files -->
+<script src="assets/vendor/aos/aos.js"></script>
+<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+<script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+<script src="assets/vendor/php-email-form/validate.js"></script>
+<script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+
+<!-- Template Main JS File -->
+<script src="assets/js/main.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.5.0-beta4/html2canvas.min.js"></script>
+<script>

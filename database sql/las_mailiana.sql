@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 14, 2021 at 11:55 AM
+-- Generation Time: Jul 18, 2021 at 06:53 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.2
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `las_marliana`
+-- Database: `las_mailiana`
 --
 
 -- --------------------------------------------------------
@@ -29,7 +29,6 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `tb_desain` (
   `kode_desain` int(3) NOT NULL,
-  `jenis_desain` enum('TJ','KR','RT','RB','PB','PP','PAB','PG','TBP') NOT NULL,
   `nama_desain` varchar(20) NOT NULL,
   `deskripsi` varchar(120) NOT NULL,
   `harga_normal` int(10) NOT NULL,
@@ -40,11 +39,11 @@ CREATE TABLE `tb_desain` (
 -- Dumping data for table `tb_desain`
 --
 
-INSERT INTO `tb_desain` (`kode_desain`, `jenis_desain`, `nama_desain`, `deskripsi`, `harga_normal`, `foto_desain`) VALUES
-(2, 'RB', 'Ralling Balkon', 'berbunga', 1000000, 'otw.jpg'),
-(3, 'TJ', 'Teralis Jendela', 'Bergaris', 300000, 'aa.jpg'),
-(4, 'KR', 'kanopi rumah', 'coklat', 500000, 'ae.jpg'),
-(5, 'PB', 'Pagar Besi', 'bergaris', 900000, 'earth.jpg');
+INSERT INTO `tb_desain` (`kode_desain`, `nama_desain`, `deskripsi`, `harga_normal`, `foto_desain`) VALUES
+(2, 'Ralling Balkon', 'berbunga', 1, 'otw.jpg'),
+(3, 'Teralis Jendela', 'Bergaris', 300000, 'aa.jpg'),
+(4, 'kanopi rumah', 'coklat', 500000, 'ae.jpg'),
+(5, 'Pagar Besi', 'bergaris', 900000, 'earth.jpg');
 
 -- --------------------------------------------------------
 
@@ -119,7 +118,6 @@ CREATE TABLE `tb_penawaran` (
   `sisa_bayar` int(10) NOT NULL,
   `total_bayar` int(10) NOT NULL,
   `proses_tawar` enum('diproses','diterima','dibatalkan') NOT NULL,
-  `ttd_admin` varchar(50) NOT NULL,
   `ttd_pelanggan` varchar(50) NOT NULL,
   `tgl_tawar` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -128,9 +126,11 @@ CREATE TABLE `tb_penawaran` (
 -- Dumping data for table `tb_penawaran`
 --
 
-INSERT INTO `tb_penawaran` (`kode_penawaran`, `kode_pesanan`, `biaya_dp`, `sisa_bayar`, `total_bayar`, `proses_tawar`, `ttd_admin`, `ttd_pelanggan`, `tgl_tawar`) VALUES
-(6, 8, 400000, 1600000, 2000000, 'diproses', 'ttd vitra.jpg', '60a94c6daff80.png', '2021-05-23 01:24:45'),
-(7, 7, 400000, 960000, 2000000, 'dibatalkan', 'ttd vitra.jpg', '7Tio Achdama60aa8286aca7d.png', '2021-05-24 00:03:49');
+INSERT INTO `tb_penawaran` (`kode_penawaran`, `kode_pesanan`, `biaya_dp`, `sisa_bayar`, `total_bayar`, `proses_tawar`, `ttd_pelanggan`, `tgl_tawar`) VALUES
+(6, 8, 400000, 1600000, 2000000, 'diproses', '60a94c6daff80.png', '2021-05-23 01:24:45'),
+(7, 7, 400000, 960000, 2000000, 'dibatalkan', '7Tio Achdama60aa8286aca7d.png', '2021-07-18 23:50:56'),
+(8, 5, 210000, 490000, 700000, 'diterima', '5Almer Risma60f4594880f96.png', '2021-07-18 23:39:36'),
+(9, 9, 630000, 1470000, 2100000, 'dibatalkan', '', '2021-07-18 23:46:48');
 
 -- --------------------------------------------------------
 
@@ -156,7 +156,7 @@ CREATE TABLE `tb_pengguna` (
 INSERT INTO `tb_pengguna` (`id_pengguna`, `nama_pengguna`, `username`, `password`, `no_hp`, `email`, `alamat_pengguna`, `level`) VALUES
 (1, 'Vitra Janitio', 'admin', '1', '085215637999', 'pitra_ahoy@gmail.com', '', 'Administrator'),
 (4, 'Tio Achdama', 'tio', '1', '081222888999', 'tio@gmail.com', 'Jalan Beo 3 No. 15 D6 Pondok Sejahtera, Kutabumi', 'Pelanggan'),
-(5, 'Almer Risma', 'almer', '1', '081888333000', 'almer@gmail.com', '', 'Pelanggan');
+(5, 'Almer Risma', 'almer', '1', '081888333000', 'almer@gmail.com', 'jalan komodo 2', 'Pelanggan');
 
 -- --------------------------------------------------------
 
@@ -178,10 +178,11 @@ CREATE TABLE `tb_pesanan` (
 
 INSERT INTO `tb_pesanan` (`kode_pesanan`, `kode_desain`, `id_pengguna`, `proses`, `tgl_pesanan`) VALUES
 (4, 2, 3, 'dibatalkan', '2021-05-19 01:18:18'),
-(5, 4, 5, 'diproses', '2021-04-23 13:57:31'),
+(5, 4, 5, 'kalkulasi', '2021-04-23 13:57:31'),
 (6, 5, 4, 'diproses', '2021-04-23 14:32:39'),
 (7, 4, 4, 'kalkulasi', '2021-05-19 01:18:55'),
-(8, 5, 4, 'diterima', '2021-05-24 01:26:47');
+(8, 5, 4, 'diterima', '2021-05-24 01:26:47'),
+(9, 4, 5, 'diproses', '2021-07-18 23:43:49');
 
 -- --------------------------------------------------------
 
@@ -192,15 +193,17 @@ INSERT INTO `tb_pesanan` (`kode_pesanan`, `kode_desain`, `id_pengguna`, `proses`
 CREATE TABLE `tb_profil` (
   `id_profil` int(11) NOT NULL,
   `nama_profil` varchar(50) NOT NULL,
-  `alamat` text NOT NULL
+  `alamat` text NOT NULL,
+  `nama_pemilik` varchar(40) NOT NULL,
+  `ttd_pemilik` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tb_profil`
 --
 
-INSERT INTO `tb_profil` (`id_profil`, `nama_profil`, `alamat`) VALUES
-(1, 'MARLIANA JAYA 2', 'KOTABUMI, TANGERANG - BANTEN');
+INSERT INTO `tb_profil` (`id_profil`, `nama_profil`, `alamat`, `nama_pemilik`, `ttd_pemilik`) VALUES
+(1, 'MAILIANA JAYA 2', 'KOTABUMI, TANGERANG - BANTEN', 'Sawardi', 'ttd vitra_150px150p.jpg');
 
 -- --------------------------------------------------------
 
@@ -228,7 +231,8 @@ INSERT INTO `tb_track_pesanan` (`kode_track_pesanan`, `kode_pesanan`, `proses`, 
 (6, 8, 'survei', '2021-05-24 01:26:10'),
 (7, 8, 'pengerjaan', '2021-05-24 01:26:24'),
 (8, 8, 'dikirim', '2021-05-24 01:26:34'),
-(9, 8, 'diterima', '2021-05-24 01:26:47');
+(9, 8, 'diterima', '2021-05-24 01:26:47'),
+(10, 5, 'kalkulasi', '2021-07-18 22:30:37');
 
 -- --------------------------------------------------------
 
@@ -347,7 +351,7 @@ ALTER TABLE `tb_pembayaran`
 -- AUTO_INCREMENT for table `tb_penawaran`
 --
 ALTER TABLE `tb_penawaran`
-  MODIFY `kode_penawaran` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `kode_penawaran` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `tb_pengguna`
@@ -359,7 +363,7 @@ ALTER TABLE `tb_pengguna`
 -- AUTO_INCREMENT for table `tb_pesanan`
 --
 ALTER TABLE `tb_pesanan`
-  MODIFY `kode_pesanan` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `kode_pesanan` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `tb_profil`
@@ -371,7 +375,7 @@ ALTER TABLE `tb_profil`
 -- AUTO_INCREMENT for table `tb_track_pesanan`
 --
 ALTER TABLE `tb_track_pesanan`
-  MODIFY `kode_track_pesanan` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `kode_track_pesanan` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `tb_verify_proyek`

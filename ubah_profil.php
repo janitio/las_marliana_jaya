@@ -124,7 +124,7 @@ if(isset($data_id)){
 						<label class="col-sm-2 col-form-label">Nomor Telepon</label>
 						<div class="col-sm-6">
 							<input type="Telepon" class="form-control" id="no_hp" name="no_hp" value="<?php echo $data_cek['no_hp']; ?>"
-							readonly/>
+							/>
 						</div>
 					</div>
 					<br>
@@ -132,7 +132,7 @@ if(isset($data_id)){
 						<label class="col-sm-2 col-form-label">Email</label>
 						<div class="col-sm-6">
 							<input type="email" class="form-control" id="email" name="email" value="<?php echo $data_cek['email']; ?>"
-							readonly/>
+							/>
 						</div>
 					</div>
 					<br>
@@ -300,7 +300,7 @@ if (isset ($_POST['Ubah'])){
 			Swal.fire({title: 'Ubah Data Berhasil',text: 'Silahkan Login Kembali',icon: 'success',confirmButtonText: 'OK'
 			}).then((result) => {
 				if (result.value) {
-					window.location = 'admin/logout.php';
+					window.location = 'index.php';
 				}
 			})</script>";
 		}else{

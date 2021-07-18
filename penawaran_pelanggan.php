@@ -19,26 +19,19 @@ while ($data= $sql->fetch_assoc()) {
 	$alamat=$data['alamat'];
 }
 
-$sql_tampil = "SELECT tb_penawaran.kode_penawaran,tb_pesanan.kode_pesanan, tb_pengguna.nama_pengguna, tb_pengguna.alamat_pengguna, tb_desain.nama_desain, tb_desain.foto_desain, tb_pengguna.no_hp, tb_penawaran.biaya_dp, tb_penawaran.total_bayar, tb_penawaran.ttd_admin, tb_penawaran.ttd_pelanggan, tb_penawaran.tgl_tawar FROM tb_pesanan 
+$sql_tampil = "SELECT tb_penawaran.kode_penawaran,tb_pesanan.kode_pesanan, tb_pengguna.nama_pengguna, tb_pengguna.alamat_pengguna, tb_desain.nama_desain, tb_desain.foto_desain, tb_pengguna.no_hp, tb_penawaran.biaya_dp, tb_penawaran.total_bayar, tb_penawaran.ttd_pelanggan, tb_penawaran.tgl_tawar FROM tb_pesanan 
 JOIN tb_desain ON tb_pesanan.kode_desain=tb_desain.kode_desain 
 JOIN tb_pengguna ON tb_pesanan.id_pengguna=tb_pengguna.id_pengguna 
 JOIN tb_penawaran ON tb_pesanan.kode_pesanan=tb_penawaran.kode_pesanan 
 WHERE tb_pesanan.kode_pesanan=$kode_pesanan";
 $query_tampil = mysqli_query($koneksi, $sql_tampil);
-while ($tampil= $query_tampil->fetch_assoc()) {
+$data_cek = mysqli_fetch_array($query_tampil,MYSQLI_BOTH);
 
-	$kode_penawaran=$tampil['kode_penawaran'];
-	$kode_pesanan=$tampil['kode_pesanan'];
-	$nama_pengguna=$tampil['nama_pengguna'];
-	$alamat=$tampil['alamat_pengguna'];
-	$no_hp=$tampil['no_hp'];
-	$nama_desain=$tampil['nama_desain'];
-	$biaya_dp=$tampil['biaya_dp'];
-	$total_bayar=$tampil['total_bayar'];
-	$ttd_admin=$tampil['ttd_admin'];
-	$ttd_pelanggan=$tampil['ttd_pelanggan'];
-	$tgl_tawar=$tampil['tgl_tawar'];
-}
+$sql2_cek = "SELECT ttd_pemilik,nama_pemilik FROM tb_profil";
+$query2_cek = mysqli_query($koneksi, $sql2_cek);
+$profil_cek = mysqli_fetch_array($query2_cek,MYSQLI_BOTH);
+$nama_pemilik=$profil_cek['nama_pemilik'];
+$ttd_pemilik=$profil_cek['ttd_pemilik'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -152,9 +145,9 @@ while ($tampil= $query_tampil->fetch_assoc()) {
 	if(isset($_GET['kode_pesanan'])){
 		$sql_cek = "SELECT kode_penawaran FROM tb_penawaran WHERE kode_pesanan='".$_GET['kode_pesanan']."'";
 		$query_cek = mysqli_query($koneksi, $sql_cek);
-		$data_cek = mysqli_fetch_array($query_cek,MYSQLI_BOTH);
+		$data2_cek = mysqli_fetch_array($query_cek,MYSQLI_BOTH);
 
-		if (empty($data_cek['kode_penawaran'])) {
+		if (empty($data2_cek['kode_penawaran'])) {
 			echo "<script>
 			Swal.fire({title: 'Penawaran Belum Ada, Masih Diproses',text: 'Harap Tunggu dan cek berkala pada kolom proses pesanan',icon: 'error',confirmButtonText: 'OK'
 			}).then((result) => {
@@ -193,7 +186,7 @@ while ($tampil= $query_tampil->fetch_assoc()) {
 											<td width="8">
 												<span >:</span></td>         
 												<td width="200">
-													<span ><?=$kode_penawaran?></span></td>       </tr>
+													<span ><?=$data_cek['kode_penawaran'];?></span></td>       </tr>
 													<tr>         
 														<td><span >Perihal</span></td>         
 														<td><span >:</span></td>         
@@ -204,7 +197,7 @@ while ($tampil= $query_tampil->fetch_assoc()) {
 										</td>     
 										<td valign="top">
 											<div align="right">
-												<span ><?=$tgl_tawar?></span></div>
+												<span ><?=$data_cek['tgl_tawar'];?></span></div>
 											</td>   
 										</tr>
 										<tr>     
@@ -220,37 +213,37 @@ while ($tampil= $query_tampil->fetch_assoc()) {
 														<tr>
 															<td style="width: 30%;">Nama</td>
 															<td style="width: 5%;">:</td>
-															<td style="width: 65%;"><?=$nama_pengguna?></td>
+															<td style="width: 65%;"><?=$data_cek['nama_pengguna'];?></td>
 														</tr>
 														<tr>
 															<td style="width: 30%;">No. HP</td>
 															<td style="width: 5%;">:</td>
-															<td style="width: 65%;"><?=$no_hp?></td>
+															<td style="width: 65%;"><?=$data_cek['no_hp'];?></td>
 														</tr>
 														<tr>
 															<td style="width: 30%; vertical-align: top;">Alamat</td>
 															<td style="width: 5%; vertical-align: top;">:</td>
-															<td style="width: 65%;"><?=$alamat?></td>
+															<td style="width: 65%;"><?=$data_cek['alamat_pengguna'];?></td>
 														</tr>
 														<tr>
 															<td style="width: 30%;">Kode Pesanan</td>
 															<td style="width: 5%;">:</td>
-															<td style="width: 65%;"><?=$kode_pesanan?></td>
+															<td style="width: 65%;"><?=$data_cek['kode_pesanan'];?></td>
 														</tr>
 														<tr>
-															<td style="width: 30%;">Barang yang Akan Dipesan</td>
+															<td style="width: 30%;">Pesanan</td>
 															<td style="width: 5%;">:</td>
-															<td style="width: 65%;"><?=$nama_desain?></td>
+															<td style="width: 65%;"><?=$data_cek['nama_desain'];?></td>
 														</tr>
 														<tr>
 															<td style="width: 30%;">Bayar Dimuka</td>
 															<td style="width: 5%;">:</td>
-															<td style="width: 65%;">Rp. <?php echo number_format($biaya_dp); ?></td>
+															<td style="width: 65%;">Rp. <?php echo number_format($data_cek['biaya_dp']); ?></td>
 														</tr>
 														<tr>
 															<td style="width: 30%;">Harga Total</td>
 															<td style="width: 5%;">:</td>
-															<td style="width: 65%;">Rp. <?php echo number_format($total_bayar); ?></td>
+															<td style="width: 65%;">Rp. <?php echo number_format($data_cek['total_bayar']); ?></td>
 														</tr>
 													</table>
 													<div align="justify">
@@ -263,24 +256,27 @@ while ($tampil= $query_tampil->fetch_assoc()) {
 														<span >Pelanggan,</span></div>
 														<div align="center">
 															<?php
+															$ttd_pelanggan=$data_cek['ttd_pelanggan'];
 															if(!empty($ttd_pelanggan)){
 																?>
-																<img src="admin/foto/ttd_pelanggan/<?=$ttd_pelanggan; ?>" width="230px"/>
+																<br><br><br>
+																<img src="admin/foto/ttd_pelanggan/<?=$ttd_pelanggan; ?>" width="150px"/>
 															<?php }else{?>
 																<br>
-																<b>(Tanda Tangan Pelanggan)</b>
+																<br>
+																<b>(Tanda Tangan Pelanggan)</b><br><br>
 																<br><br>
 															<?php }?>
 														</div>
 														<div align="center">
-															<span ><?=$nama_pengguna?></span></div>
+															<span ><?=$data_cek['nama_pengguna'];?></span></div>
 														</td>     <td></td>     <td valign="top"><div align="center">
 															<span >Pemilik Jasa, </span></div>
 															<div align="center">
-																<img src="admin/foto/ttd_admin/<?=$ttd_admin; ?>" width="100px"/>
+																<img src="admin/foto/ttd_pemilik/<?=$ttd_pemilik; ?>" width="150px"/>
 															</div>
 															<div align="center">
-																<span >Sawardi</span></div>
+																<span ><?=$nama_pemilik;?></span></div>
 															</td>   </tr>
 														</tbody>
 													</table>
@@ -297,8 +293,8 @@ while ($tampil= $query_tampil->fetch_assoc()) {
 													<br>
 													<button type="button" class="btn btn-warning" id="reset-btn">Hapus</button>
 													<button type="button" class="btn btn-success" id="btn-save">Setujui</button>
-													<a href="aksi_batalpenawaran.php?kode_penawaran=<?=$kode_penawaran;?>" title="Batal" class="btn btn-danger">Batalkan</a>
-													<a href="admin/report/cetak_penawaran.php?kode_penawaran=<?=$kode_penawaran; ?>" target=" _blank" title="Lihat" class="btn btn-primary">Cetak</a>
+													<a href="aksi_batalpenawaran.php?kode_penawaran=<?=$data_cek['kode_penawaran'];?>" title="Batal" class="btn btn-danger">Batalkan</a>
+													<a href="admin/report/cetak_penawaran.php?kode_penawaran=<?=$data_cek['kode_penawaran']; ?>" target="_blank" title="Lihat" class="btn btn-primary">Cetak</a>
 													<a href="pesanan_pelanggan.php?id_pelanggan=<?=$data_id?>" title="Batal" class="btn btn-secondary">Kembali</a>
 												</div>
 												<form id="signatureform" action="" style="display:none" method="post">
@@ -312,6 +308,9 @@ while ($tampil= $query_tampil->fetch_assoc()) {
 								</section>
 								<?php
 								if(isset($_POST['signaturesubmit'])){ 
+									$kode_pesanan=$data_cek['kode_pesanan'];
+									$nama_pengguna=$data_cek['nama_pengguna'];
+									$kode_penawaran=$data_cek['kode_penawaran'];
 									$signature = $_POST['signature'];
 									$signatureFileName = $kode_pesanan.$nama_pengguna.uniqid().'.png';
 									$signature = str_replace('data:image/png;base64,', '', $signature);
@@ -323,7 +322,7 @@ while ($tampil= $query_tampil->fetch_assoc()) {
 									$sql_terima = "UPDATE tb_penawaran SET
 									proses_tawar='diterima',
 									ttd_pelanggan='$signatureFileName',
-									timestamp=NOW()   
+									tgl_tawar=NOW()   
 									WHERE kode_penawaran=$kode_penawaran";
 									$sql_terima = mysqli_query($koneksi, $sql_terima);
 
@@ -344,132 +343,56 @@ while ($tampil= $query_tampil->fetch_assoc()) {
 							}
   // $msg = "<div class='alert alert-success'>Signature Uploaded</div>";
 						} 
-				?>
-			</main><!-- End #main -->
-
-			<!-- ======= Footer ======= -->
-			<footer id="footer">
-
-				<div class="footer-top">
-					<div class="container">
-						<div class="row">
-
-							<div class="col-lg-3 col-md-6 footer-contact">
-								<h3>Flexor</h3>
-								<p>
-									A108 Adam Street <br>
-									New York, NY 535022<br>
-									United States <br><br>
-									<strong>Phone:</strong> +1 5589 55488 55<br>
-									<strong>Email:</strong> info@example.com<br>
-								</p>
-							</div>
-
-							<div class="col-lg-2 col-md-6 footer-links">
-								<h4>Useful Links</h4>
-								<ul>
-									<li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
-									<li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>
-									<li><i class="bx bx-chevron-right"></i> <a href="#">Services</a></li>
-									<li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
-									<li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
-								</ul>
-							</div>
-
-							<div class="col-lg-3 col-md-6 footer-links">
-								<h4>Our Services</h4>
-								<ul>
-									<li><i class="bx bx-chevron-right"></i> <a href="#">Web Design</a></li>
-									<li><i class="bx bx-chevron-right"></i> <a href="#">Web Development</a></li>
-									<li><i class="bx bx-chevron-right"></i> <a href="#">Product Management</a></li>
-									<li><i class="bx bx-chevron-right"></i> <a href="#">Marketing</a></li>
-									<li><i class="bx bx-chevron-right"></i> <a href="#">Graphic Design</a></li>
-								</ul>
-							</div>
-
-							<div class="col-lg-4 col-md-6 footer-newsletter">
-								<h4>Join Our Newsletter</h4>
-								<p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna</p>
-								<form action="" method="post">
-									<input type="email" name="email"><input type="submit" value="Subscribe">
-								</form>
-							</div>
-
-						</div>
-					</div>
-				</div>
-
-				<div class="container d-lg-flex py-4">
-
-					<div class="me-lg-auto text-center text-lg-start">
-						<div class="copyright">
-							&copy; Copyright <strong><span>Flexor</span></strong>. All Rights Reserved
-						</div>
-						<div class="credits">
-							<!-- All the links in the footer should remain intact. -->
-							<!-- You can delete the links only if you purchased the pro version. -->
-							<!-- Licensing information: https://bootstrapmade.com/license/ -->
-							<!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/flexor-free-multipurpose-bootstrap-template/ -->
-							Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-						</div>
-					</div>
-					<div class="social-links text-center text-lg-right pt-3 pt-lg-0">
-						<a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
-						<a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
-						<a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
-						<a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
-						<a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
-					</div>
-				</div>
-			</footer><!-- End Footer -->
-			<?php
-		}
-	}
-	?>
-	<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-
-	<!-- jQuery -->
-	<script src="admin/plugins/jquery/jquery.min.js"></script>
-
-	<!-- Vendor JS Files -->
-	<script src="assets/vendor/aos/aos.js"></script>
-	<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-	<script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-	<script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-	<script src="assets/vendor/php-email-form/validate.js"></script>
-	<script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-
-	<!-- Template Main JS File -->
-	<script src="assets/js/main.js"></script>
-
-	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8=" crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.5.0-beta4/html2canvas.min.js"></script>
-	<script>
-		$(document).ready(() => {
-			var canvasDiv = document.getElementById('canvasDiv');
-			var canvas = document.createElement('canvas');
-			canvas.setAttribute('id', 'canvas');
-			canvasDiv.appendChild(canvas);
-			$("#canvas").attr('height', $("#canvasDiv").outerHeight());
-			$("#canvas").attr('width', $("#canvasDiv").width());
-			if (typeof G_vmlCanvasManager != 'undefined') {
-				canvas = G_vmlCanvasManager.initElement(canvas);
+						?>
+					</main><!-- End #main -->
+					<?php
+				}
 			}
+			?>
+			<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
-			context = canvas.getContext("2d");
-			$('#canvas').mousedown(function(e) {
-				var offset = $(this).offset()
-				var mouseX = e.pageX - this.offsetLeft;
-				var mouseY = e.pageY - this.offsetTop;
+			<!-- jQuery -->
+			<script src="admin/plugins/jquery/jquery.min.js"></script>
 
-				paint = true;
-				addClick(e.pageX - offset.left, e.pageY - offset.top);
-				redraw();
-			});
+			<!-- Vendor JS Files -->
+			<script src="assets/vendor/aos/aos.js"></script>
+			<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+			<script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+			<script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+			<script src="assets/vendor/php-email-form/validate.js"></script>
+			<script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
 
-			$('#canvas').mousemove(function(e) {
-				if (paint) {
-					var offset = $(this).offset()
+			<!-- Template Main JS File -->
+			<script src="assets/js/main.js"></script>
+
+			<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8=" crossorigin="anonymous"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.5.0-beta4/html2canvas.min.js"></script>
+			<script>
+				$(document).ready(() => {
+					var canvasDiv = document.getElementById('canvasDiv');
+					var canvas = document.createElement('canvas');
+					canvas.setAttribute('id', 'canvas');
+					canvasDiv.appendChild(canvas);
+					$("#canvas").attr('height', $("#canvasDiv").outerHeight());
+					$("#canvas").attr('width', $("#canvasDiv").width());
+					if (typeof G_vmlCanvasManager != 'undefined') {
+						canvas = G_vmlCanvasManager.initElement(canvas);
+					}
+
+					context = canvas.getContext("2d");
+					$('#canvas').mousedown(function(e) {
+						var offset = $(this).offset()
+						var mouseX = e.pageX - this.offsetLeft;
+						var mouseY = e.pageY - this.offsetTop;
+
+						paint = true;
+						addClick(e.pageX - offset.left, e.pageY - offset.top);
+						redraw();
+					});
+
+					$('#canvas').mousemove(function(e) {
+						if (paint) {
+							var offset = $(this).offset()
                 //addClick(e.pageX - this.offsetLeft, e.pageY - this.offsetTop, true);
                 addClick(e.pageX - offset.left, e.pageY - offset.top, true);
                 console.log(e.pageX, offset.left, e.pageY, offset.top);
@@ -477,74 +400,74 @@ while ($tampil= $query_tampil->fetch_assoc()) {
             }
         });
 
-			$('#canvas').mouseup(function(e) {
-				paint = false;
-			});
+					$('#canvas').mouseup(function(e) {
+						paint = false;
+					});
 
-			$('#canvas').mouseleave(function(e) {
-				paint = false;
-			});
+					$('#canvas').mouseleave(function(e) {
+						paint = false;
+					});
 
-			var clickX = new Array();
-			var clickY = new Array();
-			var clickDrag = new Array();
-			var paint;
+					var clickX = new Array();
+					var clickY = new Array();
+					var clickDrag = new Array();
+					var paint;
 
-			function addClick(x, y, dragging) {
-				clickX.push(x);
-				clickY.push(y);
-				clickDrag.push(dragging);
-			}
+					function addClick(x, y, dragging) {
+						clickX.push(x);
+						clickY.push(y);
+						clickDrag.push(dragging);
+					}
 
-			$("#reset-btn").click(function() {
-				context.clearRect(0, 0, window.innerWidth, window.innerWidth);
-				clickX = [];
-				clickY = [];
-				clickDrag = [];
-			});
+					$("#reset-btn").click(function() {
+						context.clearRect(0, 0, window.innerWidth, window.innerWidth);
+						clickX = [];
+						clickY = [];
+						clickDrag = [];
+					});
 
-			$(document).on('click', '#btn-save', function() {
-				var mycanvas = document.getElementById('canvas');
-				var img = mycanvas.toDataURL("image/png");
-				anchor = $("#signature");
-				anchor.val(img);
-				$("#signatureform").submit();
-			});
+					$(document).on('click', '#btn-save', function() {
+						var mycanvas = document.getElementById('canvas');
+						var img = mycanvas.toDataURL("image/png");
+						anchor = $("#signature");
+						anchor.val(img);
+						$("#signatureform").submit();
+					});
 
-			var drawing = false;
-			var mousePos = {
-				x: 0,
-				y: 0
-			};
-			var lastPos = mousePos;
+					var drawing = false;
+					var mousePos = {
+						x: 0,
+						y: 0
+					};
+					var lastPos = mousePos;
 
-			canvas.addEventListener("touchstart", function(e) {
-				mousePos = getTouchPos(canvas, e);
-				var touch = e.touches[0];
-				var mouseEvent = new MouseEvent("mousedown", {
-					clientX: touch.clientX,
-					clientY: touch.clientY
-				});
-				canvas.dispatchEvent(mouseEvent);
-			}, false);
-
-
-			canvas.addEventListener("touchend", function(e) {
-				var mouseEvent = new MouseEvent("mouseup", {});
-				canvas.dispatchEvent(mouseEvent);
-			}, false);
+					canvas.addEventListener("touchstart", function(e) {
+						mousePos = getTouchPos(canvas, e);
+						var touch = e.touches[0];
+						var mouseEvent = new MouseEvent("mousedown", {
+							clientX: touch.clientX,
+							clientY: touch.clientY
+						});
+						canvas.dispatchEvent(mouseEvent);
+					}, false);
 
 
-			canvas.addEventListener("touchmove", function(e) {
+					canvas.addEventListener("touchend", function(e) {
+						var mouseEvent = new MouseEvent("mouseup", {});
+						canvas.dispatchEvent(mouseEvent);
+					}, false);
 
-				var touch = e.touches[0];
-				var offset = $('#canvas').offset();
-				var mouseEvent = new MouseEvent("mousemove", {
-					clientX: touch.clientX,
-					clientY: touch.clientY
-				});
-				canvas.dispatchEvent(mouseEvent);
-			}, false);
+
+					canvas.addEventListener("touchmove", function(e) {
+
+						var touch = e.touches[0];
+						var offset = $('#canvas').offset();
+						var mouseEvent = new MouseEvent("mousemove", {
+							clientX: touch.clientX,
+							clientY: touch.clientY
+						});
+						canvas.dispatchEvent(mouseEvent);
+					}, false);
 
 
 

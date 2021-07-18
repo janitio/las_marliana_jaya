@@ -11,6 +11,8 @@
 					<tr>
 						<th>Nama Bengkel Las</th>
 						<th>Alamat</th>
+						<th>Nama Pemilik</th>
+						<th>Foto Tanda Tangan</th>
 						<th>Kelola</th>
 					</tr>
 				</thead>
@@ -29,7 +31,12 @@
 						<td>
 							<?php echo $data['alamat']; ?>
 						</td>
-						
+						<td>
+							<?php echo $data['nama_pemilik']; ?>
+						</td>
+						<td>
+							<?php echo $data['ttd_pemilik']; ?>
+						</td>
 						<td>
 							<a href="?page=edit-profil&kode=<?php echo $data['id_profil']; ?>" title="Ubah"
 							 class="btn btn-success btn-sm">

@@ -11,7 +11,7 @@ if (isset($_SESSION["ses_username"])){
 
 include "admin/inc/koneksi.php";
 
-define('DBINFO', 'mysql:host=localhost;dbname=las_marliana');
+define('DBINFO', 'mysql:host=localhost;dbname=las_mailiana');
 define('DBUSER','root');
 define('DBPASS','');
 
@@ -45,7 +45,7 @@ $sql2 = $koneksi->query("SELECT * from tb_desain");
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Marliana Jaya 2</title>
+  <title>Mailiana Jaya 2</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -85,7 +85,6 @@ $sql2 = $koneksi->query("SELECT * from tb_desain");
         <ul>
           <li><a class="nav-link scrollto active" href="#hero">Beranda</a></li>
           <li><a class="nav-link scrollto" href="#about">Tentang Kami</a></li>
-          <li><a class="nav-link scrollto" href="#services">Layanan</a></li>
           <li><a class="nav-link scrollto " href="#portfolio">Desain</a></li>
           <li><a class="nav-link scrollto" href="#contact">Kontak Kami</a></li>
           <?php if(!isset($data_user)){?>
@@ -131,12 +130,12 @@ $sql2 = $koneksi->query("SELECT * from tb_desain");
      </li>
      <li class="dropdown"><a href="ubah_profil.php?id_pelanggan=<?=$data_id?>"><span><?php if(isset($data_user)){
                 //tampil data nama dari sesi yang ada
-       echo $_SESSION['ses_nama'];}?>
+      echo $_SESSION['ses_nama'];}?>
 
-     </span> <i class="bi bi-chevron-down"></i></a>
-     <ul>
-      <li><a href="pesanan_pelanggan.php?id_pelanggan=<?=$data_id?>">Pesanan</a></li>
-      <li><a href="hasil_proyek.php?id_pelanggan=<?=$data_id?>">Hasil Proyek</a></li>
+    </span> <i class="bi bi-chevron-down"></i></a>
+    <ul>
+      <li><a href="pesanan_pelanggan.php?id_pelanggan=<?= $data_id?>">Pesanan</a></li>
+      <li><a href="hasil_proyek.php">Hasil Proyek</a></li>
     </ul>
   </li>
   <li><a href="admin/logout.php">Keluar</a></li>
@@ -151,12 +150,7 @@ $sql2 = $koneksi->query("SELECT * from tb_desain");
 <!-- ======= Hero Section ======= -->
 <section id="hero" class="d-flex flex-column justify-content-center align-items-center">
   <div class="container" data-aos="fade-in">
-    <h1>Welcome to Flexor</h1>
-    <h2>We are team of talented designers making websites with Bootstrap</h2>
-    <div class="d-flex align-items-center">
-      <i class="bx bxs-right-arrow-alt get-started-icon"></i>
-      <a href="#about" class="btn-get-started scrollto">Get Started</a>
-    </div>
+    <h1>Selamat Datang di Website Bengkel Las <?=$nama; ?></h1>
   </div>
 </section><!-- End Hero -->
 
@@ -169,14 +163,10 @@ $sql2 = $koneksi->query("SELECT * from tb_desain");
       <div class="row">
         <div class="col-xl-4 col-lg-5" data-aos="fade-up">
           <div class="content">
-            <h3>Why Choose Flexor for your company website?</h3>
+            <h3>Kenapa memilih website ini ?</h3>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              Asperiores dolores sed et. Tenetur quia eos. Autem tempore quibusdam vel necessitatibus optio ad corporis.
+              Kami menyediakan desain - desain menarik pada teralis jendela, kanopi, pintu besi, pagar besi, tangga besi, dan semacamnya. 
             </p>
-            <div class="text-center">
-              <a href="#" class="more-btn">Learn More <i class="bx bx-chevron-right"></i></a>
-            </div>
           </div>
         </div>
         <div class="col-xl-8 col-lg-7 d-flex">
@@ -185,22 +175,22 @@ $sql2 = $koneksi->query("SELECT * from tb_desain");
               <div class="col-xl-4 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
                 <div class="icon-box mt-4 mt-xl-0">
                   <i class="bx bx-receipt"></i>
-                  <h4>Corporis voluptates sit</h4>
-                  <p>Consequuntur sunt aut quasi enim aliquam quae harum pariatur laboris nisi ut aliquip</p>
+                  <h4>Desain</h4>
+                  <p>menyediakan desain - desain menarik untuk anda</p>
                 </div>
               </div>
               <div class="col-xl-4 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
                 <div class="icon-box mt-4 mt-xl-0">
                   <i class="bx bx-cube-alt"></i>
-                  <h4>Ullamco laboris ladore pan</h4>
-                  <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt</p>
+                  <h4>Penawaran</h4>
+                  <p>Melakukan penawaran secara online agar mempermudah dalam memproses pesanan anda</p>
                 </div>
               </div>
               <div class="col-xl-4 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="300">
                 <div class="icon-box mt-4 mt-xl-0">
                   <i class="bx bx-images"></i>
-                  <h4>Labore consequatur</h4>
-                  <p>Aut suscipit aut cum nemo deleniti aut omnis. Doloribus ut maiores omnis facere</p>
+                  <h4>Pesanan</h4>
+                  <p>pilih desain yang diinginkan, ukur lokasi, penawaran online, bayar dimuka, kirim & pasang, bayar keseluruhan</p>
                 </div>
               </div>
             </div>
@@ -221,195 +211,13 @@ $sql2 = $koneksi->query("SELECT * from tb_desain");
         </div>
 
         <div class="col-xl-7 col-lg-6 icon-boxes d-flex flex-column align-items-stretch justify-content-center py-5 px-lg-5">
-          <h4 data-aos="fade-up">About us</h4>
-          <h3 data-aos="fade-up">Enim quis est voluptatibus aliquid consequatur fugiat</h3>
-          <p data-aos="fade-up">Esse voluptas cumque vel exercitationem. Reiciendis est hic accusamus. Non ipsam et sed minima temporibus laudantium. Soluta voluptate sed facere corporis dolores excepturi. Libero laboriosam sint et id nulla tenetur. Suscipit aut voluptate.</p>
-
-          <div class="icon-box" data-aos="fade-up">
-            <div class="icon"><i class="bx bx-fingerprint"></i></div>
-            <h4 class="title"><a href="">Lorem Ipsum</a></h4>
-            <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</p>
-          </div>
-
-          <div class="icon-box" data-aos="fade-up" data-aos-delay="100">
-            <div class="icon"><i class="bx bx-gift"></i></div>
-            <h4 class="title"><a href="">Nemo Enim</a></h4>
-            <p class="description">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque</p>
-          </div>
-
-          <div class="icon-box" data-aos="fade-up" data-aos-delay="200">
-            <div class="icon"><i class="bx bx-atom"></i></div>
-            <h4 class="title"><a href="">Dine Pad</a></h4>
-            <p class="description">Explicabo est voluptatum asperiores consequatur magnam. Et veritatis odit. Sunt aut deserunt minus aut eligendi omnis</p>
-          </div>
-
+          <h4 data-aos="fade-up">Tentang Kami</h4>
+          <p data-aos="fade-up">Bengkel las yang berada di Kotabumi, memiliki karyawan - karyawan yang terampil dalam mendesain dengan berbahan besi yang berkualitas.</p>
         </div>
       </div>
 
     </div>
   </section><!-- End About Section -->
-
-  <!-- ======= Clients Section ======= -->
-  <section id="clients" class="clients">
-    <div class="container" data-aos="fade-up">
-      <div class="section-title" data-aos="fade-up">
-        <h2>Hasil Proyek Kami</h2>
-      </div>
-      <div class="clients-slider swiper-container">
-        <div class="swiper-wrapper align-items-center">
-          <div class="swiper-slide"><img src="assets/img/clients/client-1.png" class="img-fluid" alt=""></div>
-          <div class="swiper-slide"><img src="assets/img/clients/client-2.png" class="img-fluid" alt=""></div>
-          <div class="swiper-slide"><img src="assets/img/clients/client-3.png" class="img-fluid" alt=""></div>
-          <div class="swiper-slide"><img src="assets/img/clients/client-4.png" class="img-fluid" alt=""></div>
-          <div class="swiper-slide"><img src="assets/img/clients/client-5.png" class="img-fluid" alt=""></div>
-          <div class="swiper-slide"><img src="assets/img/clients/client-6.png" class="img-fluid" alt=""></div>
-          <div class="swiper-slide"><img src="assets/img/clients/client-7.png" class="img-fluid" alt=""></div>
-          <div class="swiper-slide"><img src="assets/img/clients/client-8.png" class="img-fluid" alt=""></div>
-        </div>
-        <div class="swiper-pagination"></div>
-      </div>
-
-    </div>
-  </section><!-- End Clients Section -->
-
-  <!-- ======= Services Section ======= -->
-  <section id="services" class="services section-bg">
-    <div class="container">
-
-      <div class="section-title" data-aos="fade-up">
-        <h2>Layanan</h2>
-        <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
-      </div>
-
-      <div class="row">
-        <div class="col-lg-4 col-md-6" data-aos="fade-up">
-          <div class="icon-box">
-            <div class="icon"><i class="bi bi-briefcase"></i></div>
-            <h4 class="title"><a href="">Lorem Ipsum</a></h4>
-            <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</p>
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
-          <div class="icon-box">
-            <div class="icon"><i class="bi bi-card-checklist"></i></div>
-            <h4 class="title"><a href="">Dolor Sitema</a></h4>
-            <p class="description">Minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat tarad limino ata</p>
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
-          <div class="icon-box">
-            <div class="icon"><i class="bi bi-bar-chart"></i></div>
-            <h4 class="title"><a href="">Sed ut perspiciatis</a></h4>
-            <p class="description">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</p>
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
-          <div class="icon-box">
-            <div class="icon"><i class="bi bi-binoculars"></i></div>
-            <h4 class="title"><a href="">Magni Dolores</a></h4>
-            <p class="description">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
-          <div class="icon-box">
-            <div class="icon"><i class="bi bi-brightness-high"></i></div>
-            <h4 class="title"><a href="">Nemo Enim</a></h4>
-            <p class="description">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque</p>
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
-          <div class="icon-box">
-            <div class="icon"><i class="bi bi-calendar4-week"></i></div>
-            <h4 class="title"><a href="">Eiusmod Tempor</a></h4>
-            <p class="description">Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi</p>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </section><!-- End Services Section -->
-
-  <!-- ======= Values Section ======= -->
-  <!-- End Values Section -->
-
-  <!-- ======= Testimonials Section ======= -->
-  <section id="testimonials" class="testimonials">
-    <div class="container position-relative" data-aos="fade-up">
-
-      <div class="testimonials-slider swiper-container" data-aos="fade-up" data-aos-delay="100">
-        <div class="swiper-wrapper">
-
-          <div class="swiper-slide">
-            <div class="testimonial-item">
-              <img src="assets/img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
-              <h3>Saul Goodman</h3>
-              <h4>Ceo &amp; Founder</h4>
-              <p>
-                <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.
-                <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-              </p>
-            </div>
-          </div><!-- End testimonial item -->
-
-          <div class="swiper-slide">
-            <div class="testimonial-item">
-              <img src="assets/img/testimonials/testimonials-2.jpg" class="testimonial-img" alt="">
-              <h3>Sara Wilsson</h3>
-              <h4>Designer</h4>
-              <p>
-                <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                Export tempor illum tamen malis malis eram quae irure esse labore quem cillum quid cillum eram malis quorum velit fore eram velit sunt aliqua noster fugiat irure amet legam anim culpa.
-                <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-              </p>
-            </div>
-          </div><!-- End testimonial item -->
-
-          <div class="swiper-slide">
-            <div class="testimonial-item">
-              <img src="assets/img/testimonials/testimonials-3.jpg" class="testimonial-img" alt="">
-              <h3>Jena Karlis</h3>
-              <h4>Store Owner</h4>
-              <p>
-                <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                Enim nisi quem export duis labore cillum quae magna enim sint quorum nulla quem veniam duis minim tempor labore quem eram duis noster aute amet eram fore quis sint minim.
-                <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-              </p>
-            </div>
-          </div><!-- End testimonial item -->
-
-          <div class="swiper-slide">
-            <div class="testimonial-item">
-              <img src="assets/img/testimonials/testimonials-4.jpg" class="testimonial-img" alt="">
-              <h3>Matt Brandon</h3>
-              <h4>Freelancer</h4>
-              <p>
-                <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                Fugiat enim eram quae cillum dolore dolor amet nulla culpa multos export minim fugiat minim velit minim dolor enim duis veniam ipsum anim magna sunt elit fore quem dolore labore illum veniam.
-                <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-              </p>
-            </div>
-          </div><!-- End testimonial item -->
-
-          <div class="swiper-slide">
-            <div class="testimonial-item">
-              <img src="assets/img/testimonials/testimonials-5.jpg" class="testimonial-img" alt="">
-              <h3>John Larson</h3>
-              <h4>Entrepreneur</h4>
-              <p>
-                <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                Quis quorum aliqua sint quem legam fore sunt eram irure aliqua veniam tempor noster veniam enim culpa labore duis sunt culpa nulla illum cillum fugiat legam esse veniam culpa fore nisi cillum quid.
-                <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-              </p>
-            </div>
-          </div><!-- End testimonial item -->
-
-        </div>
-        <div class="swiper-pagination"></div>
-      </div>
-
-    </div>
-  </section><!-- End Testimonials Section -->
 
   <!-- ======= Portfolio Section ======= -->
   <section id="portfolio" class="portfolio">
@@ -417,7 +225,7 @@ $sql2 = $koneksi->query("SELECT * from tb_desain");
 
       <div class="section-title">
         <h2 data-aos="fade-up">Desain</h2>
-        <p data-aos="fade-up">Desain - desain yang sudah pernah dibuat dengan rancangan menarik oleh Marliana Jaya 2.</p>
+        <p data-aos="fade-up">Desain - desain yang pernah dibuat dengan rancangan menarik oleh Mailiana Jaya 2.</p>
       </div>
 
         <!-- <div class="row" data-aos="fade-up" data-aos-delay="100">
@@ -447,38 +255,19 @@ $sql2 = $koneksi->query("SELECT * from tb_desain");
                 <?php }?>
               </div>
             </div>
-
-            <!-- <div class="col-lg-4 col-md-6 portfolio-item filter-web">
-              <img src="assets/img/portfolio/portfolio-2.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Web 3</h4>
-                <p>Web</p>
-                <a href="assets/img/portfolio/portfolio-2.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="Web 3"><i class="bx bx-plus"></i></a>
-                <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
-              </div>
-            </div> -->
           <?php }?>
         </div>
 
       </div>
-    </section><!-- End Portfolio Section -->
-
-    <!-- ======= Team Section ======= -->
-    <!-- End Team Section -->
-
-    <!-- ======= Pricing Section ======= -->
-    <!-- End Pricing Section -->
-
-    <!-- ======= F.A.Q Section ======= -->
-    <!-- End F.A.Q Section -->
+    </section>
 
     <!-- ======= Contact Section ======= -->
     <section id="contact" class="contact">
       <div class="container">
 
         <div class="section-title">
-          <h2 data-aos="fade-up">Contact</h2>
-          <p data-aos="fade-up">Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+          <h2 data-aos="fade-up">Kontak Kami</h2>
+          <p data-aos="fade-up">Bila ada yang ingin bertanya mengenai bengkel las kami, bisa hubungi kami.</p>
         </div>
 
         <div class="row justify-content-center">
@@ -486,55 +275,26 @@ $sql2 = $koneksi->query("SELECT * from tb_desain");
           <div class="col-xl-3 col-lg-4 mt-4" data-aos="fade-up">
             <div class="info-box">
               <i class="bx bx-map"></i>
-              <h3>Our Address</h3>
-              <p>A108 Adam Street, New York, NY 535022</p>
+              <h3>Alamat Kami</h3>
+              <p>Jalan Bawal Raya Blok A7 #01, Kuta Baru, Kec. Ps. Kemis, Tangerang, Banten 15561</p>
             </div>
           </div>
 
           <div class="col-xl-3 col-lg-4 mt-4" data-aos="fade-up" data-aos-delay="100">
             <div class="info-box">
               <i class="bx bx-envelope"></i>
-              <h3>Email Us</h3>
-              <p>info@example.com<br>contact@example.com</p>
+              <h3>Email Kami  </h3>
+              <p>las_mailiana@gmail.com</p>
             </div>
           </div>
           <div class="col-xl-3 col-lg-4 mt-4" data-aos="fade-up" data-aos-delay="200">
             <div class="info-box">
               <i class="bx bx-phone-call"></i>
-              <h3>Call Us</h3>
-              <p>+1 5589 55488 55<br>+1 6678 254445 41</p>
+              <h3>Hubungi Kami (WhatsApp)</h3>
+              <p>+62 852 1563 7999</p>
             </div>
           </div>
         </div>
-
-        <div class="row justify-content-center" data-aos="fade-up" data-aos-delay="300">
-          <div class="col-xl-9 col-lg-12 mt-4">
-            <form action="forms/contact.php" method="post" role="form" class="php-email-form">
-              <div class="row">
-                <div class="col-md-6 form-group">
-                  <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
-                </div>
-                <div class="col-md-6 form-group mt-3 mt-md-0">
-                  <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
-                </div>
-              </div>
-              <div class="form-group mt-3">
-                <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
-              </div>
-              <div class="form-group mt-3">
-                <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
-              </div>
-              <div class="my-3">
-                <div class="loading">Loading</div>
-                <div class="error-message"></div>
-                <div class="sent-message">Your message has been sent. Thank you!</div>
-              </div>
-              <div class="text-center"><button type="submit">Send Message</button></div>
-            </form>
-          </div>
-
-        </div>
-
       </div>
     </section><!-- End Contact Section -->
 
@@ -542,14 +302,11 @@ $sql2 = $koneksi->query("SELECT * from tb_desain");
 
   <!-- ======= Footer ======= -->
   <footer id="footer">
-
-
-
     <div class="container d-lg-flex py-4">
 
       <div class="me-lg-auto text-center text-lg-start">
         <div class="copyright">
-          &copy; Copyright <strong><span>Marliana Jaya 2</span></strong>. All Rights Reserved
+          &copy; Copyright <strong><span>Mailiana Jaya 2</span></strong>. All Rights Reserved
         </div>
         <div class="credits">
           Designed by <a href="https://bootstrapmade.com/">Vitra Janitio</a>

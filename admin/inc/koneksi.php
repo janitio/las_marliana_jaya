@@ -1,5 +1,7 @@
 <?php
-$koneksi = new mysqli ("localhost","root","","las_marliana");
+$koneksi = new mysqli ("localhost","root","","las_mailiana");
+
+
 ?>
 
 <!-- end -->
