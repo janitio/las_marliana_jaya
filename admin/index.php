@@ -27,7 +27,7 @@ while ($data= $sql->fetch_assoc()) {
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>MAILIANA JAYA 2</title>
+	<title><?=$nama; ?></title>
 	<link rel="icon" href="dist/img/logo.png">
 	<!-- Tell the browser to be responsive to screen width -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -71,7 +71,7 @@ while ($data= $sql->fetch_assoc()) {
 					<a href="index.php" class="nav-link">
 						<font color="white">
 							<b>
-								<?php echo $nama; ?>
+								<?=$nama; ?>
 							</b>
 						</font>
 					</a>
@@ -86,7 +86,7 @@ while ($data= $sql->fetch_assoc()) {
 			<!-- Brand Logo -->
 			<a href="index.php" class="brand-link">
 				<img src="dist/img/logo.png" alt="AdminLTE Logo" class="brand-image" style="opacity: .8">
-				<span class="brand-text"> MARLIANA JAYA 2</span>
+				<span class="brand-text"> <?=$nama; ?></span>
 			</a>
 
 			<!-- Sidebar -->
@@ -289,6 +289,9 @@ while ($data= $sql->fetch_assoc()) {
 								case 'view-penawaran':
 								include "admin/penawaran/view_penawaran.php";
 								break;
+								case 'del-penawaran':
+								include "admin/penawaran/del_penawaran.php";
+								break;
 
 					//pesanan 
 								case 'data-pesanan':
@@ -296,6 +299,9 @@ while ($data= $sql->fetch_assoc()) {
 								break;
 								case 'edit-pesanan':
 								include "admin/pesanan/edit_pesanan.php";
+								break;
+								case 'del-pesanan':
+								include "admin/pesanan/del_pesanan.php";
 								break;
 								case 'ket-pesanan':
 								include "admin/pesanan/ket_pesanan.php";
@@ -310,6 +316,9 @@ while ($data= $sql->fetch_assoc()) {
 								break;
 								case 'edit-pembayaran':
 								include "admin/pembayaran/edit_pembayaran.php";
+								break;
+								case 'del-pembayaran':
+								include "admin/pembayaran/del_pembayaran.php";
 								break;
 
 					//hasil proyek
@@ -352,11 +361,11 @@ while ($data= $sql->fetch_assoc()) {
 				<div class="float-right d-none d-sm-block">
 					Copyright &copy;
 					<a target="_blank" href="https://www.youtube.com/channel/UCDxjOzW7F0JOkltlXT6g7AQ">
-						<strong> Marliana Jaya 2</strong>
+						<strong> <?=$nama; ?></strong>
 					</a>
 					All rights reserved.
 				</div>
-				<b>Created 2020</b>
+				<b>Created 2021</b>
 			</footer>
 
 			<!-- Control Sidebar -->

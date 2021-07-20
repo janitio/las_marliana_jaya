@@ -36,13 +36,16 @@ include "admin/inc/koneksi.php";
               </div>
               <div class="form-group">
                 <label for="no_hp">No. HP (WhatsApp Aktif)</label>
-                <input type="tel" name="no_hp" id="no_hp" class="form-control" placeholder="081234567890" required>
+                <input type="number" name="no_hp" id="no_hp" class="form-control" placeholder="081234567890" required>
               </div>
               <div class="form-group">
                 <label for="email">Email</label>
                 <input type="email" name="email" id="email" class="form-control" placeholder="email@contoh.com" required>
               </div>
-             <!--  <input name="daftar" id="login" class="btn btn-block login-btn" type="button" value="Daftar"> -->
+              <div class="form-group">
+                <label for="alamat_pengguna">Alamat Lengkap</label>
+                <input type="text" name="alamat_pengguna" id="alamat_pengguna" class="form-control" placeholder="cantumkan alamat selengkapnya" required>
+              </div>
                <button type="submit" class="btn btn-block login-btn" name="daftar" title="Daftar">
                 <b>Daftar</b>
               </button>
@@ -71,12 +74,13 @@ include "admin/inc/koneksi.php";
 if (isset($_POST['daftar'])) {  
 
   //query login
-  $sql_simpan = "INSERT INTO tb_pengguna (nama_pengguna, username, password, no_hp, email, level) VALUES (
+  $sql_simpan = "INSERT INTO tb_pengguna (nama_pengguna, username, password, no_hp, email,alamat_pengguna, level) VALUES (
   '".$_POST['nama']."',
   '".$_POST['username']."',
   '".$_POST['password']."',
   '".$_POST['no_hp']."',
   '".$_POST['email']."',
+  '".$_POST['alamat_pengguna']."',
   'Pelanggan')";
   $query_simpan = mysqli_query($koneksi, $sql_simpan);
   mysqli_close($koneksi);

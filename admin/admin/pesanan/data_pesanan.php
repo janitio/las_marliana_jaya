@@ -17,7 +17,7 @@
 							<th width="20px">Nama Pelanggan</th>
 							<th width="50px">Alamat</th>
 							<th width="30px">Waktu</th>
-							<th width="20px">Proses</th>
+							<th width="10px">Proses</th>
 							<th width="90px">Aksi</th>
 						</tr>
 					</thead>
@@ -58,16 +58,20 @@
 								</td>
 								<td>
 									<a href="?page=edit-pesanan&kode_pesanan=<?php echo $data['kode_pesanan']; ?>" title="Ubah Data" class="btn btn-warning btn-sm">
-									<i class="fa fa-edit"></i>
+									<i class="fa fa-edit">Ubah Data</i>
 								</a>
 
 								<a href="?page=kalkulasi-pesanan&kode_pesanan=<?php echo $data['kode_pesanan']; ?>" title="Buat Penawaran" class="btn btn-success btn-sm">
-									<i class="fa fa-file"></i>
+									<i class="fa fa-file">Buat Penawaran</i>
 								</a>
 								
 								<a href="?page=ket-pesanan&kode_pesanan=<?php echo $data['kode_pesanan']; ?>" title="Beri Pesan"
 										class="btn btn-info btn-sm">
-										<i class="fa fa-comment-dots"></i>
+										<i class="fa fa-comment-dots">Beri Pesan</i>
+									</a>
+									<a href="?page=del-pesanan&kode_pesanan=<?php echo $data['kode_pesanan']; ?>" title="hapus"
+										class="btn btn-danger btn-sm">
+										<i class="fa fa-trash">Hapus Data</i>
 									</a>
 								</a>
 							</td>

@@ -1,6 +1,6 @@
 <?php
 
-define('DBINFO', 'mysql:host=localhost;dbname=las_marliana');
+define('DBINFO', 'mysql:host=localhost;dbname=las_mailiana');
 define('DBUSER','root');
 define('DBPASS','');
 

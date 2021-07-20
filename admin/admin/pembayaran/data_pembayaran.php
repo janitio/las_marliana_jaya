@@ -56,11 +56,11 @@
 								</td>
 								<td>
 									<a href="?page=edit-pembayaran&id_pembayaran=<?php echo $data['id_pembayaran']; ?>" title="Ubah Data" class="btn btn-warning btn-sm">
-										<i class="fa fa-edit"></i>
+										<i class="fa fa-edit">Ubah Data</i>
 									</a>
 									<a href="?page=del-pembayaran&id_pembayaran=<?php echo $data['id_pembayaran']; ?>" title="Beri Pesan"
 										class="btn btn-danger btn-sm">
-										<i class="fa fa-trash"></i>
+										<i class="fa fa-trash">Hapus Data</i>
 									</a>
 								</a>
 							</td>

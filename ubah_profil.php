@@ -1,13 +1,20 @@
 <?php
-
  //KONEKSI DB
 include "admin/inc/koneksi.php";
 
 session_start();
+
 if (isset($_SESSION["ses_username"])){
 
 	$data_id = $_SESSION["ses_id"];
 	$data_user = $_SESSION["ses_username"];
+}
+
+$sql = $koneksi->query("SELECT * from tb_profil");
+while ($data= $sql->fetch_assoc()) {
+
+	$nama=$data['nama_profil'];
+	$alamat=$data['alamat'];
 }
 
 if(isset($data_id)){
@@ -48,43 +55,37 @@ if(isset($data_id)){
 	<!-- Template Main CSS File -->
 	<link href="assets/css/style.css" rel="stylesheet">
 
+	<!-- Alert -->
+	<script src="admin/plugins/alert.js"></script>
 </head>
 
 <body>
 
-<!-- ======= Header ======= -->
-<header id="header" class="d-flex align-items-center">
-	<div class="container d-flex align-items-center justify-content-between">
+	<!-- ======= Header ======= -->
+	<header id="header" class="d-flex align-items-center">
+		<div class="container d-flex align-items-center justify-content-between">
 
-		<div class="logo">
-			<h1><a href="index.php"></a></h1>
-		</div>
+			<div class="logo">
+				<h1><a href="index.php"><?=$nama; ?></a></h1>
+			</div>
 
-		<nav id="navbar" class="navbar">
-			<ul>
-				<li><a class="nav-link scrollto active" href="index.php">Beranda</a></li>
-				<?php if(!isset($data_user)){?>
-					<li><a class="nav-link scrollto" href="login.php">Login</a></li>
-				<?php }else{?>
-					<li class="dropdown"><a href="ubah_profil.php?id_pelanggan=<?=$data_id?>"><span><?php if(isset($data_user)){
-                //tampil data nama dari sesi yang ada
-						echo $_SESSION['ses_nama'];}?>
 
-					</span> <i class="bi bi-chevron-down"></i></a>
-					<ul>
+			<nav id="navbar" class="navbar">
+				<ul>
+					<li><a class="nav-link scrollto active" href="index.php">Beranda</a></li>
+					<?php if(!isset($data_user)){?>
+						<li><a class="nav-link scrollto" href="login.php">Login</a></li>
+					<?php }else{?>
+						<li><a href="ubah_profil.php?id_pelanggan=<?=$data_id?>"><?= $_SESSION['ses_nama'];?>
 						<li><a href="pesanan_pelanggan.php?id_pelanggan=<?= $data_id?>">Pesanan</a></li>
-         
-          <li><a href="hasil_proyek.php">Hasil Proyek</a></li>
-      </ul>
-  </li>
-  <li><a href="admin/logout.php">Keluar</a></li>
-<?php } ?>
-</ul>
-<i class="bi bi-list mobile-nav-toggle"></i>
-</nav><!-- .navbar -->
+						<li><a href="admin/logout.php">Keluar</a></li>
+					<?php } ?>
+				</ul>
+				<i class="bi bi-list mobile-nav-toggle"></i>
+			</nav><!-- .navbar -->
 
-</div>
-</header><!-- End Header -->
+		</div>
+	</header><!-- End Header -->
 
 <main id="main">
 
@@ -160,84 +161,10 @@ if(isset($data_id)){
 	</section>
 
 </main><!-- End #main -->
-
-<!-- ======= Footer ======= -->
-<footer id="footer">
-
-	<div class="footer-top">
-		<div class="container">
-			<div class="row">
-
-				<div class="col-lg-3 col-md-6 footer-contact">
-					<h3>Flexor</h3>
-					<p>
-						A108 Adam Street <br>
-						New York, NY 535022<br>
-						United States <br><br>
-						<strong>Phone:</strong> +1 5589 55488 55<br>
-						<strong>Email:</strong> info@example.com<br>
-					</p>
-				</div>
-
-				<div class="col-lg-2 col-md-6 footer-links">
-					<h4>Useful Links</h4>
-					<ul>
-						<li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
-						<li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>
-						<li><i class="bx bx-chevron-right"></i> <a href="#">Services</a></li>
-						<li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
-						<li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
-					</ul>
-				</div>
-
-				<div class="col-lg-3 col-md-6 footer-links">
-					<h4>Our Services</h4>
-					<ul>
-						<li><i class="bx bx-chevron-right"></i> <a href="#">Web Design</a></li>
-						<li><i class="bx bx-chevron-right"></i> <a href="#">Web Development</a></li>
-						<li><i class="bx bx-chevron-right"></i> <a href="#">Product Management</a></li>
-						<li><i class="bx bx-chevron-right"></i> <a href="#">Marketing</a></li>
-						<li><i class="bx bx-chevron-right"></i> <a href="#">Graphic Design</a></li>
-					</ul>
-				</div>
-
-				<div class="col-lg-4 col-md-6 footer-newsletter">
-					<h4>Join Our Newsletter</h4>
-					<p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna</p>
-					<form action="" method="post">
-						<input type="email" name="email"><input type="submit" value="Subscribe">
-					</form>
-				</div>
-
-			</div>
-		</div>
-	</div>
-
-	<div class="container d-lg-flex py-4">
-
-		<div class="me-lg-auto text-center text-lg-start">
-			<div class="copyright">
-				&copy; Copyright <strong><span>Flexor</span></strong>. All Rights Reserved
-			</div>
-			<div class="credits">
-				<!-- All the links in the footer should remain intact. -->
-				<!-- You can delete the links only if you purchased the pro version. -->
-				<!-- Licensing information: https://bootstrapmade.com/license/ -->
-				<!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/flexor-free-multipurpose-bootstrap-template/ -->
-				Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-			</div>
-		</div>
-		<div class="social-links text-center text-lg-right pt-3 pt-lg-0">
-			<a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
-			<a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
-			<a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
-			<a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
-			<a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
-		</div>
-	</div>
-</footer><!-- End Footer -->
-
 <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+<!-- jQuery -->
+<script src="admin/plugins/jquery/jquery.min.js"></script>
 
 <!-- Vendor JS Files -->
 <script src="assets/vendor/aos/aos.js"></script>
@@ -250,15 +177,8 @@ if(isset($data_id)){
 <!-- Template Main JS File -->
 <script src="assets/js/main.js"></script>
 
-<!-- jQuery -->
-<script src="admin/plugins/jquery/jquery.min.js"></script>
-<!-- Alert -->
-<script src="admin/plugins/alert.js"></script>
-
-</body>
-
-</html>
-
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.5.0-beta4/html2canvas.min.js"></script>
 <?php
 $sumber = @$_FILES['foto_hasil']['tmp_name'];
 $target = 'admin/foto/proyek/';

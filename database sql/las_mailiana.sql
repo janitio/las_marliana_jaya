@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 18, 2021 at 06:53 PM
+-- Generation Time: Jul 20, 2021 at 07:57 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.2
 
@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `tb_desain` (
   `kode_desain` int(3) NOT NULL,
-  `nama_desain` varchar(20) NOT NULL,
+  `nama_desain` varchar(30) NOT NULL,
   `deskripsi` varchar(120) NOT NULL,
   `harga_normal` int(10) NOT NULL,
   `foto_desain` varchar(50) NOT NULL
@@ -40,24 +40,21 @@ CREATE TABLE `tb_desain` (
 --
 
 INSERT INTO `tb_desain` (`kode_desain`, `nama_desain`, `deskripsi`, `harga_normal`, `foto_desain`) VALUES
-(2, 'Ralling Balkon', 'berbunga', 1, 'otw.jpg'),
-(3, 'Teralis Jendela', 'Bergaris', 300000, 'aa.jpg'),
-(4, 'kanopi rumah', 'coklat', 500000, 'ae.jpg'),
-(5, 'Pagar Besi', 'bergaris', 900000, 'earth.jpg');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tb_hasilproyek`
---
-
-CREATE TABLE `tb_hasilproyek` (
-  `id_hasilproyek` int(3) NOT NULL,
-  `id_pengguna` int(3) NOT NULL,
-  `foto_hasil` varchar(50) NOT NULL,
-  `ulasan` text NOT NULL,
-  `tgl_hasil` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+(6, 'canopy cn-001', 'Canopy ini terbuat dari besi hollow 4x4 tebal 1,6 mm di mana menggunakan polycarbonate merk solarlite', 410000, 'kn-001.jpg'),
+(7, 'canopy cn-002', 'Canopy ini terbuat dari besi hollow 3x6 tebal 1,6 mm untuk rangka pinggir dan untuk jari-jarinya mengunakan besi hollow ', 400000, 'kn-002.jpg'),
+(8, 'canopy cn-003', 'Canopy ini terbuat dari besi hollow 4x4 tebal 1,2 mm di mana menggunakan polycarbonate merk solarlite dan dibantu dengan', 385000, 'kn-003.jpg'),
+(9, 'Pagar Besi pb-001', 'Pagar ini terbuat dari besi hollow 4x4 dengan tebal 1,2 mm dan jari2 terbuat dari besi hollow 2x4 dengan tebal 1,2mm den', 600000, 'pb-001.jpg'),
+(10, 'Pagar Besi pb-002', 'Pagar ini terbuat dari besi hollow 4x4 embos dengan tebal 1,6 mm dan dipadu dengan besi beton ulir 12 ml yang kemudian d', 800000, 'pb-002.jpg'),
+(11, 'Pagar Besi pb-003', 'Pagar ini terbuat dari besi hollow 4x4 tebal 1,2 mm, kemudian dipadu dengan besi hollow 2x4 tebal 1,2 mm dan jarak luban', 700000, 'pb-003.jpg'),
+(12, 'Railing Tangga rt-001', 'Railing ini mengunakan besi hollow 4x4 tebal 1,2 mm untuk tiangnya kemudian  untuk jari-jarinya dipadu dengan hollow 2x2', 610000, 'rt-001.jpg'),
+(13, 'Railing Tangga rt-002', 'Railing ini mengunakan besi hollow 4x4 tebal 1,2 mm untuk tiangnya kemudian  untuk jari-jarinya dipadu dengan hollow 2x4', 730000, 'rt-002.jpg'),
+(14, 'Railing Tangga rt-003', 'Railing ini terbuat dari besi hollow 3x6 tebal 1,2 mm untuk pegangan dan tiang2nya sedangkan untuk jari-jarinya mengguna', 580000, 'rt-003.jpg'),
+(15, 'Teralis Jendela tj-001', 'Teralis ini mempunyai motif hampir sama dengan tipe TJ-102. Terbuat dari besi beton 12bc untuk jari jarinya dan plat str', 400000, 'tj-001.jpg'),
+(16, 'Teralis Jendela tj-002', 'Teralis ini adalah salah satu motif minimalis dari kami. Jari-jarinya menggunakan Beton 12bc dengan rangka Plat strip 5x', 400000, 'tj-002.jpg'),
+(17, 'Teralis Jendela tj-003', 'Teralis jendela ini adalah motif minimalis standart dari kami. Jari-jarinya bisa menggunakan Nako atau Besi Beton. Untuk', 455000, 'tj-003.jpg'),
+(18, 'Pintu Besi pp-001', 'Pintu ini terbuat dari rangka hollow 4x4 dengan tebal 1,6 mm dan jari-jari rangka terbuat dari hollow 2x4 dengan tebal 1', 750000, 'pp-001.jpg'),
+(19, 'Pintu Besi pp-002', 'Pintu pagar ini terbuat dari besi hollow 4x4 dengan tebal 1,6 mm lalu untuk jari-jarinya mengunakan besi hollow 2 x 4 de', 800000, 'pp-002.jpg'),
+(20, 'Pintu Besi pp-003', 'Pintu ini terbuat dari rangka besi hollow 4x4 dengan tebal 1,6 mm dan jari-jari rangkanya terbuat dari hollow 2x4 dengan', 800000, 'pp-003.jpg');
 
 -- --------------------------------------------------------
 
@@ -78,10 +75,7 @@ CREATE TABLE `tb_notif` (
 --
 
 INSERT INTO `tb_notif` (`id_notif`, `kode_pesanan`, `pesan`, `status`, `tgl_pesan`) VALUES
-(1, 5, '2 minggu lagi yak', 'read', '2021-06-08 00:49:03'),
-(2, 8, 'seminggu akan dikirim', 'read', '2021-06-08 00:50:11'),
-(3, 8, 'maaf, ada kendala ngaret 3 hari ya', 'read', '2021-06-08 00:52:11'),
-(4, 8, 'sebentar lagi akan dikirim dalam sehari', 'read', '2021-06-08 01:03:48');
+(5, 11, 'sedang kami survei', 'read', '2021-07-20 23:18:59');
 
 -- --------------------------------------------------------
 
@@ -127,10 +121,9 @@ CREATE TABLE `tb_penawaran` (
 --
 
 INSERT INTO `tb_penawaran` (`kode_penawaran`, `kode_pesanan`, `biaya_dp`, `sisa_bayar`, `total_bayar`, `proses_tawar`, `ttd_pelanggan`, `tgl_tawar`) VALUES
-(6, 8, 400000, 1600000, 2000000, 'diproses', '60a94c6daff80.png', '2021-05-23 01:24:45'),
-(7, 7, 400000, 960000, 2000000, 'dibatalkan', '7Tio Achdama60aa8286aca7d.png', '2021-07-18 23:50:56'),
-(8, 5, 210000, 490000, 700000, 'diterima', '5Almer Risma60f4594880f96.png', '2021-07-18 23:39:36'),
-(9, 9, 630000, 1470000, 2100000, 'dibatalkan', '', '2021-07-18 23:46:48');
+(10, 11, 300000, 700000, 1000000, 'diterima', '11Fajrillah Achmad60f7084f9cbb0.png', '2021-07-21 00:30:55'),
+(11, 14, 240000, 560000, 800000, 'diproses', '', '2021-07-21 00:34:53'),
+(12, 15, 210000, 490000, 700000, 'dibatalkan', '', '2021-07-21 00:47:13');
 
 -- --------------------------------------------------------
 
@@ -155,8 +148,9 @@ CREATE TABLE `tb_pengguna` (
 
 INSERT INTO `tb_pengguna` (`id_pengguna`, `nama_pengguna`, `username`, `password`, `no_hp`, `email`, `alamat_pengguna`, `level`) VALUES
 (1, 'Vitra Janitio', 'admin', '1', '085215637999', 'pitra_ahoy@gmail.com', '', 'Administrator'),
-(4, 'Tio Achdama', 'tio', '1', '081222888999', 'tio@gmail.com', 'Jalan Beo 3 No. 15 D6 Pondok Sejahtera, Kutabumi', 'Pelanggan'),
-(5, 'Almer Risma', 'almer', '1', '081888333000', 'almer@gmail.com', 'jalan komodo 2', 'Pelanggan');
+(6, 'didiet anggara', 'didit', '1', '081234123111', 'didit@gmail.com', '', 'Pelanggan'),
+(7, 'Fajrillah Achmad', 'paji', '1', '081222111333', 'paji@gmail.com', 'Jalan Beo 3 No. 15 D6 Pondok Sejahtera, Kutabumi', 'Pelanggan'),
+(8, 'Risky Ramadhan', 'rijra', '1', '081222111333', 'risky@gmail.com', 'jalan komodo 2', 'Pelanggan');
 
 -- --------------------------------------------------------
 
@@ -182,7 +176,11 @@ INSERT INTO `tb_pesanan` (`kode_pesanan`, `kode_desain`, `id_pengguna`, `proses`
 (6, 5, 4, 'diproses', '2021-04-23 14:32:39'),
 (7, 4, 4, 'kalkulasi', '2021-05-19 01:18:55'),
 (8, 5, 4, 'diterima', '2021-05-24 01:26:47'),
-(9, 4, 5, 'diproses', '2021-07-18 23:43:49');
+(9, 4, 5, 'diproses', '2021-07-18 23:43:49'),
+(10, 8, 5, 'diproses', '2021-07-20 22:17:02'),
+(11, 10, 7, 'kalkulasi', '2021-07-20 23:01:20'),
+(14, 9, 8, 'kalkulasi', '2021-07-21 00:13:38'),
+(15, 14, 7, 'kalkulasi', '2021-07-21 00:32:41');
 
 -- --------------------------------------------------------
 
@@ -232,28 +230,11 @@ INSERT INTO `tb_track_pesanan` (`kode_track_pesanan`, `kode_pesanan`, `proses`, 
 (7, 8, 'pengerjaan', '2021-05-24 01:26:24'),
 (8, 8, 'dikirim', '2021-05-24 01:26:34'),
 (9, 8, 'diterima', '2021-05-24 01:26:47'),
-(10, 5, 'kalkulasi', '2021-07-18 22:30:37');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tb_verify_proyek`
---
-
-CREATE TABLE `tb_verify_proyek` (
-  `id_verifyproyek` int(3) NOT NULL,
-  `id_pengguna` int(3) NOT NULL,
-  `foto_verifyhasil` varchar(50) NOT NULL,
-  `ulasan_verify` text NOT NULL,
-  `tgl_verifyhasil` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `tb_verify_proyek`
---
-
-INSERT INTO `tb_verify_proyek` (`id_verifyproyek`, `id_pengguna`, `foto_verifyhasil`, `ulasan_verify`, `tgl_verifyhasil`) VALUES
-(2, 4, 'kucing.jpeg', 'hahahahahahaha', '2021-06-14 15:26:08');
+(10, 5, 'kalkulasi', '2021-07-18 22:30:37'),
+(11, 11, 'survei', '2021-07-20 23:12:39'),
+(12, 14, 'kalkulasi', '2021-07-21 00:35:29'),
+(13, 15, 'kalkulasi', '2021-07-21 00:35:40'),
+(14, 11, 'kalkulasi', '2021-07-21 00:35:52');
 
 --
 -- Indexes for dumped tables
@@ -264,12 +245,6 @@ INSERT INTO `tb_verify_proyek` (`id_verifyproyek`, `id_pengguna`, `foto_verifyha
 --
 ALTER TABLE `tb_desain`
   ADD PRIMARY KEY (`kode_desain`);
-
---
--- Indexes for table `tb_hasilproyek`
---
-ALTER TABLE `tb_hasilproyek`
-  ADD PRIMARY KEY (`id_hasilproyek`);
 
 --
 -- Indexes for table `tb_notif`
@@ -314,12 +289,6 @@ ALTER TABLE `tb_track_pesanan`
   ADD PRIMARY KEY (`kode_track_pesanan`);
 
 --
--- Indexes for table `tb_verify_proyek`
---
-ALTER TABLE `tb_verify_proyek`
-  ADD PRIMARY KEY (`id_verifyproyek`);
-
---
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -327,43 +296,37 @@ ALTER TABLE `tb_verify_proyek`
 -- AUTO_INCREMENT for table `tb_desain`
 --
 ALTER TABLE `tb_desain`
-  MODIFY `kode_desain` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT for table `tb_hasilproyek`
---
-ALTER TABLE `tb_hasilproyek`
-  MODIFY `id_hasilproyek` int(3) NOT NULL AUTO_INCREMENT;
+  MODIFY `kode_desain` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `tb_notif`
 --
 ALTER TABLE `tb_notif`
-  MODIFY `id_notif` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_notif` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `tb_pembayaran`
 --
 ALTER TABLE `tb_pembayaran`
-  MODIFY `id_pembayaran` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_pembayaran` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `tb_penawaran`
 --
 ALTER TABLE `tb_penawaran`
-  MODIFY `kode_penawaran` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `kode_penawaran` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `tb_pengguna`
 --
 ALTER TABLE `tb_pengguna`
-  MODIFY `id_pengguna` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_pengguna` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `tb_pesanan`
 --
 ALTER TABLE `tb_pesanan`
-  MODIFY `kode_pesanan` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `kode_pesanan` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `tb_profil`
@@ -375,13 +338,7 @@ ALTER TABLE `tb_profil`
 -- AUTO_INCREMENT for table `tb_track_pesanan`
 --
 ALTER TABLE `tb_track_pesanan`
-  MODIFY `kode_track_pesanan` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
---
--- AUTO_INCREMENT for table `tb_verify_proyek`
---
-ALTER TABLE `tb_verify_proyek`
-  MODIFY `id_verifyproyek` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `kode_track_pesanan` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

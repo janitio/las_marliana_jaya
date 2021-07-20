@@ -45,7 +45,7 @@ $sql2 = $koneksi->query("SELECT * from tb_desain");
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Mailiana Jaya 2</title>
+  <title><?=$nama; ?></title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -78,12 +78,12 @@ $sql2 = $koneksi->query("SELECT * from tb_desain");
     <div class="container d-flex align-items-center justify-content-between">
 
       <div class="logo">
-        <h1><a href="index.html"><?=$nama; ?></a></h1>
+        <h1><a href="index.php"><?=$nama; ?></a></h1>
       </div>
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="nav-link scrollto active" href="#hero">Beranda</a></li>
+          <li><a class="nav-link scrollto active" href="index.php">Beranda</a></li>
           <li><a class="nav-link scrollto" href="#about">Tentang Kami</a></li>
           <li><a class="nav-link scrollto " href="#portfolio">Desain</a></li>
           <li><a class="nav-link scrollto" href="#contact">Kontak Kami</a></li>
@@ -128,18 +128,11 @@ $sql2 = $koneksi->query("SELECT * from tb_desain");
          ?>
        </div>
      </li>
-     <li class="dropdown"><a href="ubah_profil.php?id_pelanggan=<?=$data_id?>"><span><?php if(isset($data_user)){
-                //tampil data nama dari sesi yang ada
-      echo $_SESSION['ses_nama'];}?>
-
-    </span> <i class="bi bi-chevron-down"></i></a>
-    <ul>
-      <li><a href="pesanan_pelanggan.php?id_pelanggan=<?= $data_id?>">Pesanan</a></li>
-      <li><a href="hasil_proyek.php">Hasil Proyek</a></li>
-    </ul>
-  </li>
-  <li><a href="admin/logout.php">Keluar</a></li>
-<?php } ?>
+     <li><a href="ubah_profil.php?id_pelanggan=<?=$data_id?>"><?= $_SESSION['ses_nama'];?>
+     <li><a href="pesanan_pelanggan.php?id_pelanggan=<?= $data_id?>">Pesanan</a></li>
+     <li><a href="admin/logout.php">Keluar</a></li>
+   </li>
+ <?php } ?>
 </ul>
 <i class="bi bi-list mobile-nav-toggle"></i>
 </nav><!-- .navbar -->
@@ -228,109 +221,94 @@ $sql2 = $koneksi->query("SELECT * from tb_desain");
         <p data-aos="fade-up">Desain - desain yang pernah dibuat dengan rancangan menarik oleh Mailiana Jaya 2.</p>
       </div>
 
-        <!-- <div class="row" data-aos="fade-up" data-aos-delay="100">
-          <div class="col-lg-12 d-flex justify-content-center">
-            <ul id="portfolio-flters">
-              <li data-filter="*" class="filter-active">Semua</li>
-              <li data-filter=".filter-app">Pagar</li>
-              <li data-filter=".filter-card">Teralis</li>
-              <li data-filter=".filter-web">Ralling</li>
-              <li data-filter=".filter-app">Pintu</li>
-            </ul>
-          </div>
-        </div> -->
+      <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
+        <?php while ($data= $sql2->fetch_assoc()) {
+          ?>
+          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+            <img src="admin/foto/desain/<?=$data['foto_desain'];?>" class="img-fluid" width="350px">
+            <div class="portfolio-info">
+              <h4><?=$data['nama_desain'];?></h4> 
 
-        <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
-          <?php while ($data= $sql2->fetch_assoc()) {
-            ?>
-            <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-              <img src="admin/foto/desain/<?=$data['foto_desain'];?>" class="img-fluid" width="350px">
-              <div class="portfolio-info">
-                <h4><?=$data['nama_desain'];?></h4> 
-                <p><?=$data['deskripsi'];?></p>
-
-                <a href="desain_detail.php?kode_desain=<?php echo $data['kode_desain']; ?>" class="portfolio-lightbox preview-link"><i class="bx bx-show-alt"></i></a><br>
-                <?php if(isset($data_user)){?>
-                  <a href="pesan_desain.php?kode_desain=<?php echo $data['kode_desain']; ?>" title="Pesan" class="btn btn-success btn-sm">Pesan</a>
-                <?php }?>
-              </div>
+              <a href="desain_detail.php?kode_desain=<?php echo $data['kode_desain']; ?>" class="portfolio-lightbox preview-link"><i class="bx bx-show-alt"></i></a><br>
+              <?php if(isset($data_user)){?>
+                <a href="pesan_desain.php?kode_desain=<?php echo $data['kode_desain']; ?>" title="Pesan" class="btn btn-success btn-sm">Pesan</a>
+              <?php }?>
             </div>
-          <?php }?>
-        </div>
-
+          </div>
+        <?php }?>
       </div>
-    </section>
 
-    <!-- ======= Contact Section ======= -->
-    <section id="contact" class="contact">
-      <div class="container">
+    </div>
+  </section>
 
-        <div class="section-title">
-          <h2 data-aos="fade-up">Kontak Kami</h2>
-          <p data-aos="fade-up">Bila ada yang ingin bertanya mengenai bengkel las kami, bisa hubungi kami.</p>
-        </div>
+  <!-- ======= Contact Section ======= -->
+  <section id="contact" class="contact">
+    <div class="container">
 
-        <div class="row justify-content-center">
-
-          <div class="col-xl-3 col-lg-4 mt-4" data-aos="fade-up">
-            <div class="info-box">
-              <i class="bx bx-map"></i>
-              <h3>Alamat Kami</h3>
-              <p>Jalan Bawal Raya Blok A7 #01, Kuta Baru, Kec. Ps. Kemis, Tangerang, Banten 15561</p>
-            </div>
-          </div>
-
-          <div class="col-xl-3 col-lg-4 mt-4" data-aos="fade-up" data-aos-delay="100">
-            <div class="info-box">
-              <i class="bx bx-envelope"></i>
-              <h3>Email Kami  </h3>
-              <p>las_mailiana@gmail.com</p>
-            </div>
-          </div>
-          <div class="col-xl-3 col-lg-4 mt-4" data-aos="fade-up" data-aos-delay="200">
-            <div class="info-box">
-              <i class="bx bx-phone-call"></i>
-              <h3>Hubungi Kami (WhatsApp)</h3>
-              <p>+62 852 1563 7999</p>
-            </div>
-          </div>
-        </div>
+      <div class="section-title">
+        <h2 data-aos="fade-up">Kontak Kami</h2>
+        <p data-aos="fade-up">Bila ada yang ingin bertanya mengenai bengkel las kami, bisa hubungi kami.</p>
       </div>
-    </section><!-- End Contact Section -->
 
-  </main><!-- End #main -->
+      <div class="row justify-content-center">
 
-  <!-- ======= Footer ======= -->
-  <footer id="footer">
-    <div class="container d-lg-flex py-4">
-
-      <div class="me-lg-auto text-center text-lg-start">
-        <div class="copyright">
-          &copy; Copyright <strong><span>Mailiana Jaya 2</span></strong>. All Rights Reserved
+        <div class="col-xl-3 col-lg-4 mt-4" data-aos="fade-up">
+          <div class="info-box">
+            <i class="bx bx-map"></i>
+            <h3>Alamat Kami</h3>
+            <p>Jalan Bawal Raya Blok A7 #01, Kuta Baru, Kec. Ps. Kemis, Tangerang, Banten 15561</p>
+          </div>
         </div>
-        <div class="credits">
-          Designed by <a href="https://bootstrapmade.com/">Vitra Janitio</a>
+
+        <div class="col-xl-3 col-lg-4 mt-4" data-aos="fade-up" data-aos-delay="100">
+          <div class="info-box">
+            <i class="bx bx-envelope"></i>
+            <h3>Email Kami  </h3>
+            <p>las_mailiana@gmail.com</p>
+          </div>
+        </div>
+        <div class="col-xl-3 col-lg-4 mt-4" data-aos="fade-up" data-aos-delay="200">
+          <div class="info-box">
+            <i class="bx bx-phone-call"></i>
+            <h3>Hubungi Kami (WhatsApp)</h3>
+            <p>+62 852 1563 7999</p>
+          </div>
         </div>
       </div>
     </div>
-  </footer><!-- End Footer -->
+  </section><!-- End Contact Section -->
 
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+</main><!-- End #main --> <!-- ======= Footer ======= -->
+<footer id="footer">
+  <div class="container d-lg-flex py-4">
 
-  <!-- Vendor JS Files -->
-  <script src="assets/vendor/aos/aos.js"></script>
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
-  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <div class="me-lg-auto text-center text-lg-start">
+      <div class="copyright">
+        &copy; Copyright <strong><span><?=$nama; ?></span></strong>. All Rights Reserved
+      </div>
+      <div class="credits">
+        Designed by <a href="https://bootstrapmade.com/">Vitra Janitio</a>
+      </div>
+    </div>
+  </div>
+</footer><!-- End Footer -->
 
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
-  <!-- Template Main JS File -->
-  <script src="assets/js/main.js"></script>
+<!-- Vendor JS Files -->
+<script src="assets/vendor/aos/aos.js"></script>
+<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+<script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+<script src="assets/vendor/php-email-form/validate.js"></script>
+<script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+<!-- Template Main JS File -->
+<script src="assets/js/main.js"></script>
 
 </body>
 

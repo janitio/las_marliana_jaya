@@ -9,14 +9,14 @@
 				<table id="example1" class="table table-bordered table-striped">
 					<thead>
 						<tr>
-							<th>No</th>
-							<th>Kode Pesanan</th>
-							<th>Nama Pelanggan</th>
-							<th>Biaya DP</th>
-							<th>Sisa Pembayaran</th>
-							<th>Harga Total</th>
-							<th>Konfirmasi</th>
-							<th>Aksi</th>
+							<th width="5px" class="text-center">No</th>
+							<th width="10px" class="text-center">Kode Pesanan</th>
+							<th width="20px" class="text-center">Nama Pelanggan</th>
+							<th width="10px" class="text-center">Biaya DP</th>
+							<th width="10px" class="text-center">Sisa Pembayaran</th>
+							<th width="10px" class="text-center">Harga Total</th>
+							<th width="10px" class="text-center">Konfirmasi</th>
+							<th width="70px" class="text-center">Aksi</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -53,14 +53,14 @@
 								</td>
 
 								<td>
-									<a href="?page=view-penawaran&kode_penawaran=<?php echo $data['kode_penawaran']; ?>" target=" _blank" title="Detail"
+									<a href="?page=view-penawaran&kode_penawaran=<?=$data['kode_penawaran']; ?>" title="Detail"
 										class="btn btn-info btn-sm">
-										<i class="fa fa-eye"></i>
+										<i class="fa fa-eye">Lihat Detail</i>
 									</a>
 									
-									<a href="?page=del-penawaran&kode_penawaran=<?php echo $data['kode_penawaran']; ?>" onclick="return confirm('Apakah anda yakin hapus data ini ?')"
+									<a href="?page=del-penawaran&kode_penawaran=<?=$data['kode_penawaran']; ?>" onclick="return confirm('Apakah anda yakin hapus data ini ?')"
 										title="Hapus" class="btn btn-danger btn-sm">
-										<i class="fa fa-trash"></i>
+										<i class="fa fa-trash">Hapus Data</i>
 									</td>
 								</tr>
 

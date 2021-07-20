@@ -37,10 +37,10 @@
 						</tr>
 						<tr>
 							<td style="width: 150px">
-								<b>Motif/Ukuran</b>
+								<b>Deskripsi</b>
 							</td>
 							<td>:
-								<?php echo $data_cek['motif']; ?>
+								<?php echo $data_cek['deskripsi']; ?>
 							</td>
 						</tr>
 						<tr>
