@@ -21,6 +21,13 @@ function performQuery($query){
 
 
 $kode_pesanan=$_GET['kode_pesanan'];
+
+if(isset($_GET['kode_pesanan'])){
+	$sql_cek = "SELECT id_pengguna FROM tb_pesanan WHERE kode_pesanan='".$_GET['kode_pesanan']."'";
+	$query_cek = mysqli_query($koneksi, $sql_cek);
+	$data_cek = mysqli_fetch_array($query_cek,MYSQLI_BOTH);
+	$id_pengguna = $data_cek['id_pengguna'];
+}
 ?>
 <div class="row">
 
@@ -37,7 +44,7 @@ $kode_pesanan=$_GET['kode_pesanan'];
 
 				if(isset($_POST['submit'])){
 					$pesan = $_POST['kirim_pesan'];
-					$query ="INSERT INTO tb_notif (kode_pesanan,pesan,status,tgl_pesan) VALUES ($kode_pesanan,'$pesan', 'unread', CURRENT_TIMESTAMP)";
+					$query ="INSERT INTO tb_notif (id_pengguna,kode_pesanan,pesan,status,tgl_pesan) VALUES ($id_pengguna,$kode_pesanan,'$pesan', 'unread', CURRENT_TIMESTAMP)";
 					if(performQuery($query)){
 						echo "<script>
 						Swal.fire({title: 'Kirim Pesan Berhasil',text: '',icon: 'success',confirmButtonText: 'OK'

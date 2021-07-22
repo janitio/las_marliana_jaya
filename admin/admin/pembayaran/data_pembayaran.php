@@ -24,11 +24,12 @@
 
 						<?php
 						$no = 1;
-						$sql = $koneksi->query("SELECT tb_pembayaran.id_pembayaran, tb_pembayaran.foto_pembayaran, tb_pembayaran.jenis_bayar, tb_pembayaran.tgl_bayar, tb_desain.nama_desain, tb_penawaran.kode_pesanan,tb_penawaran.total_bayar, tb_pengguna.nama_pengguna FROM tb_pembayaran
-							JOIN tb_pesanan ON tb_pembayaran.id_pengguna=tb_pesanan.id_pengguna
+						$sql = $koneksi->query("SELECT tb_pembayaran.id_pembayaran, tb_pembayaran.kode_pesanan, tb_pembayaran.foto_pembayaran, tb_pembayaran.jenis_bayar, tb_pembayaran.tgl_bayar, tb_desain.nama_desain, tb_penawaran.kode_pesanan,tb_penawaran.total_bayar, tb_pengguna.nama_pengguna FROM tb_pembayaran
+							JOIN tb_pesanan ON tb_pembayaran.kode_pesanan=tb_pesanan.kode_pesanan
+							JOIN tb_pengguna ON tb_pesanan.id_pengguna=tb_pengguna.id_pengguna
 							JOIN tb_desain ON tb_pesanan.kode_desain=tb_desain.kode_desain
 							JOIN tb_penawaran ON tb_pesanan.kode_pesanan=tb_penawaran.kode_pesanan
-							JOIN tb_pengguna ON tb_pembayaran.id_pengguna=tb_pengguna.id_pengguna");
+							");
 						while ($data= $sql->fetch_assoc()) {
 							?>
 

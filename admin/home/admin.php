@@ -51,6 +51,14 @@
 ?>
 
 <?php
+	$sql = $koneksi->query("SELECT count(kode_penawaran) as penawaran from tb_penawaran where proses_tawar='diterima'");
+	while ($data= $sql->fetch_assoc()) {
+	
+		$penawaran=$data['penawaran'];
+	}
+?>
+
+<?php
 	$sql = $koneksi->query("SELECT count(id_pengguna) as pengguna from tb_pengguna");
 	while ($data= $sql->fetch_assoc()) {
 	
@@ -81,7 +89,7 @@
 	<!-- ./col -->
 	<div class="col-lg-3 col-6">
 		<!-- small box -->
-		<div class="small-box bg-success">
+		<div class="small-box bg-info">
 			<div class="inner">
 				<h3>
 					<?php echo $pesanan;  ?>
@@ -97,6 +105,24 @@
 		</div>
 	</div>
 	
+	<div class="col-lg-3 col-6">
+		<!-- small box -->
+		<div class="small-box bg-success">
+			<div class="inner">
+				<h3>
+					<?php echo $penawaran;  ?>
+				</h3>
+
+				<p>Jumlah Penawaran Yang Disetujui</p>
+			</div>
+			<div class="icon">
+				<i class="ion ion-pie-graph"></i>
+			</div>
+			<a href="#" class="small-box-footer">Informasi
+			</a>
+		</div>
+	</div>
+
 	<div class="col-lg-3 col-6">
 		<!-- small box -->
 		<div class="small-box bg-warning">

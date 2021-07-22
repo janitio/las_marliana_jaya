@@ -1,7 +1,7 @@
 <?php
 
 if(isset($_GET['kode_pesanan'])){
-    $sql_cek = "select * from tb_pesanan where kode_pesanan='".$_GET['kode_pesanan']."'";
+    $sql_cek = "SELECT * from tb_pesanan where kode_pesanan='".$_GET['kode_pesanan']."'";
     $query_cek = mysqli_query($koneksi, $sql_cek);
     $data_cek = mysqli_fetch_array($query_cek,MYSQLI_BOTH);
 }

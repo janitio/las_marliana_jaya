@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 20, 2021 at 07:57 PM
+-- Generation Time: Jul 22, 2021 at 07:49 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.2
 
@@ -64,6 +64,7 @@ INSERT INTO `tb_desain` (`kode_desain`, `nama_desain`, `deskripsi`, `harga_norma
 
 CREATE TABLE `tb_notif` (
   `id_notif` int(3) NOT NULL,
+  `id_pengguna` int(3) NOT NULL,
   `kode_pesanan` int(6) NOT NULL,
   `pesan` text NOT NULL,
   `status` varchar(10) NOT NULL,
@@ -74,8 +75,14 @@ CREATE TABLE `tb_notif` (
 -- Dumping data for table `tb_notif`
 --
 
-INSERT INTO `tb_notif` (`id_notif`, `kode_pesanan`, `pesan`, `status`, `tgl_pesan`) VALUES
-(5, 11, 'sedang kami survei', 'read', '2021-07-20 23:18:59');
+INSERT INTO `tb_notif` (`id_notif`, `id_pengguna`, `kode_pesanan`, `pesan`, `status`, `tgl_pesan`) VALUES
+(9, 7, 11, 'ngaret seminggu', 'read', '2021-07-22 11:40:42'),
+(10, 7, 15, 'ngaret 3 minggu', 'read', '2021-07-22 11:44:02'),
+(11, 7, 11, 'sedang dikirim ya', 'read', '2021-07-22 11:44:19'),
+(12, 7, 15, 'terkena macet', 'read', '2021-07-22 11:44:35'),
+(13, 8, 14, 'tunggu sebentar', 'unread', '2021-07-22 11:44:47'),
+(14, 7, 11, 'barang sudah sampe', 'read', '2021-07-22 11:48:24'),
+(15, 7, 11, 'bagus kan kualitasnya', 'unread', '2021-07-22 12:38:08');
 
 -- --------------------------------------------------------
 
@@ -85,19 +92,11 @@ INSERT INTO `tb_notif` (`id_notif`, `kode_pesanan`, `pesan`, `status`, `tgl_pesa
 
 CREATE TABLE `tb_pembayaran` (
   `id_pembayaran` int(6) NOT NULL,
-  `id_pengguna` int(3) NOT NULL,
+  `kode_pesanan` int(3) NOT NULL,
   `jenis_bayar` enum('Bayar Dimuka','Sisa Pembayaran') NOT NULL,
   `foto_pembayaran` varchar(50) NOT NULL,
   `tgl_bayar` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `tb_pembayaran`
---
-
-INSERT INTO `tb_pembayaran` (`id_pembayaran`, `id_pengguna`, `jenis_bayar`, `foto_pembayaran`, `tgl_bayar`) VALUES
-(2, 4, 'Bayar Dimuka', 'Activity-Diagram.jpg', '2021-06-14 15:35:25'),
-(3, 4, 'Sisa Pembayaran', 'Deployment-Diagram.jpg', '2021-06-14 15:36:14');
 
 -- --------------------------------------------------------
 
@@ -150,7 +149,8 @@ INSERT INTO `tb_pengguna` (`id_pengguna`, `nama_pengguna`, `username`, `password
 (1, 'Vitra Janitio', 'admin', '1', '085215637999', 'pitra_ahoy@gmail.com', '', 'Administrator'),
 (6, 'didiet anggara', 'didit', '1', '081234123111', 'didit@gmail.com', '', 'Pelanggan'),
 (7, 'Fajrillah Achmad', 'paji', '1', '081222111333', 'paji@gmail.com', 'Jalan Beo 3 No. 15 D6 Pondok Sejahtera, Kutabumi', 'Pelanggan'),
-(8, 'Risky Ramadhan', 'rijra', '1', '081222111333', 'risky@gmail.com', 'jalan komodo 2', 'Pelanggan');
+(8, 'Risky Ramadhan', 'rijra', '1', '081222111333', 'risky@gmail.com', 'jalan komodo 2', 'Pelanggan'),
+(9, 'Tio Achdama', 'tio', '1', '081444222333', 'tio@gmail.com', 'Jalan Beo 5 No. 5 D6 ', 'Pelanggan');
 
 -- --------------------------------------------------------
 
@@ -171,15 +171,7 @@ CREATE TABLE `tb_pesanan` (
 --
 
 INSERT INTO `tb_pesanan` (`kode_pesanan`, `kode_desain`, `id_pengguna`, `proses`, `tgl_pesanan`) VALUES
-(4, 2, 3, 'dibatalkan', '2021-05-19 01:18:18'),
-(5, 4, 5, 'kalkulasi', '2021-04-23 13:57:31'),
-(6, 5, 4, 'diproses', '2021-04-23 14:32:39'),
-(7, 4, 4, 'kalkulasi', '2021-05-19 01:18:55'),
-(8, 5, 4, 'diterima', '2021-05-24 01:26:47'),
-(9, 4, 5, 'diproses', '2021-07-18 23:43:49'),
-(10, 8, 5, 'diproses', '2021-07-20 22:17:02'),
 (11, 10, 7, 'kalkulasi', '2021-07-20 23:01:20'),
-(14, 9, 8, 'kalkulasi', '2021-07-21 00:13:38'),
 (15, 14, 7, 'kalkulasi', '2021-07-21 00:32:41');
 
 -- --------------------------------------------------------
@@ -201,7 +193,7 @@ CREATE TABLE `tb_profil` (
 --
 
 INSERT INTO `tb_profil` (`id_profil`, `nama_profil`, `alamat`, `nama_pemilik`, `ttd_pemilik`) VALUES
-(1, 'MAILIANA JAYA 2', 'KOTABUMI, TANGERANG - BANTEN', 'Sawardi', 'ttd vitra_150px150p.jpg');
+(1, 'MAILIANA JAYA 2', 'KOTABUMI, TANGERANG - BANTEN', 'Mawardi', 'ttd vitra_150px150p.jpg');
 
 -- --------------------------------------------------------
 
@@ -302,13 +294,13 @@ ALTER TABLE `tb_desain`
 -- AUTO_INCREMENT for table `tb_notif`
 --
 ALTER TABLE `tb_notif`
-  MODIFY `id_notif` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_notif` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `tb_pembayaran`
 --
 ALTER TABLE `tb_pembayaran`
-  MODIFY `id_pembayaran` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_pembayaran` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `tb_penawaran`
@@ -320,13 +312,13 @@ ALTER TABLE `tb_penawaran`
 -- AUTO_INCREMENT for table `tb_pengguna`
 --
 ALTER TABLE `tb_pengguna`
-  MODIFY `id_pengguna` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_pengguna` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `tb_pesanan`
 --
 ALTER TABLE `tb_pesanan`
-  MODIFY `kode_pesanan` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `kode_pesanan` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `tb_profil`

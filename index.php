@@ -1,6 +1,8 @@
 <?php
      //Mulai Sesion
 session_start();
+include "admin/inc/koneksi.php";
+
 if (isset($_SESSION["ses_username"])){
 
   $data_id = $_SESSION["ses_id"];
@@ -8,8 +10,6 @@ if (isset($_SESSION["ses_username"])){
   $data_user = $_SESSION["ses_username"];
   $data_level = $_SESSION["ses_level"];
 }
-
-include "admin/inc/koneksi.php";
 
 define('DBINFO', 'mysql:host=localhost;dbname=las_mailiana');
 define('DBUSER','root');
@@ -37,6 +37,7 @@ while ($data= $sql->fetch_assoc()) {
 }
 
 $sql2 = $koneksi->query("SELECT * from tb_desain");
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -93,7 +94,7 @@ $sql2 = $koneksi->query("SELECT * from tb_desain");
           <li class="nav-item dropdown">
             <a class="nav-link" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="bi bi-bell-fill" font-size="36px"></i>
               <?php
-              $query = "SELECT * from tb_notif where status = 'unread' order by tgl_pesan DESC";
+              $query = "SELECT * from tb_notif where status = 'unread' AND id_pengguna=$data_id order by tgl_pesan DESC";
               if(count(fetchAll($query))>0){
                 ?>
                 <span class="badge badge-dark"><?php echo count(fetchAll($query)); ?></span>
@@ -103,7 +104,7 @@ $sql2 = $koneksi->query("SELECT * from tb_desain");
             </a>
             <div class="dropdown-menu" aria-labelledby="dropdown01">
               <?php
-              $query = "SELECT * from tb_notif order by tgl_pesan DESC";
+              $query = "SELECT * from tb_notif where id_pengguna=$data_id order by tgl_pesan DESC";
               if(count(fetchAll($query))>0){
                foreach(fetchAll($query) as $data){
                 ?>
@@ -116,7 +117,7 @@ $sql2 = $koneksi->query("SELECT * from tb_desain");
                 " class="dropdown-item" href="kirimpesan_pelanggan.php?kode_pesanan=<?=$data['kode_pesanan']; ?>">
                 <small><i><?php echo date('F j, Y, g:i a',strtotime($data['tgl_pesan'])) ?></i></small><br>
                 <?php 
-                echo "Ada pesan untuk Anda.";
+                echo "Anda memiliki pesan.";
                 ?>
               </a>
               <div class="dropdown-divider"></div>

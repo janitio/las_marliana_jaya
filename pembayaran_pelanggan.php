@@ -191,8 +191,8 @@ $pindah = move_uploaded_file($sumber, $target.$nama_file);
 if (isset ($_POST['kirim'])){
 
   if(!empty($sumber)){
-    $sql_simpan = "INSERT INTO tb_pembayaran (id_pengguna,jenis_bayar,foto_pembayaran,tgl_bayar) VALUES (
-    $data_id,
+    $sql_simpan = "INSERT INTO tb_pembayaran (kode_pesanan,jenis_bayar,foto_pembayaran,tgl_bayar) VALUES (
+    $kode_pesanan,
     '".$_POST['jenis_bayar']."',
     '".$nama_file."',
     CURRENT_TIMESTAMP)";
@@ -203,14 +203,14 @@ if (isset ($_POST['kirim'])){
       echo "<script>
       Swal.fire({title: 'Kirim Bukti Pembayaran Berhasil',text: '',icon: 'success',confirmButtonText: 'OK'
       }).then((result) => {if (result.value){
-        window.location = 'index.php?page=data-desain';
+        window.location = 'index.php';
       }
     })</script>";
   }else{
     echo "<script>
     Swal.fire({title: 'Kirim Bukti Pembayarana Gagal',text: '',icon: 'error',confirmButtonText: 'OK'
     }).then((result) => {if (result.value){
-      window.location = 'index.php?page=add-desain';
+      window.location = 'pembayaran_pelanggan.php?kode_pesanan=<?=$kode_pesanan; ?>';
     }
   })</script>";
 }
@@ -219,7 +219,7 @@ if (isset ($_POST['kirim'])){
   Swal.fire({title: 'Gagal, Foto Wajib Diisi',text: '',icon: 'error',confirmButtonText: 'OK'
   }).then((result) => {
     if (result.value) {
-      window.location = 'index.php?page=add-desain';
+      window.location = 'pembayaran_pelanggan.php?kode_pesanan=<?=$kode_pesanan; ?>';
     }
   })</script>";
 }
