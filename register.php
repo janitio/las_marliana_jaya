@@ -1,5 +1,6 @@
 <?php
 include "admin/inc/koneksi.php";
+include "admin/inc/user.php";
 
 ?>
 <!DOCTYPE html>
@@ -13,6 +14,9 @@ include "admin/inc/koneksi.php";
   <link rel="stylesheet" href="https://cdn.materialdesignicons.com/4.8.95/css/materialdesignicons.min.css">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
   <link rel="stylesheet" href="login/assets/css/login.css">
+
+  <!-- Alert -->
+  <script src="admin/plugins/alert.js"></script>
 </head>
 <body>
   <main>
@@ -46,12 +50,12 @@ include "admin/inc/koneksi.php";
                 <label for="alamat_pengguna">Alamat Lengkap</label>
                 <input type="text" name="alamat_pengguna" id="alamat_pengguna" class="form-control" placeholder="cantumkan alamat selengkapnya" required>
               </div>
-               <button type="submit" class="btn btn-block login-btn" name="daftar" title="Daftar">
+              <button type="submit" class="btn btn-block login-btn" name="daftar" title="Daftar">
                 <b>Daftar</b>
               </button>
 
             </form>
-           <p class="login-wrapper-footer-text"><a href="login.php" class="text-reset">Ke halaman Login</a></p>
+            <p class="login-wrapper-footer-text"><a href="login.php" class="text-reset">Ke halaman Login</a></p>
           </div>
         </div>
         <div class="col-sm-6 px-0 d-none d-sm-block">
@@ -72,32 +76,48 @@ include "admin/inc/koneksi.php";
 </html>
 <?php
 if (isset($_POST['daftar'])) {  
+  $username=$_POST['username'];
+  $password=$_POST['password'];
 
-  //query login
-  $sql_simpan = "INSERT INTO tb_pengguna (nama_pengguna, username, password, no_hp, email,alamat_pengguna, level) VALUES (
-  '".$_POST['nama']."',
-  '".$_POST['username']."',
-  '".$_POST['password']."',
-  '".$_POST['no_hp']."',
-  '".$_POST['email']."',
-  '".$_POST['alamat_pengguna']."',
-  'Pelanggan')";
-  $query_simpan = mysqli_query($koneksi, $sql_simpan);
-  mysqli_close($koneksi);
+  if(!empty(trim($username))&& !empty(trim($password))){
+            //if(regis_cek_nama($nama)){
+    if(cek_nama($username)==0){
+                //query login
+      $sql_simpan = "INSERT INTO tb_pengguna (nama_pengguna, username, password, no_hp, email,alamat_pengguna, level) VALUES (
+      '".$_POST['nama']."',
+      '$username',
+      '$password',
+      '".$_POST['no_hp']."',
+      '".$_POST['email']."',
+      '".$_POST['alamat_pengguna']."',
+      'Pelanggan')";
+      $query_simpan = mysqli_query($koneksi, $sql_simpan);
+      mysqli_close($koneksi);
 
-  if ($query_simpan){
+      if ($query_simpan){
 
-    echo "<script>
-    Swal.fire({title: 'Daftar Akun Berhasil',text: '',icon: 'success',confirmButtonText: 'OK'
-    }).then((result) => {if (result.value)
-      {window.location = 'login.php';}
-    })</script>";
-  }else{
-    echo "<script>
-    Swal.fire({title: 'Daftar Akun Gagal',text: '',icon: 'error',confirmButtonText: 'OK'
-    }).then((result) => {if (result.value)
-      {window.location = 'register.php';}
-    })</script>";
-  }
-}
-?>
+        echo "<script>
+        Swal.fire({title: 'Daftar Akun Berhasil',text: 'Silahkan Login Kembali',icon: 'success',confirmButtonText: 'OK'
+        }).then((result) => {if (result.value)
+          {window.location = 'login.php';}
+        })</script>";
+      }else{
+        echo "<script>
+        Swal.fire({title: 'Daftar Akun Gagal',text: 'Ada kesalahan',icon: 'error',confirmButtonText: 'OK'
+        }).then((result) => {if (result.value)
+          {window.location = 'register.php';}
+        })</script>";
+      }             
+      }else  echo "<script>
+      Swal.fire({title: 'Daftar Akun Gagal',text: 'Username sudah terdaftar',icon: 'error',confirmButtonText: 'OK'
+      }).then((result) => {if (result.value)
+        {window.location = 'register.php';}
+      })</script>";
+      }else  echo "<script>
+      Swal.fire({title: 'Daftar Akun Gagal',text: 'Kolom tidak boleh kosong',icon: 'error',confirmButtonText: 'OK'
+      }).then((result) => {if (result.value)
+        {window.location = 'register.php';}
+      })</script>";
+
+    }
+    ?>

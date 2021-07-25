@@ -81,56 +81,79 @@ while ($data= $sql->fetch_assoc()) {
 	</header><!-- End Header -->
 
 	<main id="main">
-		<section class="inner-page pt-3">
-			<div class="container">
-				<div class="card-body">
-					<?php
 
-					define('DBINFO', 'mysql:host=localhost;dbname=las_mailiana');
-					define('DBUSER','root');
-					define('DBPASS','');
+		<?php
+		if(isset($data_id)){
+			$sql_cek = "SELECT id_notif FROM tb_notif WHERE id_pengguna=$data_id";
+			$query_cek = mysqli_query($koneksi, $sql_cek);
+			$data2_cek = mysqli_fetch_array($query_cek,MYSQLI_BOTH);
 
-					function fetchAll($query){
-						$con = new PDO(DBINFO, DBUSER, DBPASS);
-						$stmt = $con->query($query);
-						return $stmt->fetchAll();
+			if (empty($data2_cek['id_notif'])) {
+				echo "<script>
+				Swal.fire({title: 'Admin tidak mengirim pesan apapun',text: 'Bila ada kendala pada proses pesanan anda, mungkin Admin akan mengirim suatu pesan',icon: 'info',confirmButtonText: 'OK'
+				}).then((result) => {
+					if (result.value) {
+						window.location = 'pesanan_pelanggan.php?id_pelanggan=<?=$data_id?>';
 					}
-					function performQuery($query){
-						$con = new PDO(DBINFO, DBUSER, DBPASS);
-						$stmt = $con->prepare($query);
-						if($stmt->execute()){
-							return true;
-						}else{
-							return false;
-						}
-					}
+				})</script>";
+			}else{
 
-					$query ="UPDATE tb_notif SET status = 'read' WHERE kode_pesanan = $kode_pesanan;";
-					performQuery($query);
+				?>
 
-					$sql_cek = $koneksi->query("SELECT * FROM tb_notif WHERE kode_pesanan=$kode_pesanan");
+				<section class="inner-page pt-3">
+					<div class="container">
+						<div class="card-body">
+							<?php
 
-					while ($data= $sql_cek->fetch_assoc()) {
-						?>
-						<div class="table-responsive">
-							<br>
-							<table id="example1" class="table table-bordered table-striped">
-								<tbody>
-									<tr>
-										<td>
-											<?php echo $data['pesan']; ?> (<?php echo date('F j, Y, g:i a',strtotime($data['tgl_pesan'])); ?>)
-										</td>
-									</tr>
-								</tbody>
-							</table>
+							define('DBINFO', 'mysql:host=localhost;dbname=las_mailiana');
+							define('DBUSER','root');
+							define('DBPASS','');
+
+							function fetchAll($query){
+								$con = new PDO(DBINFO, DBUSER, DBPASS);
+								$stmt = $con->query($query);
+								return $stmt->fetchAll();
+							}
+							function performQuery($query){
+								$con = new PDO(DBINFO, DBUSER, DBPASS);
+								$stmt = $con->prepare($query);
+								if($stmt->execute()){
+									return true;
+								}else{
+									return false;
+								}
+							}
+
+							$query ="UPDATE tb_notif SET status = 'read' WHERE kode_pesanan = $kode_pesanan;";
+							performQuery($query);
+
+							$sql_cek = $koneksi->query("SELECT * FROM tb_notif WHERE kode_pesanan=$kode_pesanan");
+
+							while ($data= $sql_cek->fetch_assoc()) {
+								?>
+								<div class="table-responsive">
+									<br>
+									<table id="example1" class="table table-bordered table-striped">
+										<tbody>
+											<tr>
+												<td>
+													<?php echo $data['pesan']; ?> (<?php echo date('F j, Y, g:i a',strtotime($data['tgl_pesan'])); ?>)
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+								<?php
+							}
+							?>
+							<a href="pesanan_pelanggan.php?id_pelanggan=<?=$data_id?>" title="Batal" class="btn btn-secondary">Kembali</a>
 						</div>
-						<?php
-					}
-					?>
-					<a href="pesanan_pelanggan.php?id_pelanggan=<?=$data_id?>" title="Batal" class="btn btn-secondary">Kembali</a>
-				</div>
-			</div>
-		</section>
+					</div>
+				</section>
+				<?php
+			}
+		}
+		?>
 	</main><!-- End #main -->
 
 	<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>

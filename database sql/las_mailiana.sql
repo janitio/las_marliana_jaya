@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 22, 2021 at 07:49 AM
+-- Generation Time: Jul 25, 2021 at 06:43 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.2
 
@@ -82,7 +82,7 @@ INSERT INTO `tb_notif` (`id_notif`, `id_pengguna`, `kode_pesanan`, `pesan`, `sta
 (12, 7, 15, 'terkena macet', 'read', '2021-07-22 11:44:35'),
 (13, 8, 14, 'tunggu sebentar', 'unread', '2021-07-22 11:44:47'),
 (14, 7, 11, 'barang sudah sampe', 'read', '2021-07-22 11:48:24'),
-(15, 7, 11, 'bagus kan kualitasnya', 'unread', '2021-07-22 12:38:08');
+(15, 7, 11, 'bagus kan kualitasnya', 'read', '2021-07-22 12:38:08');
 
 -- --------------------------------------------------------
 
@@ -150,7 +150,9 @@ INSERT INTO `tb_pengguna` (`id_pengguna`, `nama_pengguna`, `username`, `password
 (6, 'didiet anggara', 'didit', '1', '081234123111', 'didit@gmail.com', '', 'Pelanggan'),
 (7, 'Fajrillah Achmad', 'paji', '1', '081222111333', 'paji@gmail.com', 'Jalan Beo 3 No. 15 D6 Pondok Sejahtera, Kutabumi', 'Pelanggan'),
 (8, 'Risky Ramadhan', 'rijra', '1', '081222111333', 'risky@gmail.com', 'jalan komodo 2', 'Pelanggan'),
-(9, 'Tio Achdama', 'tio', '1', '081444222333', 'tio@gmail.com', 'Jalan Beo 5 No. 5 D6 ', 'Pelanggan');
+(9, 'Tio Achdama', 'tio', '1', '081444222333', 'tio@gmail.com', 'Jalan Beo 5 No. 5 D6 ', 'Pelanggan'),
+(10, 'Ilham Ahmad', 'ilham', '1', '081234123112', 'ilham@gmail.com', 'jalan mawar 3 no 12', 'Pelanggan'),
+(11, 'Iman Hakim', 'iman', '1', '081444222333', 'iman@gmail.com', 'Jalan Beo 3 No. 12 D6 Pondok Sejahtera', 'Pelanggan');
 
 -- --------------------------------------------------------
 
@@ -172,7 +174,9 @@ CREATE TABLE `tb_pesanan` (
 
 INSERT INTO `tb_pesanan` (`kode_pesanan`, `kode_desain`, `id_pengguna`, `proses`, `tgl_pesanan`) VALUES
 (11, 10, 7, 'kalkulasi', '2021-07-20 23:01:20'),
-(15, 14, 7, 'kalkulasi', '2021-07-21 00:32:41');
+(15, 14, 7, 'kalkulasi', '2021-07-21 00:32:41'),
+(17, 11, 10, 'diproses', '2021-07-25 20:10:25'),
+(18, 16, 10, 'diproses', '2021-07-25 20:22:52');
 
 -- --------------------------------------------------------
 
@@ -312,13 +316,13 @@ ALTER TABLE `tb_penawaran`
 -- AUTO_INCREMENT for table `tb_pengguna`
 --
 ALTER TABLE `tb_pengguna`
-  MODIFY `id_pengguna` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_pengguna` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `tb_pesanan`
 --
 ALTER TABLE `tb_pesanan`
-  MODIFY `kode_pesanan` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `kode_pesanan` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `tb_profil`

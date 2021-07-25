@@ -28,6 +28,7 @@ if(isset($_GET['kode_desain'])){
 		$nama_desain=$data2['nama_desain'];
 		$foto_desain=$data2['foto_desain'];
 		$kode_desain=$data2['kode_desain'];
+		$harga=$data2['harga_normal'];
 	}
 }
 ?>
@@ -107,6 +108,7 @@ if(isset($_GET['kode_desain'])){
       				<li><strong>Nomor Handphone</strong>: <?=$no_hp; ?></li>
       				<li><strong>Email</strong>: <?=$email; ?></li>
       				<li><strong>Nama Desain</strong>: <?=$nama_desain; ?></li>
+      				<li><strong>Harga Normal</strong>: Rp. <?= number_format($harga); ?> (Harga akan berubah sesuai hasil kalkulasi dari pesanan Anda)</li>
       				<li><strong>Alamat</strong>: <?=$alamat_pengguna; ?><br>
       				</li>
       				<li>

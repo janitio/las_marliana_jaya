@@ -141,7 +141,7 @@ $ttd_pemilik=$profil_cek['ttd_pemilik'];
 
 			if (empty($data2_cek['kode_penawaran'])) {
 				echo "<script>
-				Swal.fire({title: 'Penawaran Belum Ada, Masih Diproses',text: 'Harap Tunggu dan cek berkala pada kolom proses pesanan',icon: 'error',confirmButtonText: 'OK'
+				Swal.fire({title: 'Penawaran Belum Ada, Masih Diproses',text: 'Harap Tunggu dan cek berkala pada kolom proses pesanan',icon: 'info',confirmButtonText: 'OK'
 				}).then((result) => {
 					if (result.value) {
 						window.location = 'pesanan_pelanggan.php?id_pelanggan=<?=$data_id?>';
@@ -278,14 +278,32 @@ $ttd_pemilik=$profil_cek['ttd_pemilik'];
 
 												<div class="container center">
 													<div class="col-md-8 col-md-offset-2">
-														<br><br>
+														<br>
+														<br><h4>Tanda Tangan :</h4>
 														<?php echo isset($msg)?$msg:''; ?>
 														<hr>
 														<div id="canvasDiv"></div>
 														<br>
-														<button type="button" class="btn btn-warning" id="reset-btn">Hapus</button>
-														<button type="button" class="btn btn-success" id="btn-save">Setujui</button>
-														<a href="aksi_batalpenawaran.php?kode_penawaran=<?=$data_cek['kode_penawaran'];?>" title="Batal" class="btn btn-danger">Batalkan</a>
+														<?php
+														$sql_cek = "SELECT proses_tawar FROM tb_penawaran WHERE kode_pesanan='".$_GET['kode_pesanan']."'";
+														$query_cek = mysqli_query($koneksi, $sql_cek);
+														$data2_cek = mysqli_fetch_array($query_cek,MYSQLI_BOTH);
+
+														if($data2_cek['proses_tawar']=='dibatalkan' || $data2_cek['proses_tawar']=='diterima'){
+															?>
+															<button type="button" class="btn btn-warning" id="reset-btn" disabled>Hapus</button>
+															<button type="button" class="btn btn-success" id="btn-save" disabled>Setujui</button>
+															<a href="aksi_batalpenawaran.php?kode_penawaran=<?=$data_cek['kode_penawaran'];?>" title="Batal" class="btn btn-danger disabled" >Batalkan</a>
+
+															<?php
+														}else{
+															?>
+															<button type="button" class="btn btn-warning" id="reset-btn" >Hapus</button>
+															<button type="button" class="btn btn-success" id="btn-save">Setujui</button>
+															<a href="aksi_batalpenawaran.php?kode_penawaran=<?=$data_cek['kode_penawaran'];?>" title="Batal" class="btn btn-danger">Batalkan</a>
+															<?php
+														}
+														?>
 														<a href="admin/report/cetak_penawaran.php?kode_penawaran=<?=$data_cek['kode_penawaran']; ?>" target="_blank" title="Lihat" class="btn btn-primary">Cetak</a>
 														<a href="pesanan_pelanggan.php?id_pelanggan=<?=$data_id?>" title="Batal" class="btn btn-secondary">Kembali</a>
 													</div>

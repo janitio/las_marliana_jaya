@@ -1,6 +1,6 @@
 <?php
 include "admin/inc/koneksi.php";
-
+include "admin/inc/user.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,6 +13,9 @@ include "admin/inc/koneksi.php";
   <link rel="stylesheet" href="https://cdn.materialdesignicons.com/4.8.95/css/materialdesignicons.min.css">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
   <link rel="stylesheet" href="login/assets/css/login.css">
+
+  <!-- Alert -->
+  <script src="admin/plugins/alert.js"></script>
 </head>
 <body>
   <main>
@@ -62,43 +65,59 @@ if (isset($_POST['login'])) {
   $username=mysqli_real_escape_string($koneksi,$_POST['username']);
   $password=mysqli_real_escape_string($koneksi,$_POST['password']);
 
-  //query login
-  $sql_login = "SELECT * FROM tb_pengguna WHERE BINARY username='$username' AND password='$password'";
-  $query_login = mysqli_query($koneksi, $sql_login);
-  $data_login = mysqli_fetch_array($query_login,MYSQLI_BOTH);
-  $jumlah_login = mysqli_num_rows($query_login);
+  if(!empty(trim($username))&& !empty(trim($password))){
+            //if(login_cek_nama($nama)){
+    if(cek_nama($username)!=0){
+                //menguji nama kembar
+      if(cek_data($username,$password)) 
+
+                  //query login
+        $sql_login = "SELECT * FROM tb_pengguna WHERE BINARY username='$username' AND password='$password'";
+      $query_login = mysqli_query($koneksi, $sql_login);
+      $data_login = mysqli_fetch_array($query_login,MYSQLI_BOTH);
+      $jumlah_login = mysqli_num_rows($query_login);
 
 
-  if ($jumlah_login ==1 ){
-    session_start();
-    $_SESSION["ses_id"]=$data_login["id_pengguna"];
-    $_SESSION["ses_nama"]=$data_login["nama_pengguna"];
-    $_SESSION["ses_username"]=$data_login["username"];
-    $_SESSION["ses_password"]=$data_login["password"];
-    $_SESSION["ses_no_hp"]=$data_login["no_hp"];
-    $_SESSION["ses_email"]=$data_login["email"];
-    $_SESSION["ses_level"]=$data_login["level"];
+      if ($jumlah_login ==1 ){
+        session_start();
+        $_SESSION["ses_id"]=$data_login["id_pengguna"];
+        $_SESSION["ses_nama"]=$data_login["nama_pengguna"];
+        $_SESSION["ses_username"]=$data_login["username"];
+        $_SESSION["ses_password"]=$data_login["password"];
+        $_SESSION["ses_no_hp"]=$data_login["no_hp"];
+        $_SESSION["ses_email"]=$data_login["email"];
+        $_SESSION["ses_level"]=$data_login["level"];
 
-    if($_SESSION["ses_level"]=='Administrator'){
+        if($_SESSION["ses_level"]=='Administrator'){
 
-    echo "<script>
-    Swal.fire({title: 'Login Berhasil',text: '',icon: 'success',confirmButtonText: 'OK'
-    }).then((result) => {if (result.value)
-      {window.location = 'admin/index.php';}
-    })</script>";
-  }else{
-    echo "<script>
-    Swal.fire({title: 'Login Berhasil',text: '',icon: 'success',confirmButtonText: 'OK'
-    }).then((result) => {if (result.value)
-      {window.location = 'index.php';}
-    })</script>";
-  }
-  }else{
-    echo "<script>
-    Swal.fire({title: 'Login Gagal',text: '',icon: 'error',confirmButtonText: 'OK'
-    }).then((result) => {if (result.value)
-      {window.location = 'login.php';}
-    })</script>";
-  }
-}
-?>
+          echo "<script>
+          Swal.fire({title: 'Login Berhasil',text: '',icon: 'success',confirmButtonText: 'OK'
+          }).then((result) => {if (result.value)
+            {window.location = 'admin/index.php';}
+          })</script>";
+        }else{
+          echo "<script>
+          Swal.fire({title: 'Login Berhasil',text: '',icon: 'success',confirmButtonText: 'OK'
+          }).then((result) => {if (result.value)
+            {window.location = 'index.php';}
+          })</script>";
+        }
+      }else{
+        echo "<script>
+        Swal.fire({title: 'Login Gagal',text: 'Ada kesalahan',icon: 'error',confirmButtonText: 'OK'
+        }).then((result) => {if (result.value)
+          {window.location = 'login.php';}
+        })</script>";
+      }
+      }else echo "<script>
+      Swal.fire({title: 'Login Gagal',text: 'Username / akun anda tidak ada, harap cek kembali akun anda / registrasi terlebih dahulu',icon: 'error',confirmButtonText: 'OK'
+      }).then((result) => {if (result.value)
+        {window.location = 'login.php';}
+      })</script>";
+      }else echo "<script>
+      Swal.fire({title: 'Login Gagal',text: 'Kolom tidak boleh kosong',icon: 'error',confirmButtonText: 'OK'
+      }).then((result) => {if (result.value)
+        {window.location = 'login.php';}
+      })</script>";
+    }
+    ?>
