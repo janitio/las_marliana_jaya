@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 25, 2021 at 06:43 PM
+-- Generation Time: Jul 26, 2021 at 06:56 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.2
 
@@ -98,6 +98,14 @@ CREATE TABLE `tb_pembayaran` (
   `tgl_bayar` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `tb_pembayaran`
+--
+
+INSERT INTO `tb_pembayaran` (`id_pembayaran`, `kode_pesanan`, `jenis_bayar`, `foto_pembayaran`, `tgl_bayar`) VALUES
+(6, 11, 'Bayar Dimuka', 'web_marliana_reg - Window.png', '2021-07-26 20:48:57'),
+(7, 11, 'Sisa Pembayaran', 'Activity-Diagram.jpg', '2021-07-26 20:50:08');
+
 -- --------------------------------------------------------
 
 --
@@ -122,7 +130,9 @@ CREATE TABLE `tb_penawaran` (
 INSERT INTO `tb_penawaran` (`kode_penawaran`, `kode_pesanan`, `biaya_dp`, `sisa_bayar`, `total_bayar`, `proses_tawar`, `ttd_pelanggan`, `tgl_tawar`) VALUES
 (10, 11, 300000, 700000, 1000000, 'diterima', '11Fajrillah Achmad60f7084f9cbb0.png', '2021-07-21 00:30:55'),
 (11, 14, 240000, 560000, 800000, 'diproses', '', '2021-07-21 00:34:53'),
-(12, 15, 210000, 490000, 700000, 'dibatalkan', '', '2021-07-21 00:47:13');
+(12, 15, 210000, 490000, 700000, 'dibatalkan', '', '2021-07-21 00:47:13'),
+(13, 17, 255000, 595000, 850000, 'diterima', '17Ilham Ahmad60fd96f746fc7.png', '2021-07-25 23:53:11'),
+(14, 19, 210000, 490000, 700000, 'diterima', '19Vitra60fec266b09e1.png', '2021-07-26 21:10:46');
 
 -- --------------------------------------------------------
 
@@ -152,7 +162,8 @@ INSERT INTO `tb_pengguna` (`id_pengguna`, `nama_pengguna`, `username`, `password
 (8, 'Risky Ramadhan', 'rijra', '1', '081222111333', 'risky@gmail.com', 'jalan komodo 2', 'Pelanggan'),
 (9, 'Tio Achdama', 'tio', '1', '081444222333', 'tio@gmail.com', 'Jalan Beo 5 No. 5 D6 ', 'Pelanggan'),
 (10, 'Ilham Ahmad', 'ilham', '1', '081234123112', 'ilham@gmail.com', 'jalan mawar 3 no 12', 'Pelanggan'),
-(11, 'Iman Hakim', 'iman', '1', '081444222333', 'iman@gmail.com', 'Jalan Beo 3 No. 12 D6 Pondok Sejahtera', 'Pelanggan');
+(11, 'Iman Hakim', 'iman', '1', '081444222333', 'iman@gmail.com', 'Jalan Beo 3 No. 12 D6 Pondok Sejahtera', 'Pelanggan'),
+(12, 'Vitra Janitio', 'pitra', '1', '081222111333', 'pitra@gmail.com', 'Jalan Beo 3 No. 15 D6 Pondok Sejahtera, Kutabumi', 'Pelanggan');
 
 -- --------------------------------------------------------
 
@@ -164,7 +175,7 @@ CREATE TABLE `tb_pesanan` (
   `kode_pesanan` int(6) NOT NULL,
   `kode_desain` int(3) NOT NULL,
   `id_pengguna` int(3) NOT NULL,
-  `proses` enum('diproses','survei','kalkulasi','pengerjaan','dikirim','diterima','dibatalkan') NOT NULL,
+  `proses_pesanan` enum('diproses','survei','kalkulasi','pengerjaan','dikirim','diterima','dibatalkan') NOT NULL,
   `tgl_pesanan` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -172,11 +183,12 @@ CREATE TABLE `tb_pesanan` (
 -- Dumping data for table `tb_pesanan`
 --
 
-INSERT INTO `tb_pesanan` (`kode_pesanan`, `kode_desain`, `id_pengguna`, `proses`, `tgl_pesanan`) VALUES
+INSERT INTO `tb_pesanan` (`kode_pesanan`, `kode_desain`, `id_pengguna`, `proses_pesanan`, `tgl_pesanan`) VALUES
 (11, 10, 7, 'kalkulasi', '2021-07-20 23:01:20'),
 (15, 14, 7, 'kalkulasi', '2021-07-21 00:32:41'),
-(17, 11, 10, 'diproses', '2021-07-25 20:10:25'),
-(18, 16, 10, 'diproses', '2021-07-25 20:22:52');
+(17, 11, 10, 'kalkulasi', '2021-07-25 20:10:25'),
+(18, 16, 10, 'diproses', '2021-07-25 20:22:52'),
+(19, 14, 12, 'survei', '2021-07-26 20:36:20');
 
 -- --------------------------------------------------------
 
@@ -208,7 +220,7 @@ INSERT INTO `tb_profil` (`id_profil`, `nama_profil`, `alamat`, `nama_pemilik`, `
 CREATE TABLE `tb_track_pesanan` (
   `kode_track_pesanan` int(4) NOT NULL,
   `kode_pesanan` int(6) NOT NULL,
-  `proses` enum('diproses','survei','kalkulasi','pengerjaan','dikirim','diterima','dibatalkan') NOT NULL,
+  `proses_track` enum('diproses','survei','kalkulasi','pengerjaan','dikirim','diterima','dibatalkan') NOT NULL,
   `timestamp` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -216,7 +228,7 @@ CREATE TABLE `tb_track_pesanan` (
 -- Dumping data for table `tb_track_pesanan`
 --
 
-INSERT INTO `tb_track_pesanan` (`kode_track_pesanan`, `kode_pesanan`, `proses`, `timestamp`) VALUES
+INSERT INTO `tb_track_pesanan` (`kode_track_pesanan`, `kode_pesanan`, `proses_track`, `timestamp`) VALUES
 (1, 4, 'kalkulasi', '2021-04-17 22:23:48'),
 (2, 4, 'pengerjaan', '2021-04-17 22:24:11'),
 (3, 4, 'dibatalkan', '2021-05-19 01:18:18'),
@@ -230,7 +242,11 @@ INSERT INTO `tb_track_pesanan` (`kode_track_pesanan`, `kode_pesanan`, `proses`, 
 (11, 11, 'survei', '2021-07-20 23:12:39'),
 (12, 14, 'kalkulasi', '2021-07-21 00:35:29'),
 (13, 15, 'kalkulasi', '2021-07-21 00:35:40'),
-(14, 11, 'kalkulasi', '2021-07-21 00:35:52');
+(14, 11, 'kalkulasi', '2021-07-21 00:35:52'),
+(15, 17, 'diproses', '2021-07-25 23:45:40'),
+(16, 17, 'survei', '2021-07-25 23:45:53'),
+(17, 17, 'kalkulasi', '2021-07-25 23:46:06'),
+(18, 19, 'survei', '2021-07-26 21:06:59');
 
 --
 -- Indexes for dumped tables
@@ -304,25 +320,25 @@ ALTER TABLE `tb_notif`
 -- AUTO_INCREMENT for table `tb_pembayaran`
 --
 ALTER TABLE `tb_pembayaran`
-  MODIFY `id_pembayaran` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_pembayaran` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `tb_penawaran`
 --
 ALTER TABLE `tb_penawaran`
-  MODIFY `kode_penawaran` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `kode_penawaran` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `tb_pengguna`
 --
 ALTER TABLE `tb_pengguna`
-  MODIFY `id_pengguna` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_pengguna` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `tb_pesanan`
 --
 ALTER TABLE `tb_pesanan`
-  MODIFY `kode_pesanan` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `kode_pesanan` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `tb_profil`
@@ -334,7 +350,7 @@ ALTER TABLE `tb_profil`
 -- AUTO_INCREMENT for table `tb_track_pesanan`
 --
 ALTER TABLE `tb_track_pesanan`
-  MODIFY `kode_track_pesanan` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `kode_track_pesanan` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

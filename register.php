@@ -24,6 +24,7 @@ include "admin/inc/user.php";
       <div class="row">
         <div class="col-sm-6 login-section-wrapper">
           <div class="login-wrapper my-auto">
+            <h1 class="login-title">Daftar</h1>
             <form action="" method="post">
               <div class="form-group">
                 <label for="nama">Nama Lengkap</label>
@@ -55,7 +56,7 @@ include "admin/inc/user.php";
               </button>
 
             </form>
-            <p class="login-wrapper-footer-text"><a href="login.php" class="text-reset">Ke halaman Login</a></p>
+            <p class="login-wrapper-footer-text"><a href="login.php" class="text-reset">Kembali ke halaman Masuk</a></p>
           </div>
         </div>
         <div class="col-sm-6 px-0 d-none d-sm-block">

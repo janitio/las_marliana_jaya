@@ -163,7 +163,7 @@ date_default_timezone_set('Asia/Jakarta');
 
 if (isset ($_POST['pesan'])){
 
-	$sql_simpan = "INSERT INTO tb_pesanan (kode_desain, id_pengguna, proses, tgl_pesanan) VALUES (
+	$sql_simpan = "INSERT INTO tb_pesanan (kode_desain, id_pengguna, proses_pesanan, tgl_pesanan) VALUES (
 	$kode_desain,
 	$id_pengguna,
 	'diproses',

@@ -65,7 +65,7 @@
 										class="btn btn-info btn-sm">
 										<i class="fa fa-comment-dots">Beri Pesan</i>
 									</a>
-									<a href="?page=del-pesanan&kode_pesanan=<?php echo $data['kode_pesanan']; ?>" title="hapus"
+									<a href="?page=del-pesanan&kode_pesanan=<?php echo $data['kode_pesanan']; ?>" onclick="return confirm('Apakah anda yakin hapus data ini ?')" title="hapus"
 										class="btn btn-danger btn-sm">
 										<i class="fa fa-trash">Hapus Data</i>
 									</a>

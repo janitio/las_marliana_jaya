@@ -129,7 +129,7 @@ $sql2 = $koneksi->query("SELECT * from tb_desain");
          ?>
        </div>
      </li>
-     <li><a href="ubah_profil.php?id_pelanggan=<?=$data_id?>"><?= $_SESSION['ses_nama'];?>
+     <li><a href="ubah_profil.php?id_pelanggan=<?=$data_id?>"><?=$data_nama;?>
      <li><a href="pesanan_pelanggan.php?id_pelanggan=<?= $data_id?>">Pesanan</a></li>
      <li><a href="admin/logout.php">Keluar</a></li>
    </li>

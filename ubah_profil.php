@@ -33,7 +33,7 @@ if(isset($data_id)){
 	<meta charset="utf-8">
 	<meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-	<title>Marliana Jaya 2</title>
+	<title><?=$nama; ?></title>
 	<meta content="" name="description">
 	<meta content="" name="keywords">
 
@@ -217,7 +217,7 @@ if (isset ($_POST['Ubah'])){
 
 		if ($query_ubah) {
 			echo "<script>
-			Swal.fire({title: 'Ubah Data Berhasil',text: 'Silahkan Login Kembali',icon: 'success',confirmButtonText: 'OK'
+			Swal.fire({title: 'Ubah Data Berhasil',text: 'Silahkan login kembali, bila data anda masih belum berubah',icon: 'success',confirmButtonText: 'OK'
 			}).then((result) => {
 				if (result.value) {
 					window.location = 'index.php';

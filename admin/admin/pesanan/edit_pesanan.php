@@ -1,7 +1,7 @@
 <?php
 
 if(isset($_GET['kode_pesanan'])){
-	$sql_cek = "SELECT tb_pesanan.kode_pesanan, tb_pesanan.proses, tb_desain.kode_desain, tb_desain.foto_desain, tb_pengguna.id_pengguna, tb_pengguna.nama_pengguna, tb_pengguna.alamat_pengguna, tb_pengguna.no_hp FROM tb_pesanan 
+	$sql_cek = "SELECT tb_pesanan.kode_pesanan, tb_pesanan.proses_pesanan, tb_desain.kode_desain, tb_desain.foto_desain, tb_pengguna.id_pengguna, tb_pengguna.nama_pengguna, tb_pengguna.alamat_pengguna, tb_pengguna.no_hp FROM tb_pesanan 
 	JOIN tb_desain ON tb_pesanan.kode_desain=tb_desain.kode_desain
 	JOIN tb_pengguna ON tb_pesanan.id_pengguna=tb_pengguna.id_pengguna
 	WHERE kode_pesanan='".$_GET['kode_pesanan']."'";
@@ -69,29 +69,29 @@ if(isset($_GET['kode_pesanan'])){
 				<div class="form-group row">
 					<label class="col-sm-2 col-form-label">Proses</label>
 					<div class="col-sm-4">
-						<select name="proses" id="proses" class="form-control">
+						<select name="proses_pesanan" id="proses_pesanan" class="form-control">
 							<option value="">-- Pilih --</option>
 							<?php
                 //cek data yg dipilih sebelumnya
-							if ($data_cek['proses'] == "diproses") echo "<option value='diproses' selected>diproses</option>";
+							if ($data_cek['proses_pesanan'] == "diproses") echo "<option value='diproses' selected>diproses</option>";
 							else echo "<option value='diproses'>diproses</option>";
 
-							if ($data_cek['proses'] == "survei") echo "<option value='survei' selected>survei</option>";
+							if ($data_cek['proses_pesanan'] == "survei") echo "<option value='survei' selected>survei</option>";
 							else echo "<option value='survei'>survei</option>";
 
-							if ($data_cek['proses'] == "kalkulasi") echo "<option value='kalkulasi' selected>kalkulasi</option>";
+							if ($data_cek['proses_pesanan'] == "kalkulasi") echo "<option value='kalkulasi' selected>kalkulasi</option>";
 							else echo "<option value='kalkulasi'>kalkulasi</option>";
 
-							if ($data_cek['proses'] == "pengerjaan") echo "<option value='pengerjaan' selected>pengerjaan</option>";
+							if ($data_cek['proses_pesanan'] == "pengerjaan") echo "<option value='pengerjaan' selected>pengerjaan</option>";
 							else echo "<option value='pengerjaan'>pengerjaan</option>";
 
-							if ($data_cek['proses'] == "dikirim") echo "<option value='dikirim' selected>dikirim</option>";
+							if ($data_cek['proses_pesanan'] == "dikirim") echo "<option value='dikirim' selected>dikirim</option>";
 							else echo "<option value='dikirim'>dikirim</option>";
 
-							if ($data_cek['proses'] == "diterima") echo "<option value='diterima' selected>diterima</option>";
+							if ($data_cek['proses_pesanan'] == "diterima") echo "<option value='diterima' selected>diterima</option>";
 							else echo "<option value='diterima'>diterima</option>";
 
-							if ($data_cek['proses'] == "dibatalkan") echo "<option value='dibatalkan' selected>dibatalkan</option>";
+							if ($data_cek['proses_pesanan'] == "dibatalkan") echo "<option value='dibatalkan' selected>dibatalkan</option>";
 							else echo "<option value='dibatalkan'>dibatalkan</option>";
 							?>
 						</select>
@@ -118,13 +118,13 @@ if(isset($_GET['kode_pesanan'])){
 	if (isset ($_POST['Ubah'])){
 
 		$sql_ubah = "UPDATE tb_pesanan SET
-		proses='".$_POST['proses']."'
+		proses_pesanan='".$_POST['proses_pesanan']."'
 		WHERE kode_pesanan='".$_POST['kode_pesanan']."'";
 		$query_ubah = mysqli_query($koneksi, $sql_ubah);
 
-		$sql_track = "INSERT INTO tb_track_pesanan (kode_pesanan, proses, timestamp) VALUES (
+		$sql_track = "INSERT INTO tb_track_pesanan (kode_pesanan, proses_track, timestamp) VALUES (
 		'".$data_cek['kode_pesanan']."',
-		'".$_POST['proses']."',
+		'".$_POST['proses_track']."',
 		NOW())";
 		$query_track = mysqli_query($koneksi, $sql_track);
 

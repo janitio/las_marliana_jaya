@@ -19,13 +19,18 @@ while ($data= $sql->fetch_assoc()) {
 }
 
 if (isset($kode_pesanan)) {
-  $sql_tampil = "SELECT tb_pesanan.kode_pesanan, tb_desain.nama_desain FROM tb_pesanan 
+  $sql_tampil = "SELECT tb_pesanan.kode_pesanan, tb_desain.nama_desain, tb_penawaran.biaya_dp, tb_penawaran.sisa_bayar, tb_penawaran.total_bayar
+  FROM tb_pesanan 
   JOIN tb_desain ON tb_pesanan.kode_desain=tb_desain.kode_desain 
+  JOIN tb_penawaran ON tb_pesanan.kode_pesanan=tb_penawaran.kode_pesanan
   WHERE tb_pesanan.kode_pesanan=$kode_pesanan";
   $query_tampil = mysqli_query($koneksi, $sql_tampil);
   while ($tampil= $query_tampil->fetch_assoc()) {
     $kode_pesanan=$tampil['kode_pesanan'];
     $nama_desain=$tampil['nama_desain'];
+    $biaya_dp=$tampil['biaya_dp'];
+    $sisa_bayar=$tampil['sisa_bayar'];
+    $total_bayar=$tampil['total_bayar'];
   }}
 
   ?>
@@ -36,7 +41,7 @@ if (isset($kode_pesanan)) {
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>Marliana Jaya 2</title>
+    <title><?=$nama?></title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -57,6 +62,9 @@ if (isset($kode_pesanan)) {
 
     <!-- Template Main CSS File -->
     <link href="assets/css/style.css" rel="stylesheet">
+
+    <!-- Alert -->
+  <script src="admin/plugins/alert.js"></script>
 
   </head>
 
@@ -86,79 +94,124 @@ if (isset($kode_pesanan)) {
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
 
-</div>
-</header><!-- End Header -->
-
-<main id="main">
-
-  <!-- ======= Breadcrumbs ======= -->
-  <section id="breadcrumbs" class="breadcrumbs">
-    <div class="container">
-      <ol>
-        <li><a href="index.php">Beranda</a></li>
-        <li>Pembayaran</li>
-      </ol>
-      <h2>Pembayaran</h2>
     </div>
-  </section><!-- End Breadcrumbs -->
+  </header><!-- End Header -->
 
-  <section class="inner-page pt-3">
-    <div class="container">
-      <form action="" method="post" enctype="multipart/form-data">
-        <div class="card-body">
+  <main id="main">
 
-          <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Kode Pesanan</label>
-            <div class="col-sm-3">
-             <input type="text" class="form-control" id="kode_pesanan" name="kode_pesanan" value="<?=$kode_pesanan; ?>"
-             readonly/> 
-           </div>
-         </div>
-         <br>
-         <div class="form-group row">
-          <label class="col-sm-3 col-form-label">Nama Desain</label>
-          <div class="col-sm-3">
-            <input type="text" class="form-control" id="nama_desain" name="nama_desain" value="<?=$nama_desain; ?>"
-            readonly/> 
-          </div>
-        </div>
-        <br>
-        <div class="form-group row">
-          <label class="col-sm-3 col-form-label">Jenis Pembayaran</label>
-          <div class="col-sm-3">
-            <select name="jenis_bayar" id="jenis_bayar" class="form-control">
-              <option value="">-- Pilih --</option>
-              <?php
+    <!-- ======= Breadcrumbs ======= -->
+    <section id="breadcrumbs" class="breadcrumbs">
+      <div class="container">
+        <ol>
+          <li><a href="index.php">Beranda</a></li>
+          <li>Pembayaran</li>
+        </ol>
+        <h2>Pembayaran</h2>
+      </div>
+    </section><!-- End Breadcrumbs -->
+
+    <?php 
+    if(isset($kode_pesanan)){
+      $sql_cek = "SELECT kode_penawaran,proses_tawar FROM tb_penawaran WHERE kode_pesanan=$kode_pesanan";
+      $query_cek = mysqli_query($koneksi, $sql_cek);
+      $data2_cek = mysqli_fetch_array($query_cek,MYSQLI_BOTH);
+
+      if (empty($data2_cek['kode_penawaran']) || $data2_cek['proses_tawar']=='dibatalkan' || $data2_cek['proses_tawar']=='diproses') {
+        echo "<script>
+        Swal.fire({title: 'Penawaran Belum Disetujui',text: 'Harap penawaran disetujui oleh anda',icon: 'info',confirmButtonText: 'OK'
+        }).then((result) => {
+          if (result.value) {
+            window.location = 'pesanan_pelanggan.php?id_pelanggan=<?=$data_id?>';
+          }
+        })</script>";
+      }else{
+
+        ?>
+
+        <section class="inner-page pt-3">
+          <div class="container">
+            <form action="" method="post" enctype="multipart/form-data">
+              <div class="card-body">
+
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label">Kode Pesanan</label>
+                  <div class="col-sm-3">
+                   <input type="text" class="form-control" id="kode_pesanan" name="kode_pesanan" value="<?=$kode_pesanan; ?>"
+                   readonly/> 
+                 </div>
+               </div>
+               <br>
+               <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Nama Desain</label>
+                <div class="col-sm-3">
+                  <input type="text" class="form-control" id="nama_desain" name="nama_desain" value="<?=$nama_desain; ?>"
+                  readonly/> 
+                </div>
+              </div>
+              <br>
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Bayar Dimuka</label>
+                <div class="col-sm-3">
+                  <input type="text" class="form-control" id="biaya_dp" name="biaya_dp" value="Rp. <?= number_format($biaya_dp); ?>"
+                  readonly/> 
+                </div>
+              </div>
+              <br>
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Sisa Pembayaran</label>
+                <div class="col-sm-3">
+                  <input type="text" class="form-control" id="sisa_bayar" name="sisa_bayar" value="Rp. <?= number_format($sisa_bayar); ?>"
+                  readonly/> 
+                </div>
+              </div>
+              <br>
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Total Pembayaran</label>
+                <div class="col-sm-3">
+                  <input type="text" class="form-control" id="total_bayar" name="total_bayar" value="Rp. <?= number_format($total_bayar); ?>"
+                  readonly/> 
+                </div>
+              </div>
+              <br>
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Jenis Pembayaran</label>
+                <div class="col-sm-3">
+                  <select name="jenis_bayar" id="jenis_bayar" class="form-control">
+                    <option value="">-- Pilih --</option>
+                    <?php
                 //cek data yg dipilih sebelumnya
-              if ($data_cek['jenis_bayar'] == "Bayar Dimuka") echo "<option value='Bayar Dimuka' selected>Bayar Dimuka</option>";
-              else echo "<option value='Bayar Dimuka'>Bayar Dimuka</option>";
+                    if ($data_cek['jenis_bayar'] == "Bayar Dimuka") echo "<option value='Bayar Dimuka' selected>Bayar Dimuka</option>";
+                    else echo "<option value='Bayar Dimuka'>Bayar Dimuka</option>";
 
-              if ($data_cek['jenis_bayar'] == "Sisa Pembayaran") echo "<option value='Sisa Pembayaran' selected>Sisa Pembayaran</option>";
-              else echo "<option value='Sisa Pembayaran'>Sisa Pembayaran</option>";
-              ?>
-            </select>
-          </div>
+                    if ($data_cek['jenis_bayar'] == "Sisa Pembayaran") echo "<option value='Sisa Pembayaran' selected>Sisa Pembayaran</option>";
+                    else echo "<option value='Sisa Pembayaran'>Sisa Pembayaran</option>";
+                    ?>
+                  </select>
+                </div>
+              </div>
+              <br>
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Unggah Foto Bukti Pembayaran</label>
+                <div class="col-sm-6">
+                  <input type="file" id="foto_pembayaran" name="foto_pembayaran">
+                  <p class="help-block">
+                    <font color="red">"Format file Jpg/Png"</font>
+                  </p>
+                </div>
+              </div>
+              <br>
+            </div>
+            <div class="card-body">
+              <input type="submit" name="kirim" value="Kirim" class="btn btn-success">
+              <a href="pesanan_pelanggan.php?id_pelanggan=<?=$data_id?>" title="Kembali" class="btn btn-secondary">Kembali</a>
+            </div>
+          </form>  
         </div>
-        <br>
-        <div class="form-group row">
-          <label class="col-sm-3 col-form-label">Unggah Foto Pembayaran</label>
-          <div class="col-sm-6">
-            <input type="file" id="foto_pembayaran" name="foto_pembayaran">
-            <p class="help-block">
-              <font color="red">"Format file Jpg/Png"</font>
-            </p>
-          </div>
-        </div>
-        <br>
-      </div>
-      <div class="card-body">
-        <input type="submit" name="kirim" value="Kirim" class="btn btn-success">
-        <a href="pesanan_pelanggan.php?id_pelanggan=<?=$data_id?>" title="Kembali" class="btn btn-secondary">Kembali</a>
-      </div>
-    </form>  
-  </div>
-</section>
-
+      </section>
+      <?php
+    }
+  }
+  ?>
 </main><!-- End #main -->
 
 <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
@@ -201,16 +254,16 @@ if (isset ($_POST['kirim'])){
 
     if ($query_simpan) {
       echo "<script>
-      Swal.fire({title: 'Kirim Bukti Pembayaran Berhasil',text: '',icon: 'success',confirmButtonText: 'OK'
+      Swal.fire({title: 'Kirim Foto Bukti Pembayaran Berhasil',text: '',icon: 'success',confirmButtonText: 'OK'
       }).then((result) => {if (result.value){
-        window.location = 'index.php';
+        window.location = 'pesanan_pelanggan.php?id_pelanggan=<?=$data_id?>';
       }
     })</script>";
   }else{
     echo "<script>
     Swal.fire({title: 'Kirim Bukti Pembayarana Gagal',text: '',icon: 'error',confirmButtonText: 'OK'
     }).then((result) => {if (result.value){
-      window.location = 'pembayaran_pelanggan.php?kode_pesanan=<?=$kode_pesanan; ?>';
+      window.location = 'pesanan_pelanggan.php?id_pelanggan=<?=$data_id?>';
     }
   })</script>";
 }
