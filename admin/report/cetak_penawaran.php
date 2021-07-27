@@ -51,7 +51,7 @@ $data_cek = mysqli_fetch_array($query_cek,MYSQLI_BOTH);
 				<?php
 			}
 
-			$sql_tampil = "SELECT tb_penawaran.kode_penawaran,tb_pesanan.kode_pesanan, tb_pengguna.nama_pengguna, tb_pengguna.alamat_pengguna, tb_desain.nama_desain, tb_desain.foto_desain, tb_pengguna.no_hp, tb_penawaran.biaya_dp, tb_penawaran.total_bayar, tb_penawaran.ttd_pelanggan, tb_penawaran.tgl_tawar FROM tb_penawaran 
+			$sql_tampil = "SELECT tb_penawaran.kode_penawaran,tb_pesanan.kode_pesanan, tb_pengguna.nama_pengguna, tb_pengguna.alamat_pengguna, tb_desain.nama_desain, tb_desain.foto_desain, tb_pengguna.no_hp, tb_penawaran.biaya_dp,tb_penawaran.sisa_bayar, tb_penawaran.total_bayar, tb_penawaran.ttd_pelanggan, tb_penawaran.tgl_tawar FROM tb_penawaran 
 			JOIN tb_pesanan ON tb_penawaran.kode_pesanan=tb_pesanan.kode_pesanan 
 			JOIN tb_pengguna ON tb_pesanan.id_pengguna=tb_pengguna.id_pengguna
 			JOIN tb_desain ON tb_pesanan.kode_desain=tb_desain.kode_desain
@@ -127,7 +127,12 @@ $data_cek = mysqli_fetch_array($query_cek,MYSQLI_BOTH);
 									<td style="width: 65%;">Rp. <?php echo number_format($data_cek['biaya_dp']); ?></td>
 								</tr>
 								<tr>
-									<td style="width: 30%;">Harga Total</td>
+									<td style="width: 30%;">Sisa Pembayaran</td>
+									<td style="width: 5%;">:</td>
+									<td style="width: 65%;">Rp. <?php echo number_format($data_cek['sisa_bayar']); ?></td>
+								</tr>
+								<tr>
+									<td style="width: 30%;">Total Pembayaran</td>
 									<td style="width: 5%;">:</td>
 									<td style="width: 65%;">Rp. <?php echo number_format($data_cek['total_bayar']); ?></td>
 								</tr>
@@ -140,23 +145,35 @@ $data_cek = mysqli_fetch_array($query_cek,MYSQLI_BOTH);
 							</td>   </tr>
 							<tr>     <td><div align="center">
 								<span >Pelanggan,</span></div>
-								<div align="center">
-									<img src="../foto/ttd_pelanggan/<?=$data_cek['ttd_pelanggan']; ?>" width="150px"/>
-								</div>
-								<div align="center">
-									<span ><?php echo $data_cek['nama_pengguna']; ?></span></div>
-								</td>     <td></td>     <td valign="top"><div align="center">
-									<span >Pemilik Jasa, </span></div>
-									<div align="center">
-										<img src="../foto/ttd_pemilik/<?=$ttd_pemilik; ?>" width="150px"/>
+								<div align="center"><br><br><br><br>
+									<?php
+									$sql_cek = "SELECT proses_tawar FROM tb_penawaran WHERE kode_penawaran=$kode_penawaran";
+									$query_cek = mysqli_query($koneksi, $sql_cek);
+									$data2_cek = mysqli_fetch_array($query_cek,MYSQLI_BOTH);
+									if ($data2_cek['proses_tawar']=='dibatalkan') {?>
+										<h4><font color="red">Anda telah membatalkan penawaran ini</font></h4><br>
+											<?php
+										}else{
+											?>
+											<img src="../foto/ttd_pelanggan/<?=$data_cek['ttd_pelanggan']; ?>" width="150px"/>
+											<?php
+										}
+										?>
 									</div>
 									<div align="center">
-										<span ><?=$nama_pemilik; ?></span></div>
-									</td>   </tr>
-								</tbody>
-						</table>
-						<script>
-							window.print();
-						</script>
-					</body>
-					</html>
+										<span ><?php echo $data_cek['nama_pengguna']; ?></span></div>
+									</td>     <td></td>     <td valign="top"><div align="center">
+										<span >Pemilik Jasa, </span></div>
+										<div align="center">
+											<img src="../foto/ttd_pemilik/<?=$ttd_pemilik; ?>" width="150px"/>
+										</div>
+										<div align="center">
+											<span ><?=$nama_pemilik; ?></span></div>
+										</td>   </tr>
+									</tbody>
+								</table>
+								<script>
+									window.print();
+								</script>
+							</body>
+							</html>

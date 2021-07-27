@@ -12,9 +12,9 @@
 							<th width="5px" class="text-center">No</th>
 							<th width="10px" class="text-center">Kode Pesanan</th>
 							<th width="20px" class="text-center">Nama Pelanggan</th>
-							<th width="10px" class="text-center">Biaya DP</th>
+							<th width="10px" class="text-center">Bayar Dimuka</th>
 							<th width="10px" class="text-center">Sisa Pembayaran</th>
-							<th width="10px" class="text-center">Harga Total</th>
+							<th width="10px" class="text-center">Total Pembayaran</th>
 							<th width="10px" class="text-center">Konfirmasi</th>
 							<th width="70px" class="text-center">Aksi</th>
 						</tr>

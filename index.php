@@ -2,6 +2,7 @@
      //Mulai Sesion
 session_start();
 include "admin/inc/koneksi.php";
+include "admin/inc/notif.php";
 
 if (isset($_SESSION["ses_username"])){
 
@@ -9,25 +10,6 @@ if (isset($_SESSION["ses_username"])){
   $data_nama = $_SESSION["ses_nama"];
   $data_user = $_SESSION["ses_username"];
   $data_level = $_SESSION["ses_level"];
-}
-
-define('DBINFO', 'mysql:host=localhost;dbname=las_mailiana');
-define('DBUSER','root');
-define('DBPASS','');
-
-function fetchAll($query){
-  $con = new PDO(DBINFO, DBUSER, DBPASS);
-  $stmt = $con->query($query);
-  return $stmt->fetchAll();
-}
-function performQuery($query){
-  $con = new PDO(DBINFO, DBUSER, DBPASS);
-  $stmt = $con->prepare($query);
-  if($stmt->execute()){
-    return true;
-  }else{
-    return false;
-  }
 }
 
 $sql = $koneksi->query("SELECT * from tb_profil");
@@ -111,7 +93,9 @@ $sql2 = $koneksi->query("SELECT * from tb_desain");
                 <a style ="
                 <?php
                 if($i['status']=='unread'){
-                  echo "font-weight:bold;";
+                 ?>
+              <body background-color:green>
+                  <?php
                 }
                 ?>
                 " class="dropdown-item" href="kirimpesan_pelanggan.php?kode_pesanan=<?=$data['kode_pesanan']; ?>">
@@ -159,7 +143,7 @@ $sql2 = $koneksi->query("SELECT * from tb_desain");
           <div class="content">
             <h3>Kenapa memilih website ini ?</h3>
             <p>
-              Kami menyediakan desain - desain menarik pada teralis jendela, kanopi, pintu besi, pagar besi, tangga besi, dan semacamnya. 
+              Kami menyediakan desain - desain menarik pada teralis jendela, canopy, dan semacamnya dengan karyawan - karyawan kami yang terampil. 
             </p>
           </div>
         </div>
@@ -168,23 +152,23 @@ $sql2 = $koneksi->query("SELECT * from tb_desain");
             <div class="row">
               <div class="col-xl-4 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
                 <div class="icon-box mt-4 mt-xl-0">
-                  <i class="bx bx-receipt"></i>
+                  <i class="bx bx-images"></i>
                   <h4>Desain</h4>
                   <p>menyediakan desain - desain menarik untuk anda</p>
                 </div>
               </div>
               <div class="col-xl-4 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
                 <div class="icon-box mt-4 mt-xl-0">
-                  <i class="bx bx-cube-alt"></i>
+                  <i class="bx bx-receipt"></i>
                   <h4>Penawaran</h4>
-                  <p>Melakukan penawaran secara online agar mempermudah dalam memproses pesanan anda</p>
+                  <p>Melakukan penawaran lewat website agar mempermudah dalam memproses pesanan anda</p>
                 </div>
               </div>
               <div class="col-xl-4 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="300">
                 <div class="icon-box mt-4 mt-xl-0">
-                  <i class="bx bx-images"></i>
+                  <i class="bx bx-cube-alt"></i>
                   <h4>Pesanan</h4>
-                  <p>pilih desain yang diinginkan, ukur lokasi, penawaran online, bayar dimuka, kirim & pasang, bayar keseluruhan</p>
+                  <p>pilih desain yang diinginkan, survei lokasi, penawaran online, setujui & bayar dimuka, segera kerjakan, kirim, pasang, bayar sisa pembayaran</p>
                 </div>
               </div>
             </div>

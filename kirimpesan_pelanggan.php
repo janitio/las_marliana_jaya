@@ -1,6 +1,7 @@
 <?php
  //KONEKSI DB
 include "admin/inc/koneksi.php";
+include "admin/inc/notif.php";
 
 $kode_pesanan=$_GET['kode_pesanan'];
 
@@ -104,25 +105,6 @@ while ($data= $sql->fetch_assoc()) {
 					<div class="container">
 						<div class="card-body">
 							<?php
-
-							define('DBINFO', 'mysql:host=localhost;dbname=las_mailiana');
-							define('DBUSER','root');
-							define('DBPASS','');
-
-							function fetchAll($query){
-								$con = new PDO(DBINFO, DBUSER, DBPASS);
-								$stmt = $con->query($query);
-								return $stmt->fetchAll();
-							}
-							function performQuery($query){
-								$con = new PDO(DBINFO, DBUSER, DBPASS);
-								$stmt = $con->prepare($query);
-								if($stmt->execute()){
-									return true;
-								}else{
-									return false;
-								}
-							}
 
 							$query ="UPDATE tb_notif SET status = 'read' WHERE kode_pesanan = $kode_pesanan;";
 							performQuery($query);

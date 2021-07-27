@@ -134,7 +134,7 @@ while ($data= $sql->fetch_assoc()) {
 									<tbody>
 										<?php
 										$no = 1;
-										$sql = $koneksi->query("SELECT tb_pesanan.kode_pesanan, tb_desain.foto_desain , tb_desain.nama_desain, tb_pengguna.alamat_pengguna, tb_pesanan.proses, tb_pesanan.tgl_pesanan FROM tb_pesanan 
+										$sql = $koneksi->query("SELECT tb_pesanan.kode_pesanan, tb_desain.foto_desain , tb_desain.nama_desain, tb_pengguna.alamat_pengguna, tb_pesanan.proses_pesanan, tb_pesanan.tgl_pesanan FROM tb_pesanan 
 											JOIN tb_desain ON tb_pesanan.kode_desain=tb_desain.kode_desain 
 											JOIN tb_pengguna ON tb_pesanan.id_pengguna=tb_pengguna.id_pengguna
 											WHERE tb_pesanan.id_pengguna='".$data_id."'");
@@ -159,7 +159,7 @@ while ($data= $sql->fetch_assoc()) {
 													<?=$data['alamat_pengguna'];?>
 												</td>
 												<td class="text-center">
-													<?=$data['proses'];?>
+													<?=$data['proses_pesanan'];?>
 												</td>
 												<td>
 													<?=$data['tgl_pesanan'];?>

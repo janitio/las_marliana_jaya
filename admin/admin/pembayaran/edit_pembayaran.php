@@ -47,7 +47,7 @@ if(isset($_GET['id_pembayaran'])){
 				<div class="form-group row">
 					<label class="col-sm-2 col-form-label">Biaya Dimuka</label>
 					<div class="col-sm-5">
-						<input type="text" class="form-control" id="no_hp" name="no_hp" value="<?=$data_cek['biaya_dp']; ?>"readonly
+						<input type="text" class="form-control" id="biaya_dp" name="biaya_dp" value="Rp. <?= number_format($data_cek['biaya_dp']); ?>"readonly
 						/>
 					</div>
 				</div>
@@ -55,7 +55,7 @@ if(isset($_GET['id_pembayaran'])){
 				<div class="form-group row">
 					<label class="col-sm-2 col-form-label">Biaya Sisa Pembayaran</label>
 					<div class="col-sm-5">
-						<input type="text" class="form-control" id="no_hp" name="no_hp" value="<?=$data_cek['sisa_bayar']; ?>"readonly
+						<input type="text" class="form-control" id="sisa_bayar" name="sisa_bayar" value="Rp. <?= number_format($data_cek['sisa_bayar']); ?>"readonly
 						/>
 					</div>
 				</div>
@@ -63,7 +63,7 @@ if(isset($_GET['id_pembayaran'])){
 				<div class="form-group row">
 					<label class="col-sm-2 col-form-label">Total Pembayaran</label>
 					<div class="col-sm-5">
-						<input type="text" class="form-control" id="no_hp" name="no_hp" value="<?=$data_cek['total_bayar']; ?>"readonly
+						<input type="text" class="form-control" id="total_bayar" name="total_bayar" value="Rp. <?= number_format($data_cek['total_bayar']); ?>"readonly
 						/>
 					</div>
 				</div>

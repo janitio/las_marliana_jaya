@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 26, 2021 at 06:56 PM
+-- Generation Time: Jul 27, 2021 at 07:20 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.2
 
@@ -82,7 +82,11 @@ INSERT INTO `tb_notif` (`id_notif`, `id_pengguna`, `kode_pesanan`, `pesan`, `sta
 (12, 7, 15, 'terkena macet', 'read', '2021-07-22 11:44:35'),
 (13, 8, 14, 'tunggu sebentar', 'unread', '2021-07-22 11:44:47'),
 (14, 7, 11, 'barang sudah sampe', 'read', '2021-07-22 11:48:24'),
-(15, 7, 11, 'bagus kan kualitasnya', 'read', '2021-07-22 12:38:08');
+(15, 7, 11, 'bagus kan kualitasnya', 'read', '2021-07-22 12:38:08'),
+(16, 12, 19, 'maaf, pesanan anda akan sampai 4 hari lagi', 'read', '2021-07-27 11:01:30'),
+(17, 12, 19, 'pesanan anda sedang kena macet, mungkin besok sudah sampai', 'read', '2021-07-27 11:08:28'),
+(18, 12, 19, 'pesanan anda sudah sampai', 'read', '2021-07-27 11:13:23'),
+(19, 7, 11, 'terima kasih atas pembayarannya', 'unread', '2021-07-27 11:48:08');
 
 -- --------------------------------------------------------
 
@@ -188,7 +192,7 @@ INSERT INTO `tb_pesanan` (`kode_pesanan`, `kode_desain`, `id_pengguna`, `proses_
 (15, 14, 7, 'kalkulasi', '2021-07-21 00:32:41'),
 (17, 11, 10, 'kalkulasi', '2021-07-25 20:10:25'),
 (18, 16, 10, 'diproses', '2021-07-25 20:22:52'),
-(19, 14, 12, 'survei', '2021-07-26 20:36:20');
+(19, 14, 12, 'dikirim', '2021-07-26 20:36:20');
 
 -- --------------------------------------------------------
 
@@ -246,7 +250,9 @@ INSERT INTO `tb_track_pesanan` (`kode_track_pesanan`, `kode_pesanan`, `proses_tr
 (15, 17, 'diproses', '2021-07-25 23:45:40'),
 (16, 17, 'survei', '2021-07-25 23:45:53'),
 (17, 17, 'kalkulasi', '2021-07-25 23:46:06'),
-(18, 19, 'survei', '2021-07-26 21:06:59');
+(18, 19, 'survei', '2021-07-26 21:06:59'),
+(19, 19, '', '2021-07-27 10:55:50'),
+(20, 19, '', '2021-07-27 10:56:04');
 
 --
 -- Indexes for dumped tables
@@ -314,7 +320,7 @@ ALTER TABLE `tb_desain`
 -- AUTO_INCREMENT for table `tb_notif`
 --
 ALTER TABLE `tb_notif`
-  MODIFY `id_notif` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id_notif` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `tb_pembayaran`
@@ -350,7 +356,7 @@ ALTER TABLE `tb_profil`
 -- AUTO_INCREMENT for table `tb_track_pesanan`
 --
 ALTER TABLE `tb_track_pesanan`
-  MODIFY `kode_track_pesanan` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `kode_track_pesanan` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

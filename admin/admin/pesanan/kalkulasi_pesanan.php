@@ -53,7 +53,7 @@ if(isset($_GET['kode_pesanan'])){
 				<div class="form-group row">
 					<label class="col-sm-2 col-form-label">Harga Normal</label>
 					<div class="col-sm-5">
-						<input type="text" class="form-control" id="harga_normal" name="harga_normal" value="<?= number_format($data_cek['harga_normal']); ?>"
+						<input type="text" class="form-control" id="harga_normal" name="harga_normal" value="Rp. <?= number_format($data_cek['harga_normal']); ?>"
 						readonly/>
 					</div>
 				</div>

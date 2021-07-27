@@ -133,7 +133,7 @@ while ($data= $sql->fetch_assoc()) {
 
 										<?php
 										$no = 1;
-										$sql = $koneksi->query("SELECT tb_desain.nama_desain, tb_track_pesanan.proses, tb_track_pesanan.timestamp FROM tb_track_pesanan 
+										$sql = $koneksi->query("SELECT tb_desain.nama_desain, tb_track_pesanan.proses_track, tb_track_pesanan.timestamp FROM tb_track_pesanan 
 											JOIN tb_pesanan ON tb_track_pesanan.kode_pesanan=tb_pesanan.kode_pesanan 
 											JOIN tb_desain ON tb_pesanan.kode_desain=tb_desain.kode_desain
 
@@ -150,7 +150,7 @@ while ($data= $sql->fetch_assoc()) {
 													<?= $data['nama_desain'];?>
 												</td>
 												<td class="text-center">
-													<?=$data['proses'];?>
+													<?=$data['proses_track'];?>
 												</td>
 												<td class="text-center">
 													<?=date('F j, Y, g:i a',strtotime($data['timestamp']));?>

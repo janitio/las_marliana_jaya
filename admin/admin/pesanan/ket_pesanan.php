@@ -1,24 +1,5 @@
 <?php
-
-define('DBINFO', 'mysql:host=localhost;dbname=las_mailiana');
-define('DBUSER','root');
-define('DBPASS','');
-
-function fetchAll($query){
-	$con = new PDO(DBINFO, DBUSER, DBPASS);
-	$stmt = $con->query($query);
-	return $stmt->fetchAll();
-}
-function performQuery($query){
-	$con = new PDO(DBINFO, DBUSER, DBPASS);
-	$stmt = $con->prepare($query);
-	if($stmt->execute()){
-		return true;
-	}else{
-		return false;
-	}
-}
-
+include "inc/notif.php";
 
 $kode_pesanan=$_GET['kode_pesanan'];
 
@@ -72,7 +53,7 @@ if(isset($_GET['kode_pesanan'])){
 					<div class="card-footer">
 						<button name="submit" class="btn btn-success my-2 my-sm-0" type="submit">Kirim</button>
 
-						<a href="?page=data-pegawai" class="btn btn-warning">Kembali</a>
+						<a href="?page=data-pesanan" class="btn btn-warning">Kembali</a>
 					</form>
 
 				</div>
@@ -100,19 +81,21 @@ if(isset($_GET['kode_pesanan'])){
 				while ($data= $sql_cek->fetch_assoc()) {
 					?>
 					<table id="example1" class="table table-bordered table-striped">
-						<thead>
+						<tbody>
 							<tr>
-								<?php echo $data['pesan']; ?> (<?php echo $data['tgl_pesan']; ?>)
+								<td>
+									<?php echo $data['pesan']; ?> (<?php echo date('F j, Y, g:i a',strtotime($data['tgl_pesan'])); ?>)
+								</td>
 							</tr>
-						</thead>
+						</tbody>
 					</table>
-							<?php
-						}
-						?>
-					</div>
-				</div>
+					<?php
+				}
+				?>
 			</div>
-
 		</div>
-		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	</div>
+
+</div>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

@@ -24,7 +24,7 @@
 
 						<?php
 						$no = 1;
-						$sql = $koneksi->query("SELECT tb_pesanan.kode_pesanan, tb_pesanan.proses, tb_pesanan.tgl_pesanan, tb_desain.foto_desain, tb_pengguna.nama_pengguna, tb_pengguna.alamat_pengguna FROM tb_pesanan
+						$sql = $koneksi->query("SELECT tb_pesanan.kode_pesanan, tb_pesanan.proses_pesanan, tb_pesanan.tgl_pesanan, tb_desain.foto_desain, tb_pengguna.nama_pengguna, tb_pengguna.alamat_pengguna FROM tb_pesanan
 							JOIN tb_desain ON tb_pesanan.kode_desain=tb_desain.kode_desain
 							JOIN tb_pengguna ON tb_pesanan.id_pengguna=tb_pengguna.id_pengguna");
 						while ($data= $sql->fetch_assoc()) {
@@ -50,7 +50,7 @@
 									<?php echo $data['tgl_pesanan']; ?>
 								</td>
 								<td>
-									<?php echo $data['proses']; ?>
+									<?php echo $data['proses_pesanan']; ?>
 								</td>
 								<td>
 									<a href="?page=edit-pesanan&kode_pesanan=<?php echo $data['kode_pesanan']; ?>" title="Ubah Data" class="btn btn-warning btn-sm">
