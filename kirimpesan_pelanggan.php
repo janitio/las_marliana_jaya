@@ -85,7 +85,8 @@ while ($data= $sql->fetch_assoc()) {
 
 		<?php
 		if(isset($data_id)){
-			$sql_cek = "SELECT id_notif FROM tb_notif WHERE id_pengguna=$data_id";
+			$sql_cek = "SELECT id_notif FROM tb_notif WHERE id_pengguna=$data_id 
+			AND kode_pesanan=$kode_pesanan";
 			$query_cek = mysqli_query($koneksi, $sql_cek);
 			$data2_cek = mysqli_fetch_array($query_cek,MYSQLI_BOTH);
 

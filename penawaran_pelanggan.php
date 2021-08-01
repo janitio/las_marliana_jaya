@@ -336,31 +336,41 @@ $ttd_pemilik=$profil_cek['ttd_pemilik'];
 										$signature = str_replace(' ', '+', $signature);
 										$data = base64_decode($signature);
 										$file = 'admin/foto/ttd_pelanggan/'.$signatureFileName;
+										$sumber = @$_FILES['signature']['tmp_name'];
 										file_put_contents($file, $data);
 
-										$sql_terima = "UPDATE tb_penawaran SET
-										proses_tawar='diterima',
-										ttd_pelanggan='$signatureFileName',
-										tgl_tawar=NOW()   
-										WHERE kode_penawaran=$kode_penawaran";
-										$sql_terima = mysqli_query($koneksi, $sql_terima);
+										if (!empty($sumber)) {
+											$sql_terima = "UPDATE tb_penawaran SET
+											proses_tawar='diterima',
+											ttd_pelanggan='$signatureFileName',
+											tgl_tawar=NOW()   
+											WHERE kode_penawaran=$kode_penawaran";
+											$sql_terima = mysqli_query($koneksi, $sql_terima);
 
-										if ($sql_terima) {
+											if ($sql_terima) {
+												echo "<script>
+												Swal.fire({title: 'Penawaran Disetujui',text: 'Kami Segera Mengerjakan Pesanan Anda',icon: 'success',confirmButtonText: 'OK'
+												}).then((result) => {if (result.value){
+													window.location = 'pesanan_pelanggan.php?id_pelanggan=<?=$data_id?>';
+												}
+											})</script>";
+										}else{
 											echo "<script>
-											Swal.fire({title: 'Penawaran Disetujui',text: 'Kami Segera Mengerjakan Pesanan Anda',icon: 'success',confirmButtonText: 'OK'
+											Swal.fire({title: 'Penawaran Gagal',text: 'Ada Kesalahan',icon: 'error',confirmButtonText: 'OK'
 											}).then((result) => {if (result.value){
-												window.location = 'pesanan_pelanggan.php?id_pelanggan=<?=$data_id?>';
+												'pesanan_pelanggan.php?id_pelanggan=<?=$data_id?>';
 											}
 										})</script>";
-									}else{
-										echo "<script>
-										Swal.fire({title: 'Penawaran Gagal',text: 'Ada Kesalahan',icon: 'error',confirmButtonText: 'OK'
-										}).then((result) => {if (result.value){
-											'pesanan_pelanggan.php?id_pelanggan=<?=$data_id?>';
+									}
+								}elseif(empty($sumber)){
+									echo "<script>
+									Swal.fire({title: 'Penawaran Gagal',text: 'Tanda tangan wajib diisi',icon: 'error',confirmButtonText: 'OK'
+									}).then((result) => {
+										if (result.value) {
+											window.location = 'pesanan_pelanggan.php?id_pelanggan=<?=$data_id?>';
 										}
 									})</script>";
 								}
-  // $msg = "<div class='alert alert-success'>Signature Uploaded</div>";
 							} 
 							?>
 						</main><!-- End #main -->

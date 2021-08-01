@@ -8,7 +8,7 @@ $koneksi=mysqli_connect($host,$user,$pass,$db)or die(mysqli_error());
 
 //database=mailiana_jaya
 //user=mailiana_master
-//pass=yahalol11123
+//pas=yahalol11123
 ?>
 
 <!-- end -->

@@ -10,11 +10,11 @@
 			<table id="example1" class="table table-bordered table-striped">
 				<thead>
 					<tr>
-						<th>No</th>
-						<th>Nama User</th>
-						<th>Username</th>
-						<th>Level</th>
-						<th>Aksi</th>
+						<th width="10px">No</th>
+						<th width="60px">Nama User</th>
+						<th width="20px">Username</th>
+						<th width="20px">Level</th>
+						<th width="10px">Aksi</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -41,11 +41,11 @@
 						<td>
 							<a href="?page=edit-pengguna&kode=<?php echo $data['id_pengguna']; ?>" title="Ubah"
 							 class="btn btn-warning btn-sm">
-								<i class="fa fa-edit"></i>
+								<i class="fa fa-edit">Ubah Data</i>
 							</a>
 							<a href="?page=del-pengguna&kode=<?php echo $data['id_pengguna']; ?>" onclick="return confirm('Apakah anda yakin hapus data ini ?')"
 							 title="Hapus" class="btn btn-danger btn-sm">
-								<i class="fa fa-trash"></i>
+								<i class="fa fa-trash">Hapus Data</i>
 								</>
 						</td>
 					</tr>

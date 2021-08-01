@@ -164,7 +164,7 @@ while ($data= $sql->fetch_assoc()) {
 												<td>
 													<?=$data['tgl_pesanan'];?>
 												</td>
-												<td class="row h-20 justify-content-center align-items-center">
+												<td class="justify-content-center align-items-center">
 													<a href="riwayat_pesanan.php?kode_pesanan=<?=$data['kode_pesanan']; ?>" class="btn btn-info">riwayat pesanan</a>
 
 													<a href="penawaran_pelanggan.php?kode_pesanan=<?=$data['kode_pesanan']; ?>" class="btn btn-secondary">surat penawaran</a>

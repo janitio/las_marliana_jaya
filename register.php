@@ -104,7 +104,7 @@ if (isset($_POST['daftar'])) {
         })</script>";
       }else{
         echo "<script>
-        Swal.fire({title: 'Daftar Akun Gagal',text: 'Ada kesalahan',icon: 'error',confirmButtonText: 'OK'
+        Swal.fire({title: 'Daftar Akun Gagal',text: 'Ada kesalahan sistem',icon: 'error',confirmButtonText: 'OK'
         }).then((result) => {if (result.value)
           {window.location = 'register.php';}
         })</script>";

@@ -272,7 +272,7 @@ if (isset ($_POST['kirim'])){
   Swal.fire({title: 'Gagal, Foto Wajib Diisi',text: '',icon: 'error',confirmButtonText: 'OK'
   }).then((result) => {
     if (result.value) {
-      window.location = 'pembayaran_pelanggan.php?kode_pesanan=<?=$kode_pesanan; ?>';
+      window.location = 'pesanan_pelanggan.php?id_pelanggan=<?=$data_id?>';
     }
   })</script>";
 }

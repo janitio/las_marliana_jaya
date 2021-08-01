@@ -61,16 +61,17 @@
 									<a href="?page=del-penawaran&kode_penawaran=<?=$data['kode_penawaran']; ?>" onclick="return confirm('Apakah anda yakin hapus data ini ?')"
 										title="Hapus" class="btn btn-danger btn-sm">
 										<i class="fa fa-trash">Hapus Data</i>
-									</td>
-								</tr>
+									</a>
+								</td>
+							</tr>
 
-								<?php
-							}
-							?>
-						</tbody>
-					</tfoot>
-				</table>
-			</div>
+							<?php
+						}
+						?>
+					</tbody>
+				</tfoot>
+			</table>
 		</div>
-		<!-- /.card-body -->
+	</div>
+	<!-- /.card-body -->
 

@@ -74,7 +74,7 @@ $sql2 = $koneksi->query("SELECT * from tb_desain");
            <li><a class="nav-link scrollto" href="login.php">Masuk</a></li>
          <?php }else{?>
           <li class="nav-item dropdown">
-            <a class="nav-link" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="bi bi-bell-fill" font-size="36px"></i>
+            <a class="nav-link" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="bi bi-bell-fill" font-size="36px"></i>
               <?php
               $query = "SELECT * from tb_notif where status = 'unread' AND id_pengguna=$data_id order by tgl_pesan DESC";
               if(count(fetchAll($query))>0){
@@ -93,22 +93,21 @@ $sql2 = $koneksi->query("SELECT * from tb_desain");
                 <a style ="
                 <?php
                 if($i['status']=='unread'){
-                 ?>
-              <body background-color:green>
-                  <?php
+                  echo "font-weight: bold";
                 }
                 ?>
                 " class="dropdown-item" href="kirimpesan_pelanggan.php?kode_pesanan=<?=$data['kode_pesanan']; ?>">
-                <small><i><?php echo date('F j, Y, g:i a',strtotime($data['tgl_pesan'])) ?></i></small><br>
+                <small><i><?php echo date('F j, Y, g:i a',strtotime($data['tgl_pesan']))?></i></small><br/>
                 <?php 
-                echo "Anda memiliki pesan.";
+                echo "Ada pesan pada pesanan # ";
+                echo $data['kode_pesanan'];
                 ?>
               </a>
               <div class="dropdown-divider"></div>
               <?php
             }
           }else{
-           echo "tidak ada pesan.";
+           echo "tidak ada pesan pada pesanan anda.";
          }
          ?>
        </div>

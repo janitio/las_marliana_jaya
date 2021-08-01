@@ -19,7 +19,7 @@
 			 readonly/>
 
 			<div class="form-group row">
-				<label class="col-sm-2 col-form-label">Nama User</label>
+				<label class="col-sm-2 col-form-label">Nama Lengkap</label>
 				<div class="col-sm-6">
 					<input type="text" class="form-control" id="nama_pengguna" name="nama_pengguna" value="<?php echo $data_cek['nama_pengguna']; ?>"
 					/>

@@ -104,7 +104,7 @@ while ($data= $sql->fetch_assoc()) {
 
 			if ($query_batal) {
 				echo "<script>
-				Swal.fire({title: 'Penawaran Dibatalkan',text: '',icon: 'info',confirmButtonText: 'OK'
+				Swal.fire({title: 'Penawaran Dibatalkan',text: '',icon: 'success',confirmButtonText: 'OK'
 				}).then((result) => {if (result.value){
 					window.location = 'index.php';
 				}

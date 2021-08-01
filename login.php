@@ -33,12 +33,10 @@ include "admin/inc/user.php";
                 <label for="password">Password</label>
                 <input type="password" name="password" id="password" class="form-control" placeholder="masukkan passwordmu" required>
               </div>
-              <!-- <input name="login" id="login" class="btn btn-block login-btn" type="button" value="Masuk"> -->
               <button type="submit" class="btn btn-block login-btn" name="login" title="Masuk">
                 <b>Masuk</b>
               </button>
             </form>
-            <!-- <a href="#!" class="forgot-password-link">Forgot password?</a> -->
             <p class="login-wrapper-footer-text">Belum memiliki akun? <a href="register.php" class="text-reset">Daftar Di Sini!</a></p>
             <p class="login-wrapper-footer-text"><a href="index.php" class="text-reset">Kembali ke halaman Beranda</a></p>
           </div>
@@ -104,13 +102,13 @@ if (isset($_POST['login'])) {
         }
       }else{
         echo "<script>
-        Swal.fire({title: 'Login Gagal',text: 'Ada kesalahan',icon: 'error',confirmButtonText: 'OK'
+        Swal.fire({title: 'Login Gagal',text: 'Username / Password anda salah',icon: 'error',confirmButtonText: 'OK'
         }).then((result) => {if (result.value)
           {window.location = 'login.php';}
         })</script>";
       }
       }else echo "<script>
-      Swal.fire({title: 'Login Gagal',text: 'Username / akun anda tidak ada, harap cek kembali akun anda / registrasi terlebih dahulu',icon: 'error',confirmButtonText: 'OK'
+      Swal.fire({title: 'Login Gagal',text: 'Username anda tidak ada, registrasi terlebih dahulu',icon: 'error',confirmButtonText: 'OK'
       }).then((result) => {if (result.value)
         {window.location = 'login.php';}
       })</script>";

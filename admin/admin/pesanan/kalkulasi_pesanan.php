@@ -59,7 +59,7 @@ if(isset($_GET['kode_pesanan'])){
 				</div>
 
 				<div class="form-group row">
-					<label class="col-sm-2 col-form-label">Harga Total</label>
+					<label class="col-sm-2 col-form-label">Harga Hasil Kalkulasi</label>
 					<div class="col-sm-5">
 						<input type="text" class="form-control" id="total_bayar" name="total_bayar" />
 					</div>

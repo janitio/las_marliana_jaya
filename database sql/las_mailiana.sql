@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 27, 2021 at 07:20 AM
+-- Generation Time: Aug 01, 2021 at 07:21 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.2
 
@@ -30,7 +30,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `tb_desain` (
   `kode_desain` int(3) NOT NULL,
   `nama_desain` varchar(30) NOT NULL,
-  `deskripsi` varchar(120) NOT NULL,
+  `deskripsi` text NOT NULL,
   `harga_normal` int(10) NOT NULL,
   `foto_desain` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -65,7 +65,7 @@ INSERT INTO `tb_desain` (`kode_desain`, `nama_desain`, `deskripsi`, `harga_norma
 CREATE TABLE `tb_notif` (
   `id_notif` int(3) NOT NULL,
   `id_pengguna` int(3) NOT NULL,
-  `kode_pesanan` int(6) NOT NULL,
+  `kode_pesanan` int(3) NOT NULL,
   `pesan` text NOT NULL,
   `status` varchar(10) NOT NULL,
   `tgl_pesan` datetime NOT NULL
@@ -95,7 +95,7 @@ INSERT INTO `tb_notif` (`id_notif`, `id_pengguna`, `kode_pesanan`, `pesan`, `sta
 --
 
 CREATE TABLE `tb_pembayaran` (
-  `id_pembayaran` int(6) NOT NULL,
+  `id_pembayaran` int(3) NOT NULL,
   `kode_pesanan` int(3) NOT NULL,
   `jenis_bayar` enum('Bayar Dimuka','Sisa Pembayaran') NOT NULL,
   `foto_pembayaran` varchar(50) NOT NULL,
@@ -117,8 +117,8 @@ INSERT INTO `tb_pembayaran` (`id_pembayaran`, `kode_pesanan`, `jenis_bayar`, `fo
 --
 
 CREATE TABLE `tb_penawaran` (
-  `kode_penawaran` int(9) NOT NULL,
-  `kode_pesanan` int(6) NOT NULL,
+  `kode_penawaran` int(3) NOT NULL,
+  `kode_pesanan` int(3) NOT NULL,
   `biaya_dp` int(10) NOT NULL,
   `sisa_bayar` int(10) NOT NULL,
   `total_bayar` int(10) NOT NULL,
@@ -136,7 +136,8 @@ INSERT INTO `tb_penawaran` (`kode_penawaran`, `kode_pesanan`, `biaya_dp`, `sisa_
 (11, 14, 240000, 560000, 800000, 'diproses', '', '2021-07-21 00:34:53'),
 (12, 15, 210000, 490000, 700000, 'dibatalkan', '', '2021-07-21 00:47:13'),
 (13, 17, 255000, 595000, 850000, 'diterima', '17Ilham Ahmad60fd96f746fc7.png', '2021-07-25 23:53:11'),
-(14, 19, 210000, 490000, 700000, 'diterima', '19Vitra60fec266b09e1.png', '2021-07-26 21:10:46');
+(14, 19, 210000, 490000, 700000, 'diterima', '19Vitra60fec266b09e1.png', '2021-07-26 21:10:46'),
+(17, 20, 600000, 1400000, 2000000, 'dibatalkan', '', '2021-08-01 23:44:44');
 
 -- --------------------------------------------------------
 
@@ -145,10 +146,10 @@ INSERT INTO `tb_penawaran` (`kode_penawaran`, `kode_pesanan`, `biaya_dp`, `sisa_
 --
 
 CREATE TABLE `tb_pengguna` (
-  `id_pengguna` int(11) NOT NULL,
-  `nama_pengguna` varchar(30) NOT NULL,
-  `username` varchar(30) NOT NULL,
-  `password` varchar(20) NOT NULL,
+  `id_pengguna` int(3) NOT NULL,
+  `nama_pengguna` varchar(40) NOT NULL,
+  `username` varchar(8) NOT NULL,
+  `password` varchar(8) NOT NULL,
   `no_hp` varchar(13) NOT NULL,
   `email` varchar(60) NOT NULL,
   `alamat_pengguna` text NOT NULL,
@@ -176,7 +177,7 @@ INSERT INTO `tb_pengguna` (`id_pengguna`, `nama_pengguna`, `username`, `password
 --
 
 CREATE TABLE `tb_pesanan` (
-  `kode_pesanan` int(6) NOT NULL,
+  `kode_pesanan` int(3) NOT NULL,
   `kode_desain` int(3) NOT NULL,
   `id_pengguna` int(3) NOT NULL,
   `proses_pesanan` enum('diproses','survei','kalkulasi','pengerjaan','dikirim','diterima','dibatalkan') NOT NULL,
@@ -192,7 +193,8 @@ INSERT INTO `tb_pesanan` (`kode_pesanan`, `kode_desain`, `id_pengguna`, `proses_
 (15, 14, 7, 'kalkulasi', '2021-07-21 00:32:41'),
 (17, 11, 10, 'kalkulasi', '2021-07-25 20:10:25'),
 (18, 16, 10, 'diproses', '2021-07-25 20:22:52'),
-(19, 14, 12, 'dikirim', '2021-07-26 20:36:20');
+(19, 14, 12, 'dikirim', '2021-07-26 20:36:20'),
+(20, 19, 12, 'kalkulasi', '2021-08-01 23:25:40');
 
 -- --------------------------------------------------------
 
@@ -222,8 +224,8 @@ INSERT INTO `tb_profil` (`id_profil`, `nama_profil`, `alamat`, `nama_pemilik`, `
 --
 
 CREATE TABLE `tb_track_pesanan` (
-  `kode_track_pesanan` int(4) NOT NULL,
-  `kode_pesanan` int(6) NOT NULL,
+  `kode_track_pesanan` int(3) NOT NULL,
+  `kode_pesanan` int(3) NOT NULL,
   `proses_track` enum('diproses','survei','kalkulasi','pengerjaan','dikirim','diterima','dibatalkan') NOT NULL,
   `timestamp` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -252,7 +254,9 @@ INSERT INTO `tb_track_pesanan` (`kode_track_pesanan`, `kode_pesanan`, `proses_tr
 (17, 17, 'kalkulasi', '2021-07-25 23:46:06'),
 (18, 19, 'survei', '2021-07-26 21:06:59'),
 (19, 19, '', '2021-07-27 10:55:50'),
-(20, 19, '', '2021-07-27 10:56:04');
+(20, 19, '', '2021-07-27 10:56:04'),
+(21, 20, '', '2021-08-01 23:28:29'),
+(22, 20, '', '2021-08-01 23:33:46');
 
 --
 -- Indexes for dumped tables
@@ -326,25 +330,25 @@ ALTER TABLE `tb_notif`
 -- AUTO_INCREMENT for table `tb_pembayaran`
 --
 ALTER TABLE `tb_pembayaran`
-  MODIFY `id_pembayaran` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_pembayaran` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `tb_penawaran`
 --
 ALTER TABLE `tb_penawaran`
-  MODIFY `kode_penawaran` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `kode_penawaran` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `tb_pengguna`
 --
 ALTER TABLE `tb_pengguna`
-  MODIFY `id_pengguna` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id_pengguna` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `tb_pesanan`
 --
 ALTER TABLE `tb_pesanan`
-  MODIFY `kode_pesanan` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `kode_pesanan` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `tb_profil`
@@ -356,7 +360,7 @@ ALTER TABLE `tb_profil`
 -- AUTO_INCREMENT for table `tb_track_pesanan`
 --
 ALTER TABLE `tb_track_pesanan`
-  MODIFY `kode_track_pesanan` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `kode_track_pesanan` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
