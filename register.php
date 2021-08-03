@@ -28,20 +28,19 @@ include "admin/inc/user.php";
             <form action="" method="post">
               <div class="form-group">
                 <label for="nama">Nama Lengkap</label>
-                <input type="nama" name="nama" id="nama" class="form-control" placeholder="Nama Lengkapmu" required>
+                <input type="nama" name="nama" id="nama" class="form-control" placeholder="maks. 40 karakter" maxlength="40" required>
               </div>
               <div class="form-group">
                 <label for="username">Username</label>
-                <input type="username" name="username" id="username" class="form-control" placeholder="masukkan usernamemu" required>
+                <input type="username" name="username" id="username" class="form-control" placeholder="maks. 12 karakter" maxlength="12" required>
               </div>
               <div class="form-group mb-4">
                 <label for="password">Password</label>
-                <input type="password" name="password" id="password" class="form-control" placeholder="masukkan passwordmu" required>
-
+                <input type="password" name="password" id="password" class="form-control" placeholder="maks. 8-12 karakter"  min="8" max="12" required>
               </div>
               <div class="form-group">
                 <label for="no_hp">No. HP (WhatsApp Aktif)</label>
-                <input type="number" name="no_hp" id="no_hp" class="form-control" placeholder="081234567890" required>
+                <input type="number" maxlength="13" name="no_hp" id="no_hp" class="form-control" placeholder="maks. 13 karakter" required>
               </div>
               <div class="form-group">
                 <label for="email">Email</label>
@@ -60,7 +59,7 @@ include "admin/inc/user.php";
           </div>
         </div>
         <div class="col-sm-6 px-0 d-none d-sm-block">
-          <img src="login/assets/images/login.jpg" alt="login image" class="login-img">
+          <img src="login/assets/images/login2.jpg" alt="login image" class="login-img">
         </div>
       </div>
     </div>

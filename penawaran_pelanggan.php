@@ -98,8 +98,6 @@ $ttd_pemilik=$profil_cek['ttd_pemilik'];
 
 			<div class="logo">
 				<h1><a href="index.php"><?=$nama; ?></a></h1>
-				<!-- Uncomment below if you prefer to use an image logo -->
-				<!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 			</div>
 
 
@@ -228,7 +226,7 @@ $ttd_pemilik=$profil_cek['ttd_pemilik'];
 																<td style="width: 65%;"><?=$data_cek['nama_desain'];?></td>
 															</tr>
 															<tr>
-																<td style="width: 30%;">Bayar Dimuka</td>
+																<td style="width: 30%;">Biaya Muka</td>
 																<td style="width: 5%;">:</td>
 																<td style="width: 65%;">Rp. <?php echo number_format($data_cek['biaya_dp']); ?></td>
 															</tr>
@@ -287,6 +285,7 @@ $ttd_pemilik=$profil_cek['ttd_pemilik'];
 														<br><h4>Tanda Tangan :</h4>
 														<?php echo isset($msg)?$msg:''; ?>
 														<hr>
+														<p><font color="red">*diharapkan mengisi tanda tangan sebelum menekan tombol "Setujui"</font></p><br>
 														<div id="canvasDiv"></div>
 														<br>
 														<?php
@@ -294,7 +293,7 @@ $ttd_pemilik=$profil_cek['ttd_pemilik'];
 														$query_cek = mysqli_query($koneksi, $sql_cek);
 														$data2_cek = mysqli_fetch_array($query_cek,MYSQLI_BOTH);
 
-														if($data2_cek['proses_tawar']=='dibatalkan' || $data2_cek['proses_tawar']=='diterima'){
+														if($data2_cek['proses_tawar']=='dibatalkan' || $data2_cek['proses_tawar']=='disetujui'){
 															if ($data2_cek['proses_tawar']=='dibatalkan') {?>
 																<h4><font color="red">Anda telah membatalkan penawaran ini</font></h4><br>
 																<?php
@@ -336,12 +335,11 @@ $ttd_pemilik=$profil_cek['ttd_pemilik'];
 										$signature = str_replace(' ', '+', $signature);
 										$data = base64_decode($signature);
 										$file = 'admin/foto/ttd_pelanggan/'.$signatureFileName;
-										$sumber = @$_FILES['signature']['tmp_name'];
 										file_put_contents($file, $data);
 
-										if (!empty($sumber)) {
+										if (!empty($signatureFileName)) {
 											$sql_terima = "UPDATE tb_penawaran SET
-											proses_tawar='diterima',
+											proses_tawar='disetujui',
 											ttd_pelanggan='$signatureFileName',
 											tgl_tawar=NOW()   
 											WHERE kode_penawaran=$kode_penawaran";

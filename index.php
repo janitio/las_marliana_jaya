@@ -92,7 +92,7 @@ $sql2 = $koneksi->query("SELECT * from tb_desain");
                 ?>
                 <a style ="
                 <?php
-                if($i['status']=='unread'){
+                if($data['status']=='unread'){
                   echo "font-weight: bold";
                 }
                 ?>
@@ -167,7 +167,7 @@ $sql2 = $koneksi->query("SELECT * from tb_desain");
                 <div class="icon-box mt-4 mt-xl-0">
                   <i class="bx bx-cube-alt"></i>
                   <h4>Pesanan</h4>
-                  <p>pilih desain yang diinginkan, survei lokasi, penawaran online, setujui & bayar dimuka, segera kerjakan, kirim, pasang, bayar sisa pembayaran</p>
+                  <p>pilih desain yang diinginkan, survei lokasi, penawaran online, setujui & bayar biaya muka, segera kerjakan, kirim, pasang, bayar sisa pembayaran</p>
                 </div>
               </div>
             </div>
@@ -255,7 +255,7 @@ $sql2 = $koneksi->query("SELECT * from tb_desain");
           <div class="info-box">
             <i class="bx bx-phone-call"></i>
             <h3>Hubungi Kami (WhatsApp)</h3>
-            <p>+62 852 1563 7999</p>
+            <p>+62 851-5638-7303</p>
           </div>
         </div>
       </div>

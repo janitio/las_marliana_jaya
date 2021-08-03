@@ -129,7 +129,7 @@ $data_cek = mysqli_fetch_array($query_cek,MYSQLI_BOTH);
 												<td style="width: 65%;"><?php echo $data_cek['nama_desain']; ?></td>
 											</tr>
 											<tr>
-												<td style="width: 30%;">Bayar Dimuka</td>
+												<td style="width: 30%;">Biaya Muka</td>
 												<td style="width: 5%;">:</td>
 												<td style="width: 65%;">Rp. <?php echo number_format($data_cek['biaya_dp']); ?></td>
 											</tr>

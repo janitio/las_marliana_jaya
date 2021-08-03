@@ -37,7 +37,7 @@ if(isset($_GET['kode_pesanan'])){
 				<div class="form-group row">
 					<label class="col-sm-2 col-form-label">Alamat</label>
 					<div class="col-sm-5">
-						<input type="text" class="form-control" id="alamat" name="alamat" value="<?php echo $data_cek['alamat_pengguna']; ?>"
+						<input type="text" class="form-control" id="alamat" name="alamat" value="<?php echo $data_cek['alamat_pengguna'];?>" readonly
 						/>
 					</div>
 				</div>

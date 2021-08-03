@@ -76,8 +76,6 @@ if (isset($kode_pesanan)) {
 
        <div class="logo">
         <h1><a href="index.php"><?=$nama; ?></a></h1>
-        <!-- Uncomment below if you prefer to use an image logo -->
-        <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
       </div>
 
       <nav id="navbar" class="navbar">
@@ -116,7 +114,8 @@ if (isset($kode_pesanan)) {
       $query_cek = mysqli_query($koneksi, $sql_cek);
       $data2_cek = mysqli_fetch_array($query_cek,MYSQLI_BOTH);
 
-      if (empty($data2_cek['kode_penawaran']) || $data2_cek['proses_tawar']=='dibatalkan' || $data2_cek['proses_tawar']=='diproses') {
+      if (empty($data2_cek['kode_penawaran']) || $data2_cek['proses_tawar']=='dibatalkan' 
+        || $data2_cek['proses_tawar']=='diproses') {
         echo "<script>
         Swal.fire({title: 'Penawaran Belum Disetujui',text: 'Harap penawaran disetujui oleh anda',icon: 'info',confirmButtonText: 'OK'
         }).then((result) => {
@@ -150,7 +149,7 @@ if (isset($kode_pesanan)) {
               </div>
               <br>
               <div class="form-group row">
-                <label class="col-sm-3 col-form-label">Bayar Dimuka</label>
+                <label class="col-sm-3 col-form-label">Biaya Muka</label>
                 <div class="col-sm-3">
                   <input type="text" class="form-control" id="biaya_dp" name="biaya_dp" value="Rp. <?= number_format($biaya_dp); ?>"
                   readonly/> 
@@ -176,12 +175,12 @@ if (isset($kode_pesanan)) {
               <div class="form-group row">
                 <label class="col-sm-3 col-form-label">Jenis Pembayaran</label>
                 <div class="col-sm-3">
-                  <select name="jenis_bayar" id="jenis_bayar" class="form-control">
+                  <select name="jenis_bayar" id="jenis_bayar" class="form-control" required>
                     <option value="">-- Pilih --</option>
                     <?php
                 //cek data yg dipilih sebelumnya
-                    if ($data_cek['jenis_bayar'] == "Bayar Dimuka") echo "<option value='Bayar Dimuka' selected>Bayar Dimuka</option>";
-                    else echo "<option value='Bayar Dimuka'>Bayar Dimuka</option>";
+                    if ($data_cek['jenis_bayar'] == "Biaya Muka") echo "<option value='Biaya Muka' selected>Biaya Muka</option>";
+                    else echo "<option value='Biaya Muka'>Biaya Muka</option>";
 
                     if ($data_cek['jenis_bayar'] == "Sisa Pembayaran") echo "<option value='Sisa Pembayaran' selected>Sisa Pembayaran</option>";
                     else echo "<option value='Sisa Pembayaran'>Sisa Pembayaran</option>";

@@ -45,7 +45,7 @@ if(isset($_GET['id_pembayaran'])){
 				</div>
 
 				<div class="form-group row">
-					<label class="col-sm-2 col-form-label">Biaya Dimuka</label>
+					<label class="col-sm-2 col-form-label">Biaya Muka</label>
 					<div class="col-sm-5">
 						<input type="text" class="form-control" id="biaya_dp" name="biaya_dp" value="Rp. <?= number_format($data_cek['biaya_dp']); ?>"readonly
 						/>
@@ -53,7 +53,7 @@ if(isset($_GET['id_pembayaran'])){
 				</div>
 
 				<div class="form-group row">
-					<label class="col-sm-2 col-form-label">Biaya Sisa Pembayaran</label>
+					<label class="col-sm-2 col-form-label">Sisa Pembayaran</label>
 					<div class="col-sm-5">
 						<input type="text" class="form-control" id="sisa_bayar" name="sisa_bayar" value="Rp. <?= number_format($data_cek['sisa_bayar']); ?>"readonly
 						/>
@@ -75,8 +75,8 @@ if(isset($_GET['id_pembayaran'])){
 							<option value="">-- Pilih --</option>
 							<?php
                 //cek data yg dipilih sebelumnya
-							if ($data_cek['jenis_bayar'] == "Bayar Dimuka") echo "<option value='Bayar Dimuka' selected>Bayar Dimuka</option>";
-							else echo "<option value='Bayar Dimuka'>Bayar Dimuka</option>";
+							if ($data_cek['jenis_bayar'] == "Biaya Muka") echo "<option value='Biaya Muka' selected>Biaya Muka</option>";
+							else echo "<option value='Biaya Muka'>Biaya Muka</option>";
 
 							if ($data_cek['jenis_bayar'] == "Sisa Pembayaran") echo "<option value='Sisa Pembayaran' selected>Sisa Pembayaran</option>";
 							else echo "<option value='Sisa Pembayaran'>Sisa Pembayaran</option>";
@@ -106,7 +106,8 @@ if(isset($_GET['id_pembayaran'])){
 
 		$sql_ubah = "UPDATE tb_pembayaran SET
 		jenis_bayar='".$_POST['jenis_bayar']."'
-		WHERE kode_pesanan='".$_POST['kode_pesanan']."'";
+		WHERE kode_pesanan='".$_POST['kode_pesanan']."'
+		AND id_pembayaran='".$_GET['id_pembayaran']."'";
 		$query_ubah = mysqli_query($koneksi, $sql_ubah);
 
 		if ($query_ubah) {

@@ -61,13 +61,6 @@ if(isset($_GET['kode_desain'])){
 
 	<!-- Template Main CSS File -->
 	<link href="assets/css/style.css" rel="stylesheet">
-
-  <!-- =======================================================
-  * Template Name: Flexor - v4.0.1
-  * Template URL: https://bootstrapmade.com/flexor-free-multipurpose-bootstrap-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
 </head>
 
 <body>
@@ -188,5 +181,4 @@ if (isset ($_POST['pesan'])){
 }
 
 }
-     //selesai proses simpan data
 ?>

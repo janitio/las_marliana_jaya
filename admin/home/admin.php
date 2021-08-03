@@ -51,7 +51,7 @@
 ?>
 
 <?php
-	$sql = $koneksi->query("SELECT count(kode_penawaran) as penawaran from tb_penawaran where proses_tawar='diterima'");
+	$sql = $koneksi->query("SELECT count(kode_penawaran) as penawaran from tb_penawaran where proses_tawar='disetujui'");
 	while ($data= $sql->fetch_assoc()) {
 	
 		$penawaran=$data['penawaran'];

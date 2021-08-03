@@ -54,7 +54,7 @@ if(isset($_GET['kode_pesanan'])){
 					<label class="col-sm-2 col-form-label">Alamat</label>
 					<div class="col-sm-5">
 						<input type="text" class="form-control" id="alamat" name="alamat" value="<?php echo $data_cek['alamat_pengguna']; ?>"
-						/>
+						readonly/>
 					</div>
 				</div>
 
@@ -62,7 +62,7 @@ if(isset($_GET['kode_pesanan'])){
 					<label class="col-sm-2 col-form-label">No HP</label>
 					<div class="col-sm-5">
 						<input type="text" class="form-control" id="no_hp" name="no_hp" value="<?=$data_cek['no_hp']; ?>"
-						/>
+						readonly/>
 					</div>
 				</div>
 
@@ -124,7 +124,7 @@ if(isset($_GET['kode_pesanan'])){
 
 		$sql_track = "INSERT INTO tb_track_pesanan (kode_pesanan, proses_track, timestamp) VALUES (
 		'".$data_cek['kode_pesanan']."',
-		'".$_POST['proses_track']."',
+		'".$_POST['proses_pesanan']."',
 		NOW())";
 		$query_track = mysqli_query($koneksi, $sql_track);
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 01, 2021 at 07:21 PM
+-- Generation Time: Aug 03, 2021 at 04:05 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.2
 
@@ -80,13 +80,12 @@ INSERT INTO `tb_notif` (`id_notif`, `id_pengguna`, `kode_pesanan`, `pesan`, `sta
 (10, 7, 15, 'ngaret 3 minggu', 'read', '2021-07-22 11:44:02'),
 (11, 7, 11, 'sedang dikirim ya', 'read', '2021-07-22 11:44:19'),
 (12, 7, 15, 'terkena macet', 'read', '2021-07-22 11:44:35'),
-(13, 8, 14, 'tunggu sebentar', 'unread', '2021-07-22 11:44:47'),
 (14, 7, 11, 'barang sudah sampe', 'read', '2021-07-22 11:48:24'),
 (15, 7, 11, 'bagus kan kualitasnya', 'read', '2021-07-22 12:38:08'),
 (16, 12, 19, 'maaf, pesanan anda akan sampai 4 hari lagi', 'read', '2021-07-27 11:01:30'),
 (17, 12, 19, 'pesanan anda sedang kena macet, mungkin besok sudah sampai', 'read', '2021-07-27 11:08:28'),
 (18, 12, 19, 'pesanan anda sudah sampai', 'read', '2021-07-27 11:13:23'),
-(19, 7, 11, 'terima kasih atas pembayarannya', 'unread', '2021-07-27 11:48:08');
+(19, 7, 11, 'terima kasih atas pembayarannya', 'read', '2021-07-27 11:48:08');
 
 -- --------------------------------------------------------
 
@@ -97,7 +96,7 @@ INSERT INTO `tb_notif` (`id_notif`, `id_pengguna`, `kode_pesanan`, `pesan`, `sta
 CREATE TABLE `tb_pembayaran` (
   `id_pembayaran` int(3) NOT NULL,
   `kode_pesanan` int(3) NOT NULL,
-  `jenis_bayar` enum('Bayar Dimuka','Sisa Pembayaran') NOT NULL,
+  `jenis_bayar` enum('Biaya Muka','Sisa Pembayaran') NOT NULL,
   `foto_pembayaran` varchar(50) NOT NULL,
   `tgl_bayar` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -107,8 +106,10 @@ CREATE TABLE `tb_pembayaran` (
 --
 
 INSERT INTO `tb_pembayaran` (`id_pembayaran`, `kode_pesanan`, `jenis_bayar`, `foto_pembayaran`, `tgl_bayar`) VALUES
-(6, 11, 'Bayar Dimuka', 'web_marliana_reg - Window.png', '2021-07-26 20:48:57'),
-(7, 11, 'Sisa Pembayaran', 'Activity-Diagram.jpg', '2021-07-26 20:50:08');
+(6, 11, 'Biaya Muka', 'web_marliana_reg - Window.png', '2021-07-26 20:48:57'),
+(7, 11, 'Sisa Pembayaran', 'Activity-Diagram.jpg', '2021-07-26 20:50:08'),
+(8, 24, 'Biaya Muka', 'jakone-receipt-2020-10-17-46.png', '2021-08-03 20:57:44'),
+(9, 24, 'Sisa Pembayaran', 'jakone-receipt-2020-10-17-46.png', '2021-08-03 20:58:06');
 
 -- --------------------------------------------------------
 
@@ -122,7 +123,7 @@ CREATE TABLE `tb_penawaran` (
   `biaya_dp` int(10) NOT NULL,
   `sisa_bayar` int(10) NOT NULL,
   `total_bayar` int(10) NOT NULL,
-  `proses_tawar` enum('diproses','diterima','dibatalkan') NOT NULL,
+  `proses_tawar` enum('diproses','disetujui','dibatalkan') NOT NULL,
   `ttd_pelanggan` varchar(50) NOT NULL,
   `tgl_tawar` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -132,12 +133,13 @@ CREATE TABLE `tb_penawaran` (
 --
 
 INSERT INTO `tb_penawaran` (`kode_penawaran`, `kode_pesanan`, `biaya_dp`, `sisa_bayar`, `total_bayar`, `proses_tawar`, `ttd_pelanggan`, `tgl_tawar`) VALUES
-(10, 11, 300000, 700000, 1000000, 'diterima', '11Fajrillah Achmad60f7084f9cbb0.png', '2021-07-21 00:30:55'),
-(11, 14, 240000, 560000, 800000, 'diproses', '', '2021-07-21 00:34:53'),
+(10, 11, 300000, 700000, 1000000, 'disetujui', '11Fajrillah Achmad60f7084f9cbb0.png', '2021-07-21 00:30:55'),
 (12, 15, 210000, 490000, 700000, 'dibatalkan', '', '2021-07-21 00:47:13'),
-(13, 17, 255000, 595000, 850000, 'diterima', '17Ilham Ahmad60fd96f746fc7.png', '2021-07-25 23:53:11'),
-(14, 19, 210000, 490000, 700000, 'diterima', '19Vitra60fec266b09e1.png', '2021-07-26 21:10:46'),
-(17, 20, 600000, 1400000, 2000000, 'dibatalkan', '', '2021-08-01 23:44:44');
+(13, 17, 255000, 595000, 850000, 'disetujui', '17Ilham Ahmad60fd96f746fc7.png', '2021-07-25 23:53:11'),
+(18, 21, 600000, 1400000, 2000000, 'dibatalkan', '', '2021-08-02 22:47:10'),
+(19, 22, 180000, 420000, 600000, 'disetujui', '22Iman Hakim6108174cee371.png', '2021-08-02 23:03:24'),
+(23, 23, 270000, 630000, 900000, 'diproses', '', '2021-08-02 23:34:18'),
+(24, 24, 270000, 630000, 900000, 'disetujui', '24Vitra Janitio610944efb9ec4.png', '2021-08-03 20:30:23');
 
 -- --------------------------------------------------------
 
@@ -148,8 +150,8 @@ INSERT INTO `tb_penawaran` (`kode_penawaran`, `kode_pesanan`, `biaya_dp`, `sisa_
 CREATE TABLE `tb_pengguna` (
   `id_pengguna` int(3) NOT NULL,
   `nama_pengguna` varchar(40) NOT NULL,
-  `username` varchar(8) NOT NULL,
-  `password` varchar(8) NOT NULL,
+  `username` varchar(12) NOT NULL,
+  `password` varchar(12) NOT NULL,
   `no_hp` varchar(13) NOT NULL,
   `email` varchar(60) NOT NULL,
   `alamat_pengguna` text NOT NULL,
@@ -161,14 +163,13 @@ CREATE TABLE `tb_pengguna` (
 --
 
 INSERT INTO `tb_pengguna` (`id_pengguna`, `nama_pengguna`, `username`, `password`, `no_hp`, `email`, `alamat_pengguna`, `level`) VALUES
-(1, 'Vitra Janitio', 'admin', '1', '085215637999', 'pitra_ahoy@gmail.com', '', 'Administrator'),
-(6, 'didiet anggara', 'didit', '1', '081234123111', 'didit@gmail.com', '', 'Pelanggan'),
-(7, 'Fajrillah Achmad', 'paji', '1', '081222111333', 'paji@gmail.com', 'Jalan Beo 3 No. 15 D6 Pondok Sejahtera, Kutabumi', 'Pelanggan'),
-(8, 'Risky Ramadhan', 'rijra', '1', '081222111333', 'risky@gmail.com', 'jalan komodo 2', 'Pelanggan'),
-(9, 'Tio Achdama', 'tio', '1', '081444222333', 'tio@gmail.com', 'Jalan Beo 5 No. 5 D6 ', 'Pelanggan'),
-(10, 'Ilham Ahmad', 'ilham', '1', '081234123112', 'ilham@gmail.com', 'jalan mawar 3 no 12', 'Pelanggan'),
-(11, 'Iman Hakim', 'iman', '1', '081444222333', 'iman@gmail.com', 'Jalan Beo 3 No. 12 D6 Pondok Sejahtera', 'Pelanggan'),
-(12, 'Vitra Janitio', 'pitra', '1', '081222111333', 'pitra@gmail.com', 'Jalan Beo 3 No. 15 D6 Pondok Sejahtera, Kutabumi', 'Pelanggan');
+(1, 'Vitra Janitio', 'admin', 'admin111', '085215637999', 'vitra_janitio@gmail.com', 'Jalan Nuri Raya no. 7 Pondok Rejeki', 'Administrator'),
+(7, 'Fajrillah Achmad', 'paji', '12345678', '081222111333', 'paji@gmail.com', 'Jalan Beo 3 No. 15 D6 Pondok Sejahtera, Kutabumi', 'Pelanggan'),
+(8, 'Risky Ramadhan', 'rijra', '12345678', '081222111333', 'risky@gmail.com', 'jalan komodo 2', 'Pelanggan'),
+(9, 'Tio Achdama', 'tio', '12345678', '081444222333', 'tio@gmail.com', 'Jalan Beo 5 No. 5 D6 ', 'Pelanggan'),
+(10, 'Ilham Ahmad', 'ilham', '12345678', '081234123112', 'ilham@gmail.com', 'jalan mawar 3 no 12', 'Pelanggan'),
+(11, 'Iman Hakim', 'iman', '12345678', '081444222333', 'iman@gmail.com', 'Jalan Beo 2 No. 10 D6 Pondok Sejahtera', 'Pelanggan'),
+(13, 'Vitra Janitio', 'vitra', '12345678', '081222888999', 'vitra@gmail.com', 'Jalan Beo 3 No. 19 D6 Pondok Sejahtera, Kutabumi', 'Pelanggan');
 
 -- --------------------------------------------------------
 
@@ -193,8 +194,12 @@ INSERT INTO `tb_pesanan` (`kode_pesanan`, `kode_desain`, `id_pengguna`, `proses_
 (15, 14, 7, 'kalkulasi', '2021-07-21 00:32:41'),
 (17, 11, 10, 'kalkulasi', '2021-07-25 20:10:25'),
 (18, 16, 10, 'diproses', '2021-07-25 20:22:52'),
-(19, 14, 12, 'dikirim', '2021-07-26 20:36:20'),
-(20, 19, 12, 'kalkulasi', '2021-08-01 23:25:40');
+(19, 14, 12, 'pengerjaan', '2021-07-26 20:36:20'),
+(20, 19, 12, 'pengerjaan', '2021-08-01 23:25:40'),
+(21, 10, 7, 'kalkulasi', '2021-08-02 22:41:33'),
+(22, 8, 11, 'dikirim', '2021-08-02 22:48:52'),
+(23, 16, 8, 'kalkulasi', '2021-08-02 23:07:20'),
+(24, 14, 13, 'kalkulasi', '2021-08-03 20:26:37');
 
 -- --------------------------------------------------------
 
@@ -215,7 +220,7 @@ CREATE TABLE `tb_profil` (
 --
 
 INSERT INTO `tb_profil` (`id_profil`, `nama_profil`, `alamat`, `nama_pemilik`, `ttd_pemilik`) VALUES
-(1, 'MAILIANA JAYA 2', 'KOTABUMI, TANGERANG - BANTEN', 'Mawardi', 'ttd vitra_150px150p.jpg');
+(1, 'MAILIANA JAYA 2', 'KOTABUMI, TANGERANG - BANTEN', 'Mawardi', 'ttd pemilik jasa las 150px.png');
 
 -- --------------------------------------------------------
 
@@ -256,7 +261,18 @@ INSERT INTO `tb_track_pesanan` (`kode_track_pesanan`, `kode_pesanan`, `proses_tr
 (19, 19, '', '2021-07-27 10:55:50'),
 (20, 19, '', '2021-07-27 10:56:04'),
 (21, 20, '', '2021-08-01 23:28:29'),
-(22, 20, '', '2021-08-01 23:33:46');
+(22, 20, '', '2021-08-01 23:33:46'),
+(23, 20, '', '2021-08-02 21:11:11'),
+(24, 19, '', '2021-08-02 21:11:25'),
+(25, 21, '', '2021-08-02 22:42:15'),
+(26, 22, '', '2021-08-02 22:51:01'),
+(27, 22, '', '2021-08-02 22:51:13'),
+(28, 22, 'pengerjaan', '2021-08-02 23:05:22'),
+(29, 22, 'dikirim', '2021-08-02 23:05:34'),
+(30, 23, 'survei', '2021-08-02 23:08:00'),
+(31, 23, 'kalkulasi', '2021-08-02 23:08:14'),
+(32, 24, 'survei', '2021-08-03 20:27:34'),
+(33, 24, 'kalkulasi', '2021-08-03 20:27:44');
 
 --
 -- Indexes for dumped tables
@@ -330,25 +346,25 @@ ALTER TABLE `tb_notif`
 -- AUTO_INCREMENT for table `tb_pembayaran`
 --
 ALTER TABLE `tb_pembayaran`
-  MODIFY `id_pembayaran` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_pembayaran` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `tb_penawaran`
 --
 ALTER TABLE `tb_penawaran`
-  MODIFY `kode_penawaran` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `kode_penawaran` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `tb_pengguna`
 --
 ALTER TABLE `tb_pengguna`
-  MODIFY `id_pengguna` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id_pengguna` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `tb_pesanan`
 --
 ALTER TABLE `tb_pesanan`
-  MODIFY `kode_pesanan` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `kode_pesanan` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `tb_profil`
@@ -360,7 +376,7 @@ ALTER TABLE `tb_profil`
 -- AUTO_INCREMENT for table `tb_track_pesanan`
 --
 ALTER TABLE `tb_track_pesanan`
-  MODIFY `kode_track_pesanan` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `kode_track_pesanan` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

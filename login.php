@@ -27,11 +27,11 @@ include "admin/inc/user.php";
             <form action="" method="post">
               <div class="form-group">
                 <label for="username">username</label>
-                <input type="username" name="username" id="username" class="form-control" placeholder="masukkan usernamemu" required>
+                <input type="username" name="username" id="username" class="form-control" placeholder="masukkan usernamemu" maxlength="12" required>
               </div>
               <div class="form-group mb-4">
                 <label for="password">Password</label>
-                <input type="password" name="password" id="password" class="form-control" placeholder="masukkan passwordmu" required>
+                <input type="password" name="password" id="password" class="form-control" placeholder="masukkan passwordmu" min="8" max="12" required>
               </div>
               <button type="submit" class="btn btn-block login-btn" name="login" title="Masuk">
                 <b>Masuk</b>
@@ -42,7 +42,7 @@ include "admin/inc/user.php";
           </div>
         </div>
         <div class="col-sm-6 px-0 d-none d-sm-block">
-          <img src="login/assets/images/login.jpg" alt="login image" class="login-img">
+          <img src="login/assets/images/login2.jpg" alt="login image" class="login-img">
         </div>
       </div>
     </div>

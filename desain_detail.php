@@ -46,13 +46,6 @@ if(isset($_GET['kode_desain'])){
 
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
-
-  <!-- =======================================================
-  * Template Name: Flexor - v4.0.1
-  * Template URL: https://bootstrapmade.com/flexor-free-multipurpose-bootstrap-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
 </head>
 
 <body>
@@ -83,7 +76,6 @@ if(isset($_GET['kode_desain'])){
             </div> -->
           </div>
 
-
           <div class="col-lg-4">
             <div class="portfolio-info">
               <h3>Informasi Desain</h3>
@@ -97,7 +89,7 @@ if(isset($_GET['kode_desain'])){
           <div class="portfolio-description">
             <h2>Cara order</h2>
             <p>
-              Login terlebih dahulu dengan pilih menu "Masuk", lalu pesan desain yang diinginkan, setelah itu kami akan memproses pesanan anda dan mengukur lokasi anda sesuai yang dicantumkan alamat pada akun anda. Kami akan melakukan kalkulasi pesanan anda mulai dari biaya karyawan, bahan yang dibutuhkan, pengiriman, dan pemasangan, lalu melakukan penawaran yang akan dikirimkan ke menu "Penawaran", bila disetujui dan bayar dimuka (cukup kirimkan bukti pembayarannya pada menu "Pembayaran") maka pesanan anda akan diproses, bila sudah dikirim dan pasang maka anda wajib membayar sisa pembayaran (cukup kirimkan bukti pembayarannya pada menu "Pembayaran").
+              Login terlebih dahulu dengan pilih menu "Masuk", lalu pesan desain yang diinginkan, setelah itu kami akan memproses pesanan anda dan mengukur lokasi anda sesuai yang dicantumkan alamat pada akun anda. Kami akan melakukan kalkulasi pesanan anda mulai dari biaya karyawan, bahan yang dibutuhkan, pengiriman, dan pemasangan, lalu melakukan penawaran yang akan dikirimkan ke menu "Penawaran", bila disetujui, lalu bayar biaya muka (cukup kirimkan bukti pembayarannya pada menu "Pembayaran") maka pesanan anda akan diproses, bila sudah dikirim dan pasang maka anda wajib membayar sisa pembayaran (cukup kirimkan bukti pembayarannya pada menu "Pembayaran").
             </p>
           </div>
         </div>
